@@ -421,6 +421,90 @@ void	itoa_tester(void)
 	printf ("========================\n");	
 }
 
+void	memchr_tester(void)
+{
+	typedef struct s_case{
+		void *mem;
+		int memlen;
+		int c;
+		int len;
+	} t_case;
+
+	t_case memchr_tests[] = {
+		{"test", 4, 'a', 4},
+		{"testtest", 8,'s', 8},
+		{"test", 4,'s', 2},
+		{"test", 4,'a', 5},
+		{"abcde\0zyxw", 10, 'z', 10},
+		{"potatoes", 8, '\0', 9},
+		{NULL, 0, '\0', 3}
+	};
+	int i = 0;
+	int	flag = 1;
+	char	*result;
+	char	*expected;
+	t_case test;
+	printf ("========================\n");	
+	printf ("Testing ft_memchr...\n");
+	while (i < 6)
+	{
+		test = memchr_tests[i];
+		result = ft_memchr(test.mem, test.c, test.len);
+		expected = memchr(test.mem, test.c, test.len);
+		if (result != expected)
+		{
+			printf("Failed test %d\n", i + 1);
+			flag = 0;
+		}
+		i++;
+	}
+	if (flag == 1)
+		printf ("Passed ft_memchr\n");	
+	printf ("========================\n");	
+}
+
+void	memcpy_tester(void)
+{
+	typedef struct s_case{
+		char *cpy;
+		int cpylen;
+		int len;
+	} t_case;
+
+	t_case memcpy_tests[] = {
+		{"abcdefghijklmnop", 16, 20},
+		{"abcdefghijklmnop", 16, 10},
+		{"abcdefghijklmnop", 16, 0},
+		{"ab\0cd\0ef\0gh", 11, 11},
+		{NULL, 0, 20},
+		{NULL, 0, 0}
+	};
+	int i = 0;
+	int	flag = 1;
+	t_case test;
+	void *mem1 = malloc(sizeof(char) * 20);
+	void *mem2 = malloc(sizeof(char) * 20);
+	printf ("========================\n");	
+	printf ("Testing ft_memcpy...\n");
+	while (i < 4)
+	{
+		memset(mem1, 'a', 20);
+		memset(mem2, 'a', 20);
+		test = memcpy_tests[i];
+		mem1 = ft_memcpy(mem1, test.cpy, test.cpylen);
+		mem2 = memcpy(mem1, test.cpy, test.cpylen);
+		if (memcmp(mem1, mem2, 20) != 0)
+		{
+			printf("Failed test %d\n", i + 1);
+			flag = 0;
+		}
+		i++;
+	}
+	if (flag == 1)
+		printf ("Passed ft_memcpy\n");	
+	printf ("========================\n");	
+}
+
 int	main(void)
 {
 	atoi_tester();
@@ -433,5 +517,7 @@ int	main(void)
 	isdigit_tester();
 	isprint_tester();
 	itoa_tester();
+	memchr_tester();
+	memcpy_tester();
 	return (0);
 }
