@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/13 11:23:17 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/09/20 09:20:59 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/11 13:59:11 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/11 14:02:39 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-	int	count;
+	int	len;
 
-	i = 0;
-	if (little[0] == '\0')
-		return (big);
-	while (big[i] != '\0' && i < len)
-	{
-		count = 0;
-		while (big[i + count] != '\0' && big[i + count] == little[count] \
-		&& i + count < len)
-		{
-			if (little[count + 1] == '\0')
-				return (&big[i]);
-			count++;
-		}
-		i++;
-	}
-	return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	write(fd, &s, len);
 }

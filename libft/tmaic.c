@@ -1,36 +1,33 @@
 #include "libft.h"
 
-void	memcpy_tester(void)
+void	memset_tester(void)
 {
 	typedef struct s_case{
-		char *cpy;
-		int cpylen;
+		char c;
 		int len;
 	} t_case;
 
-	t_case memcpy_tests[] = {
-		{"abcdefghijklmnop", 16, 20},
-		{"abcdefghijklmnop", 16, 10},
-		{"abcdefghijklmnop", 16, 0},
-		{"ab\0cd\0ef\0gh", 11, 11},
-		{NULL, 0, 20},
-		{NULL, 0, 0}
+	t_case memset_tests[] = {
+		{'b', 10},
+		{'b', 5},
+		{'b', 0},
+		{'\0', 15}
 	};
 	int i = 0;
 	int	flag = 1;
 	t_case test;
-	void *mem1 = malloc(sizeof(char) * 20);
-	void *mem2 = malloc(sizeof(char) * 20);
+	void *mem1 = malloc(sizeof(char) * 15);
+	void *mem2 = malloc(sizeof(char) * 15);
 	printf ("========================\n");	
-	printf ("Testing ft_memcpy...\n");
+	printf ("Testing ft_memset...\n");
 	while (i < 4)
 	{
-		memset(mem1, 'a', 20);
+		ft_memset(mem1, 'a', 20);
 		memset(mem2, 'a', 20);
-		test = memcpy_tests[i];
-		mem1 = ft_memcpy(mem1, test.cpy, test.cpylen);
-		mem2 = memcpy(mem1, test.cpy, test.cpylen);
-		if (memcmp(mem1, mem2, 20) != 0)
+		test = memset_tests[i];
+		ft_memset(mem1, test.c, test.len);
+		memset(mem2, test.c, test.len);
+		if (memcmp(mem1, mem2, 15) != 0)
 		{
 			printf("Failed test %d\n", i + 1);
 			flag = 0;
@@ -38,12 +35,12 @@ void	memcpy_tester(void)
 		i++;
 	}
 	if (flag == 1)
-		printf ("Passed ft_memcpy\n");	
+		printf ("Passed ft_memset\n");	
 	printf ("========================\n");	
 }
 
 int	main(void)
 {
-	memcpy_tester();
+	memset_tester();
 	return (0);
 }
