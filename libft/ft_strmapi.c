@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 09:18:17 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/13 10:33:11 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/13 11:40:32 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/13 15:35:56 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
+	size_t	len;
+	char	*str;
 
-	i = 0;
-	if (size != 0)
-	{
-		while (src[i] != '\0' && i < size - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	return (ft_strlen(src));
+	len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) + (len + 1));	
+	str[len] = 0;
+	while (--len > 0)	
+		str[len] = (*f)(len, s[len]);
+	str[len] = (*f)(len, s[len]);
+	return (str);
+}
+
+char	cap(unsigned int a, char c)
+{
+	(void) a;
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

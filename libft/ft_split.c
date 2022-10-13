@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:17:15 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/11 16:58:29 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/11 17:10:16 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,4 @@ char	**ft_slipt(char const *s, char c)
 	splited = allocate_mem(splited, c, s);
 	splited = write_mem(splited, c, s);
 	return( splited);
-}
-
-int main()
-{
-	char **arr = ft_slipt(" ", ' ');
-	char **exp = 
-	/* int i = -1; */
-	printf ("%s\n", arr[0]);
-/* 	while (++i < 1)
-		printf("%s\n",arr[i]); */
 }
