@@ -35,7 +35,7 @@ SRCS	=  ft_atoi.c \
 OBJS	= ${SRCS:.c=.o}
 INCS	= includes
 NAME	= libft.a
-LIBC	= ar rc
+LIBC	= ar rcs
 LIBR	= ranlib
 CC		= gcc
 RM		= rm -f
@@ -46,7 +46,6 @@ CFLAGS	= -Wall -Wextra -Werror
 
 ${NAME}: ${OBJS}
 	${LIBC} ${NAME} ${OBJS}
-	${LIBR} ${NAME}
 
 all: ${NAME}
 

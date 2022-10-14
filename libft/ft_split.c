@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 14:17:15 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/11 17:10:16 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/14 21:00:20 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**write_mem(char **s, char c, const char *str)
 	return (s);
 }
 
-char	**ft_slipt(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		nbr_words;
 	char	**splited;
@@ -105,5 +105,5 @@ char	**ft_slipt(char const *s, char c)
 	splited[nbr_words] = NULL;
 	splited = allocate_mem(splited, c, s);
 	splited = write_mem(splited, c, s);
-	return( splited);
+	return (splited);
 }

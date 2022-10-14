@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:39:36 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/13 16:28:57 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:51:07 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 	i = -1;
 	len = ft_strlen(s);
 	while (++i < len)
-		(*f)(i, s);
+		(*f)(i, s + i);
 }

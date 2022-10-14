@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 13:59:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/11 14:02:39 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:54:15 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	ft_putstr_fd(char *s, int fd)
 	len = 0;
 	while (s[len])
 		len++;
-	write(fd, &s, len);
+	write(fd, s, len);
 }
