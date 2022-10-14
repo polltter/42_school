@@ -6,13 +6,11 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:35:18 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/09/13 21:25:50 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/13 16:30:56 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-unsigned int	ft_strlen(char *str);
+#include "libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
@@ -37,14 +35,4 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	}
 	ret = len_dest + len_src;
 	return (ret);
-}
-
-unsigned int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }

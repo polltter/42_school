@@ -1,14 +1,14 @@
 #include <stdio.h>
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(char const *str, int c)
 {
 	while (*str)
 	{
 		if (*str == c)
-			return (str);
+			return ((char *)str);
 		str++;
 	}
 	if (*str == c)
-		return (str);
+		return ((char *)str);
 	return (NULL);
 }

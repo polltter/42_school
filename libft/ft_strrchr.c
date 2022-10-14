@@ -1,21 +1,21 @@
 #include <stdio.h>
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(char const *str, int c)
 {
 	char	*temp;
 
-	temp = str;
+	temp = (char *)str;
 	while (*str)
 		str++;
 	if (*str == c)
-		return (str);
+		return ((char *)str);
 	while (str != temp)
 	{
 		if (*str == c)
-			return (str);
+			return ((char *)str);
 		str--;
 	}
 	if (*str == c)
-		return (str);
+		return ((char *)str);
 	return (NULL);
 }
