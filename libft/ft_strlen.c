@@ -1,6 +1,18 @@
-#include <stddef.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/15 16:19:41 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/15 16:19:41 by mvenanci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-size_t ft_strlen(char const *s)
+#include "libft.h"
+
+size_t	ft_strlen(char const *s)
 {
 	int	i;
 

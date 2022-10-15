@@ -56,9 +56,9 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} -c ${SRCS} 
 	${LIBC} ${NAME} ${OBJS}
 
-all: ${NAME}
+all: ${NAME} bonus
 
-bonus: all
+bonus: ${NAME}
 	${CC} ${CFLAGS} -c ${BNS}
 	${LIBC} ${NAME} ${OBNS}
 

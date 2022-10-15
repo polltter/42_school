@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:38:03 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/14 21:27:04 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:13:52 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		start++;
 	while (ft_instr(set, s1[len]))
 		len--;
-	len =  len - start + 1;
+	len = len - start + 1;
 	trim = (char *)malloc(sizeof(char) * (len + 1));
 	trim[len] = 0;
 	trim = ft_memcpy(trim, s1 + start, len);
@@ -36,7 +36,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 int	ft_instr(char const *str, char c)
 {
 	int	i;
-	
+
 	i = -1;
 	while (str[++i])
 		if (str[i] == c)

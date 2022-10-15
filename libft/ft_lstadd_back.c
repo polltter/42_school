@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:04:28 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/15 11:44:48 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:17:20 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		else
 			*lst = new;
 	}
-
 }

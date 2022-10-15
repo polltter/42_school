@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:40:32 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/13 15:35:56 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:14:17 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*str;
 
 	len = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) + (len + 1));	
+	str = (char *)malloc(sizeof(char) + (len + 1));
 	str[len] = 0;
-	while (--len > 0)	
+	while (--len > 0)
 		str[len] = (*f)(len, s[len]);
 	str[len] = (*f)(len, s[len]);
 	return (str);
