@@ -32,25 +32,38 @@ SRCS	=  ft_atoi.c \
 		ft_split.c \
 		ft_toupper.c 
 
+BNS	= ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c 
+
 OBJS	= ${SRCS:.c=.o}
+OBNS	= ${BNS:.c=.o}
 INCS	= includes
 NAME	= libft.a
 LIBC	= ar rcs
-LIBR	= ranlib
 CC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
 ${NAME}: ${OBJS}
+	${CC} ${CFLAGS} -c ${SRCS} 
 	${LIBC} ${NAME} ${OBJS}
 
 all: ${NAME}
 
+bonus: all
+	${CC} ${CFLAGS} -c ${BNS}
+	${LIBC} ${NAME} ${OBNS}
+
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${OBNS}
 
 fclean: clean
 	${RM} ${NAME}
