@@ -44,7 +44,7 @@ BNS	= ft_lstnew.c \
 
 OBJS	= ${SRCS:.c=.o}
 OBNS	= ${BNS:.c=.o}
-INCS	= includes
+INCS	= libft.h
 NAME	= libft.a
 LIBC	= ar rcs
 CC		= gcc
@@ -53,7 +53,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} -c ${SRCS} 
+	${CC} ${CFLAGS} -c ${SRCS} ${INCS}
 	${LIBC} ${NAME} ${OBJS}
 
 all: ${NAME} bonus

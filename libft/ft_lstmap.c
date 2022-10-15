@@ -6,13 +6,11 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 14:06:43 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/15 16:17:01 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/15 18:15:02 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_lstadd_back(t_list **lst, t_list *new);
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
