@@ -6,7 +6,7 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/16 11:40:06 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/16 14:00:53 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ SRCS	= find_params.c \
 		ft_printf.c \
 		helper_nbrs.c \
 		ft_print_chars.c \
-		print_x.c
+		print_x.c \
+		print_p.c \
+		ft_split_mod.c
 
 LIBFT	= libft/libft.a
 

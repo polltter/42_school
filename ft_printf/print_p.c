@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 18:29:53 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 14:14:15 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/16 12:35:01 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/16 12:39:37 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int main()
+void	ft_print_p(unsigned long int p)
 {
-	ft_printf("ai %d asd %u sad %i %i %%\n", 1, 1, 1, 1);
+	ft_putstr_fd("0x", 1);
+	ft_putstr_fd(ft_uitoa_hex(p), 1);
 }
