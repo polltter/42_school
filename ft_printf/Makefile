@@ -6,13 +6,20 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/15 18:18:24 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/16 11:40:06 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintft.a
 
-SRCS	= 
+SRCS	= find_params.c \
+		ft_printf_numbers.c \
+		ft_printf.c \
+		helper_nbrs.c \
+		ft_print_chars.c \
+		print_x.c
+
+LIBFT	= libft/libft.a
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -30,6 +37,14 @@ INCS	= ft_printf.h
 ${NAME}:
 	${CC} ${CFLAGS} -c ${SRCS} ${INCS}
 	${LIBC} ${NAME} ${OBJS}
+
+test:	libft.a
+	${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
+	${CC} ${CFLAGS} ${OBJS} test.o -L. ${LIBFT} -o a.out
+	./a.out | cat -e
+
+clean:
+	${RM} ${OBJS}
 
 libft.a:
 	cd libft && ${MAKE} all

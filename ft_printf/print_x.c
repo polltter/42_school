@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper_nbrs.c                                      :+:      :+:    :+:   */
+/*   print_x.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 09:06:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 11:28:03 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/16 11:02:25 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/16 11:40:48 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*write_array(long int n, int size)
+char	*write_hex_array(unsigned int n, int size)
 {
 	char	*arr;
 
@@ -20,13 +20,13 @@ char	*write_array(long int n, int size)
 	arr[size] = 0;
 	while (n != 0)
 	{
-		arr[--size] = n % 10 + '0';
-		n /= 10;
+		arr[--size] = "0123456789abcdef"[n % 16];
+		n /= 16;
 	}
 	return (arr);
 }
 
-char	*ft_uitoa(unsigned int n)
+char	*ft_uitoa_hex(unsigned int n)
 {
 	int			size;
 	long int	div;
@@ -38,7 +38,25 @@ char	*ft_uitoa(unsigned int n)
 	while (div != 0)
 	{
 		size++;
-		div /= 10;
+		div /= 16;
 	}
-	return (write_array((long)n, size));
+	return (write_hex_array(n, size));
+}
+
+char	*ft_cap(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		s[i] = ft_toupper(s[i]);
+	return (s);
+}
+
+void	ft_print_x(char c, unsigned int x)
+{
+	if (c == 'x')
+		ft_putstr_fd(ft_uitoa_hex(x), 1);
+	else if (c == 'X')
+		ft_putstr_fd(ft_cap(ft_uitoa_hex(x)), 1);
 }

@@ -5,12 +5,14 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdio.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 int		ft_printf(char *po, ...);
 int		num_params(char *s);
 char	*params(char *s);
 void	print_nbr(char c, ...);
 char	*ft_uitoa(unsigned int n);
+void	print_chars(char c, ...);
+void	ft_print_x(char c, unsigned int x);
 
 #endif
