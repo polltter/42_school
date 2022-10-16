@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:19:04 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 14:47:26 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/16 16:16:30 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ int	*ft_find_order(char *ph, int size)
 		{
 			while (ph[i] != '%' && ph[i])
 			{
-				if (ph[i + 1] != '%' || ph[i + 1])
+				if (ph[i + 1] == '%' || !ph[i + 1])
 				{
 					order[index] = 2;
+					index++;
 					break ;
 				}
 				i++;
@@ -64,42 +65,42 @@ int	*ft_find_order(char *ph, int size)
 	return (order);
 }
 
+void	print_cutlines(char *ph, va_list args, char *print_params, \
+int *order)
+{
+	int	i;
+	int	words;
+	int	params;
+	char	**splitted;
+	
+	i = -1;
+	words = 0;
+	params = 0;
+	splitted = ft_split_mod(ph, '%');
+	while (++i < num_params(ph) + word_counter(ph, '%'))
+	{
+		if (order[i] == 1)
+		{
+			print_vars(args, print_params, params);
+			params++;
+		}
+		else
+		{
+			ft_putstr_fd(splitted[words], 1);
+			words++;
+		}
+	}
+}
+
 int	ft_printf(char *ph, ...)
 {
 	va_list args;
-	int		num_args;
-	int		i;
 	char	*print_params;
-	char	**splitted;
-	int		num_words;
+	int		*order;
 
-	i = -1;
-	num_args = num_params(ph);
 	print_params = params(ph);
+	order = ft_find_order(ph, num_params(ph) + word_counter(ph, '%'));
 	va_start(args, ph);
-	splitted = ft_split_mod(ph, '%');
-	num_words = word_counter(ph, '%');
-	while (++i < num_args && i < num_args)
-	{
-		ft_putstr_fd(splitted[i], 1);
-		print_vars(args, print_params, i);
-	}
-	if (num_words < num_args)
-	{
-		while (i < num_args)
-		{
-			print_vars(args, print_params, i);
-			i++;
-		}
-		
-	}
-	else if (num_words > num_args)
-	{
-		while (i < num_args)
-		{
-			ft_putstr_fd(splitted[i], 1);
-			i++;
-		}
-	}
+	print_cutlines(ph, args, print_params, order);	
 	return (1);
 }
