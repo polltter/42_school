@@ -6,7 +6,7 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/16 14:00:53 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/16 16:21:24 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,11 @@ LIBC	= ar rcs
 INCS	= ft_printf.h
 
 
-${NAME}:
+${NAME}: libft.a
 	${CC} ${CFLAGS} -c ${SRCS} ${INCS}
 	${LIBC} ${NAME} ${OBJS}
+
+all: ${NAME}
 
 test:	libft.a
 	${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
@@ -53,5 +55,8 @@ libft.a:
 
 lib_fclean:
 	cd libft && ${MAKE} fclean
+
+fclean: clean
+	${RM} ${NAME}
 
 .PHONY: all, clean, fclean, re
