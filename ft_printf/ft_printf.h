@@ -7,7 +7,7 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
-int		ft_printf(char *po, ...);
+int		ft_printf(const char *po, ...);
 int		num_params(char *s);
 char	*params(char *s);
 void	print_nbr(char c, ...);
@@ -19,6 +19,7 @@ char	*write_hex_array(long unsigned int n, int size);
 void	ft_print_p(unsigned long int p);
 char	**ft_split_mod(char const *s, char c);
 int		word_counter(const char *s, char c);
-int		*ft_find_order(char *ph, int size);
+int		*ft_find_order(const char *ph, int size);
+void	print_cutlines(const char *ph, va_list args, char *print_params, int *order);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:19:04 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 16:16:30 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:11:51 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_vars(va_list args, char *print_params, int i)
 		write(1, "%%", 1);
 }
 
-int	*ft_find_order(char *ph, int size)
+int	*ft_find_order(const char *ph, int size)
 {
 	int	*order;
 	int i;
@@ -65,7 +65,7 @@ int	*ft_find_order(char *ph, int size)
 	return (order);
 }
 
-void	print_cutlines(char *ph, va_list args, char *print_params, \
+void	print_cutlines(const char *ph, va_list args, char *print_params, \
 int *order)
 {
 	int	i;
@@ -92,7 +92,7 @@ int *order)
 	}
 }
 
-int	ft_printf(char *ph, ...)
+int	ft_printf(const char *ph, ...)
 {
 	va_list args;
 	char	*print_params;
