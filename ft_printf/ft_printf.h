@@ -8,8 +8,8 @@
 # include "libft/libft.h"
 
 int		ft_printf(const char *po, ...);
-int		num_params(char *s);
-char	*params(char *s);
+int		num_params(const char *s);
+char	*params(const char *s);
 void	print_nbr(char c, ...);
 char	*ft_uitoa(unsigned int n);
 void	print_chars(char c, ...);

@@ -6,13 +6,13 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:32:51 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/15 21:54:20 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/16 18:15:16 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	num_params(char *s)
+int	num_params(const char *s)
 {
 	int	i;
 	int count;
@@ -28,7 +28,7 @@ int	num_params(char *s)
 	return (count);
 }
 
-char	*params(char *s)
+char	*params(const char *s)
 {
 	char	*params;
 	int		n_params;
