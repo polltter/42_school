@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:19:04 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 18:11:51 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:02:04 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	ft_printf(const char *ph, ...)
 	print_params = params(ph);
 	order = ft_find_order(ph, num_params(ph) + word_counter(ph, '%'));
 	va_start(args, ph);
-	print_cutlines(ph, args, print_params, order);	
+	print_cutlines(ph, args, print_params, order);
+	va_end(args);
 	return (1);
 }

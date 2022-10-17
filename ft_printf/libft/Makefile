@@ -53,14 +53,14 @@ CFLAGS	= -Wall -Wextra -Werror
 
 
 ${NAME}:
-	${CC} ${CFLAGS} -c ${SRCS} 
-	${LIBC} ${NAME} ${OBJS}
+	@${CC} ${CFLAGS} -c ${SRCS} 
+	@${LIBC} ${NAME} ${OBJS}
 
 all: ${NAME} bonus
 
 bonus: ${NAME}
-	${CC} ${CFLAGS} -c ${BNS}
-	${LIBC} ${NAME} ${OBNS}
+	@${CC} ${CFLAGS} -c ${BNS}
+	@${LIBC} ${NAME} ${OBNS}
 
 clean:
 	${RM} ${OBJS} ${OBNS}

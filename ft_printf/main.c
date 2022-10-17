@@ -1,47 +1,111 @@
 #include "ft_printf.h"
 
-int	*ft_find_order(char *ph, int size)
+int	word_counter(const char *s, char c)
 {
-	int	*order;
-	int i;
-	int	index;	
+	int	words;
+	int	i;
 
-	index = 0;
 	i = -1;
-	order = (int *)malloc(sizeof(int) * size);
-	while (ph[++i])
+	words = 0;
+	while (++i < (int)ft_strlen(s))
 	{
-		if (ph[i] == '%')
+		while (s[i] == c && s[i])
+			i++;
+		while (s[i] != c && s[i] != 0)
 		{
-			order[index] = 1;
-			index++;
+			if (s[i + 1] == c || s[i + 1] == 0)
+			{
+				i++;
+				words++;
+				break ;
+			}
 			i++;
 		}
-		else
+	}
+	return (words);
+}
+
+char	**allocate_mem(char **s, char c, const char *str)
+{
+	int	i;
+	int	counter;
+	int	word;
+
+	word = 0;
+	i = -1;
+	while (++i < (int)ft_strlen(str))
+	{
+		while (str[i] == c && str[i])
+			i++;
+		counter = 0;
+		while (str[i] != c && str[i] != 0)
 		{
-			while (ph[i] != '%' && ph[i])
+			counter++;
+			if (str[i + 1] == c || str[i + 1] == 0)
 			{
-				if (ph[i + 1] == '%' || !ph[i + 1])
-				{
-					order[index] = 2;
-					index++;
-					break ;
-				}
+				s[word] = (char *)malloc(sizeof(char) * (counter + 1));
+				s[word][counter] = 0;
 				i++;
+				word++;
+				break ;
 			}
-			
+			i++;
 		}
 	}
-	return (order);
+	return (s);
+}
+
+char	**write_mem(char **s, char c, const char *str)
+{
+	int	i;
+	int	counter;
+	int	word;
+
+	word = 0;
+	i = -1;
+	while (++i < (int)ft_strlen(str))
+	{
+		while (str[i] == c && str[i])
+			i += 2;
+		counter = 0;
+		while (str[i] != c && str[i] != 0)
+		{
+			s[word][counter] = str[i];
+			counter++;
+			if (str[i + 1] == c || str[i + 1] == 0)
+			{
+				i += 2;
+				word++;
+				break ;
+			}
+			i++;
+		}
+	}
+	return (s);
+}
+
+char	**ft_split_mod(char const *s, char c)
+{
+	int		nbr_words;
+	char	**splited;
+
+	nbr_words = word_counter(s, c);
+	splited = (char **)malloc(sizeof(char *) * (nbr_words + 1));
+	if (!splited)
+		return (NULL);
+	splited[nbr_words] = NULL;
+	splited = allocate_mem(splited, c, s);
+	splited = write_mem(splited, c, s);
+	return (splited);
 }
 
 int main()
 {
-	int	*order;
+	char **split;
 
-	order = ft_find_order("asdas%iasdasd%isdads%i%%", 7);
-	for (int i = 0; i < 7; i++)
+	split = ft_split_mod("%%dsdas%iasdasd%isdads%i%%", '%');
+	for (int i = 0; i < 3; i++)
 	{
-		printf("%i\n", order[i]);	
+		printf("%s\n", split[i]);	
 	}
 }

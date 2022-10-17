@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:29:53 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 14:14:15 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:05:42 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int main()
 {
-	ft_printf("ai %d asd %u sad %i %i %%\n", 1, 1, 1, 1);
+	ft_printf("%dai\n", 8);
 }
