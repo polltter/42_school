@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_chars.c                                   :+:      :+:    :+:   */
+/*   test_printf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 10:35:24 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/18 10:27:51 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/18 10:41:50 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/18 11:10:15 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
 
-size_t	print_chars(char c, ...)
+int main()
 {
-	va_list	args;
-	char	a;
-	char	*s;
-
-	va_start(args, c);
-	if (c == 'c')
-	{
-		a = va_arg(args, int);	
-		ft_putchar_fd(a, 1);
-		return (1);
-	}
-	else
-	{
-		s = va_arg(args, char *);
-		ft_putstr_fd(s, 1);
-		return (ft_strlen(s));
-	}
+	printf("%i", /* %d, %d, %d, %d, %d, %x", */ 8/* , -12, 123456789, 0, -12345678, 97, 2147483647 */);
 }

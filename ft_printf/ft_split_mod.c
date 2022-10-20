@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 12:47:47 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/17 16:18:16 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:15:49 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**write_mem(char **s, char c, const char *str)
 	while (++i < (int)ft_strlen(str))
 	{
 		while (str[i] == c && str[i])
-			i++;
+			i += 2;
 		counter = 0;
 		while (str[i] != c && str[i] != 0)
 		{

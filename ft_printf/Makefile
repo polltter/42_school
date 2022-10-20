@@ -6,7 +6,7 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/17 16:06:54 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/18 17:55:32 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ INCS	= ft_printf.h
 
 
 ${NAME}: libft.a
-	cp libft/libft.a .
+	cp ${LIBFT} .
 	mv libft.a $(NAME)
 	${CC} ${CFLAGS} -c ${SRCS} ${INCS}
 	${LIBC} ${NAME} ${OBJS}
@@ -86,12 +86,13 @@ test:	libft.a
 	@${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
 	@${CC} ${CFLAGS} ${OBJS} test.o -L. ${LIBFT} -o a.out
 	@./a.out | cat -e
+	
 
 clean:
 	${RM} ${OBJS} ${OBJSD} 
 
 libft.a:
-	@cd libft && ${MAKE} all
+	cd libft && ${MAKE} all
 
 lib_fclean:
 	cd libft && ${MAKE} fclean
@@ -99,5 +100,4 @@ lib_fclean:
 fclean: clean lib_fclean
 	${RM} ${NAME}
 	
-
 .PHONY: all, clean, fclean, re

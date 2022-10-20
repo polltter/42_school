@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:49:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 09:18:53 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:27:41 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	print_int(int n)
 
 void	print_usgn(unsigned int n)
 {
-	ft_putstr_fd(ft_uitoa(n), 1);
+	ft_putstr_fd(ft_uitoa(n),1);
 }
 
 /* esta funçao so leva dois parametros:
 o primeiro indica o tipo 
 o segundo é o numero que quero dar print, ja no tipo certo */
-void	print_nbr(char c, ...)
+size_t	print_nbr(char c, ...)
 {
 	va_list			args;
 	int				i;
@@ -36,10 +36,12 @@ void	print_nbr(char c, ...)
 	{
 		i = va_arg(args, int);
 		print_int(i);
+		return (ft_strlen(ft_itoa(i)));
 	}
-	else if (c == 'u')
+	else
 	{
 		u = va_arg(args, unsigned int);
 		print_usgn(u);
+		return (ft_strlen(ft_uitoa(u)));
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 09:06:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 11:28:03 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:29:34 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*write_array(long int n, int size)
+char	*printf_write_array(long int n, int size)
 {
 	char	*arr;
 
@@ -40,5 +40,5 @@ char	*ft_uitoa(unsigned int n)
 		size++;
 		div /= 10;
 	}
-	return (write_array((long)n, size));
+	return (printf_write_array((long)n, size));
 }

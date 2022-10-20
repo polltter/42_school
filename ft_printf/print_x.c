@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:02:25 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/16 12:33:24 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:17:34 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ char	*ft_cap(char *s)
 	return (s);
 }
 
-void	ft_print_x(char c, unsigned int x)
+size_t	ft_print_x(char c, unsigned int x)
 {
 	if (c == 'x')
 		ft_putstr_fd(ft_uitoa_hex((long)x), 1);
 	else if (c == 'X')
 		ft_putstr_fd(ft_cap(ft_uitoa_hex((long)x)), 1);
+	return (ft_strlen(ft_uitoa_hex((long)x)));
 }
