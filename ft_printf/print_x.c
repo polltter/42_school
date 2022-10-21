@@ -6,41 +6,43 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:02:25 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/18 10:17:34 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:08:07 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*write_hex_array(long unsigned int n, int size)
+char	*write_hex_array(long unsigned int n, size_t size, char *arr)
 {
-	char	*arr;
-
-	arr = (char *)malloc(sizeof(char) * (size + 1));
 	arr[size] = 0;
-	while (n != 0)
+	if (n == 0)
+		arr[0] = '0';
+	else
 	{
-		arr[--size] = "0123456789abcdef"[n % 16];
-		n /= 16;
+		while (n != 0)
+		{	
+			arr[--size] = "0123456789abcdef"[n % 16];
+			n /= 16;
+		}
 	}
 	return (arr);
 }
 
-char	*ft_uitoa_hex(long unsigned int n)
+size_t	ft_size_hex(long unsigned int n)
 {
-	int			size;
-	long int	div;
+	size_t				size;
+	long unsigned int	div;
 
 	div = n;
 	size = 0;
 	if (n == 0)
-		return ("0");
+		return (1);
 	while (div != 0)
 	{
 		size++;
 		div /= 16;
 	}
-	return (write_hex_array(n, size));
+	return (size);
 }
 
 char	*ft_cap(char *s)
@@ -55,9 +57,14 @@ char	*ft_cap(char *s)
 
 size_t	ft_print_x(char c, unsigned int x)
 {
+	char	*arr;
+
+	arr = (char *)malloc(sizeof(char) * (ft_size_hex(x) + 1));
+	arr = write_hex_array(x, ft_size_hex(x), arr);
 	if (c == 'x')
-		ft_putstr_fd(ft_uitoa_hex((long)x), 1);
+		ft_putstr_fd(arr, 1);
 	else if (c == 'X')
-		ft_putstr_fd(ft_cap(ft_uitoa_hex((long)x)), 1);
-	return (ft_strlen(ft_uitoa_hex((long)x)));
+		ft_putstr_fd(ft_cap(arr), 1);
+	free(arr);
+	return (ft_size_hex((long)x));
 }

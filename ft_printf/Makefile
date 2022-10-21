@@ -6,7 +6,7 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/18 17:55:32 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/20 17:46:04 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,9 @@ NAME	= libftprintf.a
 SRCS	= find_params.c \
 		ft_printf_numbers.c \
 		ft_printf.c \
-		helper_nbrs.c \
 		ft_print_chars.c \
 		print_x.c \
-		print_p.c \
-		ft_split_mod.c
+		print_p.c 
 
 SRCSF	=  ft_atoi.c \
 		ft_isdigit.c \
@@ -65,8 +63,7 @@ OBJSD	= ${SRCSF:.c=.o}
 
 CC	= gcc
 
-CFLAGS 	= -Wall -Werror -Wextra
-
+CFLAGS 	= -Wall -Werror -Wextra -fsanitize=address -g
 RM		= rm -rf
 
 LIBC	= ar rcs

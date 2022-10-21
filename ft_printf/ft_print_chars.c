@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:35:24 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/18 10:27:51 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:52:09 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ size_t	print_chars(char c, ...)
 	else
 	{
 		s = va_arg(args, char *);
+		if (!s)
+			return (write(1, "(null)", 6));
 		ft_putstr_fd(s, 1);
 		return (ft_strlen(s));
 	}

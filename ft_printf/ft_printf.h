@@ -11,15 +11,16 @@ int		ft_printf(const char *po, ...);
 int		num_params(const char *s);
 char	*params(const char *s);
 size_t	print_nbr(char c, ...);
-char	*ft_uitoa(unsigned int n);
+size_t	ft_size(long int n);
 size_t	print_chars(char c, ...);
 size_t	ft_print_x(char c, unsigned int x);
-char	*ft_uitoa_hex(long unsigned int n);
-char	*write_hex_array(long unsigned int n, int size);
+size_t	ft_size_hex(long unsigned int n);
+char	*write_hex_array(long unsigned int n, size_t size, char *arr);
 size_t	ft_print_p(unsigned long int p);
 char	**ft_split_mod(char const *s, char c);
 int		word_counter(const char *s, char c);
 int		*ft_find_order(const char *ph, int size);
 void	print_cutlines(const char *ph, va_list args, char *print_params, int *order);
+char	*write_array(long int n, int size, char *arr);
 
 #endif

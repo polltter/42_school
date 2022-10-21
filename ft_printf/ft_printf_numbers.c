@@ -6,42 +6,69 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:49:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/18 10:27:41 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/21 10:23:31 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_int(int n)
-{
-	ft_putnbr_fd(n, 1);
-}
 
-void	print_usgn(unsigned int n)
-{
-	ft_putstr_fd(ft_uitoa(n),1);
-}
-
-/* esta funçao so leva dois parametros:
-o primeiro indica o tipo 
-o segundo é o numero que quero dar print, ja no tipo certo */
 size_t	print_nbr(char c, ...)
 {
-	va_list			args;
-	int				i;
-	unsigned int	u;
+	va_list		args;
+	long int	i;
+	char		*arr;
 
 	va_start(args, c);
-	if (c == 'i' || c == 'd')
+	i = va_arg(args, long int);
+	arr = (char *)malloc(sizeof(char) * (ft_size(i) + 1));
+	arr = write_array(i, ft_size(i), arr);
+	ft_putstr_fd(arr, 1);
+	free(arr);
+	return (ft_size(i));
+}
+
+char	*write_array(long int n, int size, char *arr)
+{
+	arr[size] = 0;
+	if (n < 0)
 	{
-		i = va_arg(args, int);
-		print_int(i);
-		return (ft_strlen(ft_itoa(i)));
+		arr[0] = '-';
+		n *= -1; 
 	}
-	else
+	if (n == 0)
 	{
-		u = va_arg(args, unsigned int);
-		print_usgn(u);
-		return (ft_strlen(ft_uitoa(u)));
+		arr[0] = '0';
+		return(arr);
 	}
+	while (n != 0)
+	{
+		arr[--size] = n % 10 + '0';
+		n /= 10;
+	}
+	return (arr);
+}
+
+size_t	ft_size(long int n)
+{
+	int			size;
+	long int	div;
+	int			size_sign;
+
+	size_sign = 0;
+	div = n;
+	size = 0;
+	if (n < 0)
+	{
+		n *= -1; 
+		size_sign = 1;
+	}
+	if (n == 0)
+		return (1);
+	while (div != 0)
+	{
+		size++;
+		div /= 10;
+	}
+	return (size + size_sign);
 }
