@@ -6,12 +6,11 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:49:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/21 10:23:31 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:03:37 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 size_t	print_nbr(char c, ...)
 {
@@ -34,12 +33,12 @@ char	*write_array(long int n, int size, char *arr)
 	if (n < 0)
 	{
 		arr[0] = '-';
-		n *= -1; 
+		n *= -1;
 	}
 	if (n == 0)
 	{
 		arr[0] = '0';
-		return(arr);
+		return (arr);
 	}
 	while (n != 0)
 	{
@@ -60,7 +59,7 @@ size_t	ft_size(long int n)
 	size = 0;
 	if (n < 0)
 	{
-		n *= -1; 
+		n *= -1;
 		size_sign = 1;
 	}
 	if (n == 0)

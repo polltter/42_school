@@ -6,14 +6,13 @@
 #    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/20 17:46:04 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/23 11:12:08 by mvenanci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libftprintf.a
 
-SRCS	= find_params.c \
-		ft_printf_numbers.c \
+SRCS	= ft_printf_numbers.c \
 		ft_printf.c \
 		ft_print_chars.c \
 		print_x.c \
@@ -80,10 +79,12 @@ ${NAME}: libft.a
 all: ${NAME}
 
 test:	libft.a
-	@${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
-	@${CC} ${CFLAGS} ${OBJS} test.o -L. ${LIBFT} -o a.out
-	@./a.out | cat -e
+	${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
+	${CC} ${CFLAGS} ${OBJS} test.o -L. ${LIBFT} -o a.out
+	./a.out | cat -e
 	
+norm:
+	python3 -m norminette ${SRCS}
 
 clean:
 	${RM} ${OBJS} ${OBJSD} 

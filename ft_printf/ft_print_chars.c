@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 10:35:24 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/20 14:52:09 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:01:43 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	print_chars(char c, ...)
 	va_start(args, c);
 	if (c == 'c')
 	{
-		a = va_arg(args, int);	
+		a = va_arg(args, int);
 		ft_putchar_fd(a, 1);
 		return (1);
 	}

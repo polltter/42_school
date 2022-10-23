@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 12:35:01 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/20 18:05:53 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:10:22 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 size_t	ft_print_p(unsigned long int p)
 {
 	char	*arr;
+
 	if (!p)
 		return (write(1, "(nil)", 5));
 	arr = (char *)malloc(sizeof(char) * (ft_size_hex(p) + 1));

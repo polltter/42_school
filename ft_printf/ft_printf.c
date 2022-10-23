@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:19:04 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/21 11:05:46 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/23 11:02:18 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	print_vars(va_list args, char c)
 
 int	ft_printf(const char *ph, ...)
 {
-	va_list args;
+	va_list	args;
 	int		i;
 	int		count;
 	size_t	total_len;
@@ -55,7 +55,6 @@ int	ft_printf(const char *ph, ...)
 		else
 			total_len += write(1, &ph[i], 1);
 	}
-	
 	va_end(args);
 	return (total_len);
 }
