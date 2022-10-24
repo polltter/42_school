@@ -4,11 +4,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#define BUFFER_SIZE 42
+# define BUFFER_SIZE 4
 
 char	*get_next_line(int fd);
-size_t	size_until_nl(char *s);
+char	*read_copy(char *line, int fd);
+char	*ft_strchr(char *str, int c);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(char *s);
+char	*ft_strdup_until_nl(char *s);
+char	*forward_line(char *line);
 void	*ft_memcpy(void *dest, void *src, size_t n);
-void	change_size(void **line, int old_size, int new_size);
 
 #endif

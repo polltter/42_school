@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/23 17:42:19 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/24 10:08:04 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2022/10/24 17:28:01 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "get_next_line.h"
 #include <fcntl.h> //testing only
@@ -16,64 +18,82 @@
 
 char	*get_next_line(int fd)
 {
-	static void	*temp;
-	void		*line;
-	size_t		bytes_read;
-	size_t		size;
-	size_t		total_size;
+	static char	*line;
+	char		*return_line;
 
-	temp = malloc(sizeof(char) * (BUFFER_SIZE));
-	bytes_read = read(fd, temp, BUFFER_SIZE);
-	size = size_until_nl(temp);
-	total_size = 0;
-	if (bytes_read <= 0)
-		return (NULL);
-	else if (size < BUFFER_SIZE - 1|| bytes_read < BUFFER_SIZE)
-	{
-		change_size(&line, total_size, size + 1);
-		line = ft_memcpy(line + total_size, temp, size + 1);
-		return ((char *)line);
-	}
-	else
-	{
-		while (size == BUFFER_SIZE && bytes_read > 0)
-		{
-			change_size(&line, total_size, total_size + size + 1);
-			line = ft_memcpy(line + total_size - size, temp, size);
-			bytes_read = read(fd, temp, BUFFER_SIZE);
-			size = size_until_nl(temp);
-			total_size += size;
-		}
-	}
-	if (bytes_read <= 0)
-	{
-		free(temp);
-		return (line);
-	}
-	else
-	{
-		change_size(&line, total_size, size);
-		line = ft_memcpy(line + total_size, temp, size);
-		free(temp);
-		return (line);
-	}
+	line = read_copy(line, fd);
+	return_line = ft_strdup_until_nl(line);
+	line = forward_line(line);
+	return (return_line);
 }
 
-void	change_size(void **line, int old_size, int new_size)
+char	*forward_line(char *line)
 {
-	void	*temp_arr;
+	while (*line && *line != '\n')
+		line++;
+	return (line);
+}
 
-	if (old_size == 0)
+
+char	*ft_strdup_until_nl(char *s)
+{
+	char	*dest;
+	int		len_s;
+
+	len_s = 0;
+	while (s[len_s] && s[len_s] != '\n')
+		len_s++;
+	dest = (char *)malloc(sizeof(char) * len_s + 1);
+	dest[len_s] = 0;
+	while (--len_s >= 0)
+		dest[len_s] = s[len_s];
+	return (dest);
+}
+
+char	*read_copy(char *line, int fd)
+{
+	char	*temp;
+
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	temp[BUFFER_SIZE] = 0;
+	while (read(fd, temp, BUFFER_SIZE) > 0)
 	{
-		*line = malloc(sizeof(char) * new_size);
-		return ;
+		line = ft_strjoin(line, temp);
+		if (ft_strchr(line, '\n'))
+			break ;
 	}
-	temp_arr = malloc(sizeof(char) * old_size);
-	temp_arr = ft_memcpy(temp_arr, *line, old_size);
-	free(*line);
-	*line = malloc(sizeof(char) * new_size);
-	*line = ft_memcpy(*line, temp_arr, old_size);
-	free(temp_arr);
+	free(temp);
+	return (line);
+}
+
+char	*ft_strchr(char *str, int c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return ((char *)str);
+		str++;
+	}
+	if (*str == c)
+		return ((char *)str);
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*str;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!str)
+		return (NULL);
+	str[len1 + len2] = 0;
+	ft_memcpy(str, s1, len1);
+	ft_memcpy(str + len1, s2, len2);
+	return (str);
 }
 
 void	*ft_memcpy(void *dest, void *src, size_t n)
@@ -92,21 +112,27 @@ void	*ft_memcpy(void *dest, void *src, size_t n)
 	return (dest);
 }
 
-size_t	size_until_nl(char *s)
-{
-	size_t	size;
 
-	size = 0;
-	while (size < BUFFER_SIZE && s[size] != '\n')
-		size++;
-	return (size);
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+	{
+		printf("entrou no if\n");
+		return (0);
+	}
+	while (s[i])
+		i++;
+	return (i);
 }
+
 
 int main(void)
 {
 	int fd = open("oi", O_RDONLY);
-	char *line = get_next_line(fd);
-	write(1, line, 15);
-	free(line);
-	close(fd);
+
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
 }
