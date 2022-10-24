@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 17:42:19 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/23 20:25:16 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/24 10:08:04 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,24 @@ char	*get_next_line(int fd)
 	size_t		size;
 	size_t		total_size;
 
-	temp = malloc(sizeof(char) * BUFFER_SIZE);
+	temp = malloc(sizeof(char) * (BUFFER_SIZE));
 	bytes_read = read(fd, temp, BUFFER_SIZE);
 	size = size_until_nl(temp);
 	total_size = 0;
 	if (bytes_read <= 0)
 		return (NULL);
-	else if (size < BUFFER_SIZE || bytes_read < BUFFER_SIZE)
-		return ((char *)temp);
+	else if (size < BUFFER_SIZE - 1|| bytes_read < BUFFER_SIZE)
+	{
+		change_size(&line, total_size, size + 1);
+		line = ft_memcpy(line + total_size, temp, size + 1);
+		return ((char *)line);
+	}
 	else
 	{
 		while (size == BUFFER_SIZE && bytes_read > 0)
 		{
-			change_size(&line, total_size, size);
-			line = ft_memcpy(line + total_size, temp, size);
+			change_size(&line, total_size, total_size + size + 1);
+			line = ft_memcpy(line + total_size - size, temp, size);
 			bytes_read = read(fd, temp, BUFFER_SIZE);
 			size = size_until_nl(temp);
 			total_size += size;
@@ -93,7 +97,7 @@ size_t	size_until_nl(char *s)
 	size_t	size;
 
 	size = 0;
-	while (size < BUFFER_SIZE - 1 && s[size] != '\n')
+	while (size < BUFFER_SIZE && s[size] != '\n')
 		size++;
 	return (size);
 }
@@ -102,7 +106,7 @@ int main(void)
 {
 	int fd = open("oi", O_RDONLY);
 	char *line = get_next_line(fd);
-	write(1, line, 4);
+	write(1, line, 15);
 	free(line);
 	close(fd);
 }
