@@ -6,11 +6,9 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/24 17:28:01 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/25 09:18:50 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "get_next_line.h"
 #include <fcntl.h> //testing only
@@ -31,9 +29,9 @@ char	*forward_line(char *line)
 {
 	while (*line && *line != '\n')
 		line++;
+	line++;
 	return (line);
 }
-
 
 char	*ft_strdup_until_nl(char *s)
 {
@@ -112,27 +110,26 @@ void	*ft_memcpy(void *dest, void *src, size_t n)
 	return (dest);
 }
 
-
 size_t	ft_strlen(char *s)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
-	{
-		printf("entrou no if\n");
 		return (0);
-	}
 	while (s[i])
 		i++;
 	return (i);
 }
 
-
 int main(void)
 {
 	int fd = open("oi", O_RDONLY);
-
+	
 	printf("%s\n", get_next_line(fd));
 	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+	close(fd);
 }

@@ -4,7 +4,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 4
+# define BUFFER_SIZE 6
 
 char	*get_next_line(int fd);
 char	*read_copy(char *line, int fd);
