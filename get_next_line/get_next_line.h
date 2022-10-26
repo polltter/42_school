@@ -4,7 +4,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 6
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 char	*get_next_line(int fd);
 char	*read_copy(char *line, int fd);
@@ -13,6 +15,6 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(char *s);
 char	*ft_strdup_until_nl(char *s);
 char	*forward_line(char *line);
-void	*ft_memcpy(void *dest, void *src, size_t n);
+char	*ft_memcpy(char *dest, char *src, size_t n);
 
 #endif
