@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 08:59:56 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/26 15:51:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/28 11:33:46 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_memcpy(char *dest, char *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(c, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	len1;
 	size_t	len2;
@@ -56,13 +56,16 @@ char	*ft_strjoin(c, char *s2)
 
 char	*ft_strchr(char *str, int c)
 {
-	while (*str)
+	if (str)
 	{
+		while (*str)
+		{
+			if (*str == c)
+				return ((char *)str);
+			str++;
+		}
 		if (*str == c)
 			return ((char *)str);
-		str++;
 	}
-	if (*str == c)
-		return ((char *)str);
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/26 15:42:50 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/28 11:52:28 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	static char	*line;
 	char		*return_line;
 
-	if (fd < 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (!line)
 	{
@@ -40,12 +40,29 @@ char	*get_next_line(int fd)
 
 char	*forward_line(char *line)
 {
-	while (*line && *line != '\n')
-		line++;
-	line++;
-	if (!line)
-		return (0);
-	return (line);
+	int		i;
+	int		j;
+	char	*new_line;
+	
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (!line[i])
+		return(line);
+	i++;
+	j = i;
+	while (line[j])
+		j++;
+	new_line = (char *)malloc(sizeof(char) * (j - i + 1));
+	new_line[j - i] = 0;
+	j = i;
+	while (line[i])
+	{
+		new_line[i - j] = line[i];
+		i++;
+	}
+	free(line);
+	return (new_line);
 }
 
 char	*ft_strdup_until_nl(char *s)
@@ -85,8 +102,6 @@ char	*read_copy(char *line, int fd)
 		if (ft_strchr(line, '\n'))
 			break ;
 		b_read = read(fd, temp, BUFFER_SIZE);
-		if (b_read <= 0)
-			return (0);
 	}
 	free(temp);
 	return (line);
