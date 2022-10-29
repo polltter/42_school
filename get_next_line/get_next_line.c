@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/28 11:52:28 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:37:13 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (!line)
-	{
-		line = malloc(1);
-		line[0] = 0;
-	}
+		line = (char *)ft_calloc(1, 1);
 	if (ft_strchr(line, '\n'))
 	{
 		return_line = ft_strdup_until_nl(line);
@@ -35,6 +32,8 @@ char	*get_next_line(int fd)
 	line = read_copy(line, fd);
 	return_line = ft_strdup_until_nl(line);
 	line = forward_line(line);
+	if (!line)
+		free (line);
 	return (return_line);
 }
 
@@ -43,12 +42,14 @@ char	*forward_line(char *line)
 	int		i;
 	int		j;
 	char	*new_line;
-	
+
 	i = 0;
+	if (!line)
+		return (0);
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (!line[i])
-		return(line);
+		return (line);
 	i++;
 	j = i;
 	while (line[j])
@@ -71,7 +72,7 @@ char	*ft_strdup_until_nl(char *s)
 	int		len_s;
 
 	len_s = 0;
-	if (!*s)
+	if (!s)
 		return (0);
 	while (s[len_s] && s[len_s] != '\n')
 		len_s++;
@@ -86,13 +87,14 @@ char	*ft_strdup_until_nl(char *s)
 char	*read_copy(char *line, int fd)
 {
 	char	*temp;
-	size_t	b_read;
+	int		b_read;
 
-	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	temp = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	temp[BUFFER_SIZE] = 0;
 	b_read = read(fd, temp, BUFFER_SIZE);
 	if (b_read <= 0)
 	{
+		free(line);
 		free(temp);
 		return (0);
 	}
@@ -107,18 +109,3 @@ char	*read_copy(char *line, int fd)
 	return (line);
 }
 
-int main(void)
-{
-	int fd = open("oi", O_RDONLY);
-	char	*s = get_next_line(fd);
-	
-	while (s)
-	{
-
-		printf("%s", s);
-		free(s);
-		s = get_next_line(fd);
-	}
-	free(s);
-	close(fd);
-}

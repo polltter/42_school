@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 08:59:56 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/28 11:33:46 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/29 09:50:19 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,22 @@ char	*ft_strchr(char *str, int c)
 			return ((char *)str);
 	}
 	return (NULL);
+}
+
+void	*ft_calloc(size_t nelem, size_t elsize)
+{
+	char	*arr;
+	size_t	i;
+
+	i = -1;
+	arr = malloc(elsize * nelem);
+	if (!arr)
+		return (NULL);
+	if (nelem != 0)
+	{
+		while (++i < nelem)
+			arr[i] = 0;
+		return ((void *)arr);
+	}
+	return ((void *)arr);
 }
