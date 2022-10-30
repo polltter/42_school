@@ -1,26 +1,15 @@
-==895833== Memcheck, a memory error detector
-==895833== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==895833== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==895833== Command: ./a.out
-==895833== Parent PID: 854867
-==895833== 
-==895833== 
-==895833== HEAP SUMMARY:
-==895833==     in use at exit: 2 bytes in 1 blocks
-==895833==   total heap usage: 7 allocs, 6 frees, 1,200 bytes allocated
-==895833== 
-==895833== 2 bytes in 1 blocks are definitely lost in loss record 1 of 1
-==895833==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==895833==    by 0x109391: forward_line (get_next_line.c:57)
-==895833==    by 0x1092C1: get_next_line (get_next_line.c:34)
-==895833==    by 0x1097B0: main (main.c:20)
-==895833== 
-==895833== LEAK SUMMARY:
-==895833==    definitely lost: 2 bytes in 1 blocks
-==895833==    indirectly lost: 0 bytes in 0 blocks
-==895833==      possibly lost: 0 bytes in 0 blocks
-==895833==    still reachable: 0 bytes in 0 blocks
-==895833==         suppressed: 0 bytes in 0 blocks
-==895833== 
-==895833== For lists of detected and suppressed errors, rerun with: -s
-==895833== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==1302302== Memcheck, a memory error detector
+==1302302== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1302302== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1302302== Command: ./a.out
+==1302302== Parent PID: 1291395
+==1302302== 
+==1302302== 
+==1302302== HEAP SUMMARY:
+==1302302==     in use at exit: 0 bytes in 0 blocks
+==1302302==   total heap usage: 30 allocs, 30 frees, 4,967 bytes allocated
+==1302302== 
+==1302302== All heap blocks were freed -- no leaks are possible
+==1302302== 
+==1302302== For lists of detected and suppressed errors, rerun with: -s
+==1302302== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

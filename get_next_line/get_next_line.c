@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/29 12:37:13 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/30 11:40:54 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!line)
 		line = (char *)ft_calloc(1, 1);
-	if (ft_strchr(line, '\n'))
+	else if (ft_strchr(line, '\n'))
 	{
 		return_line = ft_strdup_until_nl(line);
 		line = forward_line(line);
@@ -32,8 +32,6 @@ char	*get_next_line(int fd)
 	line = read_copy(line, fd);
 	return_line = ft_strdup_until_nl(line);
 	line = forward_line(line);
-	if (!line)
-		free (line);
 	return (return_line);
 }
 
@@ -49,19 +47,19 @@ char	*forward_line(char *line)
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (!line[i])
-		return (line);
-	i++;
-	j = i;
+	{
+		free(line);
+		return (0);
+	}
+	j = ++i;
 	while (line[j])
 		j++;
 	new_line = (char *)malloc(sizeof(char) * (j - i + 1));
 	new_line[j - i] = 0;
 	j = i;
-	while (line[i])
-	{
+	i--;
+	while (line[++i])
 		new_line[i - j] = line[i];
-		i++;
-	}
 	free(line);
 	return (new_line);
 }
@@ -90,13 +88,16 @@ char	*read_copy(char *line, int fd)
 	int		b_read;
 
 	temp = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	temp[BUFFER_SIZE] = 0;
 	b_read = read(fd, temp, BUFFER_SIZE);
 	if (b_read <= 0)
 	{
-		free(line);
 		free(temp);
-		return (0);
+		if (!line[0])
+		{
+			free(line);
+			line = NULL;
+		}
+		return (line);
 	}
 	while (b_read > 0)
 	{
@@ -104,6 +105,7 @@ char	*read_copy(char *line, int fd)
 		if (ft_strchr(line, '\n'))
 			break ;
 		b_read = read(fd, temp, BUFFER_SIZE);
+		temp[b_read] = 0;
 	}
 	free(temp);
 	return (line);

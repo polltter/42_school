@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 09:05:49 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/29 09:06:07 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/30 11:00:15 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main(void)
 {
-	int fd = open("oi", O_RDONLY);
+	int fd = open("res", O_RDONLY);
 	char	*s = get_next_line(fd);
 	
 	while (s)
@@ -24,7 +24,8 @@ int main(void)
 
 		printf("%s", s);
 		free(s);
-		s = get_next_line(fd);
+		//s = get_next_line(fd);
+		s = NULL;
 	}
 	free(s);
 	close(fd);
