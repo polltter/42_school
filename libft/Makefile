@@ -31,7 +31,8 @@ SRCS	=  ft_atoi.c \
 		ft_strmapi.c \
 		ft_split.c \
 		ft_toupper.c \
-		ft_strtrim.c
+		ft_strtrim.c \
+		ft_putendl_fd.c
 
 BNS	= ft_lstnew.c \
 		ft_lstadd_front.c \
