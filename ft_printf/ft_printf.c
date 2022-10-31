@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 18:19:04 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/23 11:02:18 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:34:51 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ size_t	print_vars(va_list args, char c)
 {
 	size_t	total_len;
 
+	total_len = 0;
 	if (c == 'd' || c == 'i')
-		total_len = print_nbr(c, (long)va_arg(args, int));
+		total_len = print_nbr((long)va_arg(args, int));
 	else if (c == 'u')
-		total_len = print_nbr(c, va_arg(args, unsigned int));
+		total_len = print_nbr((long)va_arg(args, unsigned int));
 	else if (c == 's')
-		total_len = print_chars(c, va_arg(args, char *));
+		total_len = print_strs(va_arg(args, char *));
 	else if (c == 'c')
-		total_len = print_chars(c, va_arg(args, int));
+		total_len = print_char(va_arg(args, int));
 	else if (c == 'x' || c == 'X')
 		total_len = ft_print_x(c, va_arg(args, unsigned int));
 	else if (c == 'p')

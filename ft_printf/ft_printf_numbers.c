@@ -3,31 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_numbers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:49:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/23 11:03:37 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:32:26 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	print_nbr(char c, ...)
+size_t	print_nbr(long int i)
 {
-	va_list		args;
-	long int	i;
-	char		*arr;
-
-	va_start(args, c);
-	i = va_arg(args, long int);
-	arr = (char *)malloc(sizeof(char) * (ft_size(i) + 1));
-	arr = write_array(i, ft_size(i), arr);
-	ft_putstr_fd(arr, 1);
-	free(arr);
+	ft_putnbr(i);
 	return (ft_size(i));
 }
 
-char	*write_array(long int n, int size, char *arr)
+/* char	*write_array(long int n, int size, char *arr)
 {
 	arr[size] = 0;
 	if (n < 0)
@@ -46,7 +37,7 @@ char	*write_array(long int n, int size, char *arr)
 		n /= 10;
 	}
 	return (arr);
-}
+} */
 
 size_t	ft_size(long int n)
 {
@@ -70,4 +61,16 @@ size_t	ft_size(long int n)
 		div /= 10;
 	}
 	return (size + size_sign);
+}
+
+void	ft_putnbr(long int n)
+{
+	if (n < 0)
+	{
+		ft_putchar_fd('-', 1);
+		n *= -1;
+	}
+	if (n > 9)
+		ft_putnbr(n / 10);
+	ft_putchar_fd(n % 10 + '0', 1);
 }

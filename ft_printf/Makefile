@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/23 11:12:08 by mvenanci         ###   ########.fr        #
+#    Updated: 2022/10/31 15:59:41 by mvenanci@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,9 +60,9 @@ OBJS	= ${SRCS:.c=.o}
 
 OBJSD	= ${SRCSF:.c=.o}
 
-CC	= gcc
+CC	= clang
 
-CFLAGS 	= -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS 	= -Wall -Werror -Wextra
 RM		= rm -rf
 
 LIBC	= ar rcs
