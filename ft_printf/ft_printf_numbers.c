@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:49:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/31 16:32:26 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/10/31 17:03:37 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,6 @@ size_t	print_nbr(long int i)
 	ft_putnbr(i);
 	return (ft_size(i));
 }
-
-/* char	*write_array(long int n, int size, char *arr)
-{
-	arr[size] = 0;
-	if (n < 0)
-	{
-		arr[0] = '-';
-		n *= -1;
-	}
-	if (n == 0)
-	{
-		arr[0] = '0';
-		return (arr);
-	}
-	while (n != 0)
-	{
-		arr[--size] = n % 10 + '0';
-		n /= 10;
-	}
-	return (arr);
-} */
 
 size_t	ft_size(long int n)
 {
