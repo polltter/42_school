@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/10/30 11:40:54 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/01 17:47:25 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ char	*get_next_line(int fd)
 	char		*return_line;
 
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if (line)
+		{
+			free(line);
+			line = NULL;
+		}
 		return (NULL);
+	}
 	if (!line)
 		line = (char *)ft_calloc(1, 1);
 	else if (ft_strchr(line, '\n'))
