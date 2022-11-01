@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 21:31:25 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/14 22:07:57 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:13:14 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_list	*ft_lstnew(void *content)
 	t_list	*first;
 
 	first = (t_list *)malloc(sizeof(t_list));
+	if (!first)
+		return (NULL);
 	first->content = content;
 	first->next = NULL;
 	return (first);

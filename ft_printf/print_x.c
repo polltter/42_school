@@ -3,29 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   print_x.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:02:25 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/21 11:08:07 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:50:14 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*write_hex_array(long unsigned int n, size_t size, char *arr)
+void	write_hex_array(long unsigned int n, int cap)
 {
-	arr[size] = 0;
-	if (n == 0)
-		arr[0] = '0';
+	char	*base;
+
+	if (cap == 0)
+		base = "0123456789abcdef";
 	else
-	{
-		while (n != 0)
-		{	
-			arr[--size] = "0123456789abcdef"[n % 16];
-			n /= 16;
-		}
-	}
-	return (arr);
+		base = "0123456789ABCDEF";
+	if (n > 15)
+		write_hex_array(n / 16, cap);
+	ft_putchar_fd(base[n % 16], 1);
 }
 
 size_t	ft_size_hex(long unsigned int n)
@@ -45,26 +42,20 @@ size_t	ft_size_hex(long unsigned int n)
 	return (size);
 }
 
-char	*ft_cap(char *s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		s[i] = ft_toupper(s[i]);
-	return (s);
-}
-
 size_t	ft_print_x(char c, unsigned int x)
 {
-	char	*arr;
-
-	arr = (char *)malloc(sizeof(char) * (ft_size_hex(x) + 1));
-	arr = write_hex_array(x, ft_size_hex(x), arr);
 	if (c == 'x')
-		ft_putstr_fd(arr, 1);
+		write_hex_array(x, 0);
 	else if (c == 'X')
-		ft_putstr_fd(ft_cap(arr), 1);
-	free(arr);
+		write_hex_array(x, 1);
 	return (ft_size_hex((long)x));
+}
+
+size_t	ft_print_p(unsigned long int p)
+{
+	if (!p)
+		return (write(1, "(nil)", 5));
+	ft_putstr_fd("0x", 1);
+	write_hex_array(p, 0);
+	return (ft_size_hex(p) + 2);
 }

@@ -31,7 +31,8 @@ SRCS	=  ft_atoi.c \
 		ft_strmapi.c \
 		ft_split.c \
 		ft_toupper.c \
-		ft_strtrim.c
+		ft_strtrim.c \
+		ft_putendl_fd.c
 
 BNS	= ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -45,7 +46,7 @@ BNS	= ft_lstnew.c \
 
 OBJS	= ${SRCS:.c=.o}
 OBNS	= ${BNS:.c=.o}
-INCS	= includes
+INCS	= libft.h
 NAME	= libft.a
 LIBC	= ar rcs
 CC		= clang
@@ -53,15 +54,13 @@ RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
 
-${NAME}:
-	@${CC} ${CFLAGS} -c ${SRCS} 
-	@${LIBC} ${NAME} ${OBJS}
+${NAME}: ${OBJS}
+	${LIBC} ${NAME} ${OBJS}
 
-all: ${NAME} bonus
+all: ${NAME}
 
-bonus: ${NAME}
-	@${CC} ${CFLAGS} -c ${BNS}
-	@${LIBC} ${NAME} ${OBNS}
+bonus: ${NAME} ${OBNS}
+	${LIBC} ${NAME} ${OBNS}
 
 clean:
 	${RM} ${OBJS} ${OBNS}

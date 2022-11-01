@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:11:08 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/15 16:11:09 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:11:51 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*write_array(long int n, int size)
 	char	*arr;
 
 	arr = (char *)malloc(sizeof(char) * (size + 1));
+	if (!arr)
+		return (NULL);
 	arr[size] = 0;
 	if (n == INT_MIN)
 	{
@@ -41,11 +43,16 @@ char	*ft_itoa(int n)
 {
 	int			size;
 	long int	div;
+	char		*arr;
 
 	div = n;
 	size = 0;
 	if (n == 0)
-		return ("0");
+	{
+		arr = (char *)ft_calloc(2, 1);
+		arr[0] = '0';
+		return (arr);
+	}
 	while (div != 0)
 	{
 		size++;

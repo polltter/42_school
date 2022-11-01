@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:38:03 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/30 19:22:56 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 08:48:34 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		start++;
 	while (len >= 0 && ft_strchr(set, s1[len]))
 		len--;
-	if (start >= len)
+	if (start > len)
 	{
 		trim = ft_calloc(1, 1);
 		return (trim);

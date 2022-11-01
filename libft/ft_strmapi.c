@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:40:32 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/15 16:14:17 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:12:51 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	len;
+	int		len;
 	char	*str;
 
 	len = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) + (len + 1));
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
 	str[len] = 0;
-	while (--len > 0)
+	while (--len >= 0)
 		str[len] = (*f)(len, s[len]);
-	str[len] = (*f)(len, s[len]);
 	return (str);
-}
-
-char	cap(unsigned int a, char c)
-{
-	(void) a;
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
 }

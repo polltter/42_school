@@ -5,3 +5,6 @@ veri/
 get_next_line_remake/
 libft-war-machine/
 libft/libftTester
+ft_printf/printf-unit-test
+ft_printf/printfTester
+ft_printf/ft_printf_tester

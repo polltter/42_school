@@ -6,7 +6,7 @@
 #    By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 17:51:42 by mvenanci          #+#    #+#              #
-#    Updated: 2022/10/31 15:59:41 by mvenanci@st      ###   ########.fr        #
+#    Updated: 2022/11/01 11:54:09 by mvenanci@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ SRCS	= ft_printf_numbers.c \
 		ft_printf.c \
 		ft_print_chars.c \
 		print_x.c \
-		print_p.c 
 
 SRCSF	=  ft_atoi.c \
 		ft_isdigit.c \
@@ -63,6 +62,7 @@ OBJSD	= ${SRCSF:.c=.o}
 CC	= clang
 
 CFLAGS 	= -Wall -Werror -Wextra
+
 RM		= rm -rf
 
 LIBC	= ar rcs
@@ -70,21 +70,12 @@ LIBC	= ar rcs
 INCS	= ft_printf.h
 
 
-${NAME}: libft.a
+${NAME}: libft.a ${OBJS}
 	cp ${LIBFT} .
 	mv libft.a $(NAME)
-	${CC} ${CFLAGS} -c ${SRCS} ${INCS}
 	${LIBC} ${NAME} ${OBJS}
 
 all: ${NAME}
-
-test:	libft.a
-	${CC} ${CFLAGS} -c ${SRCS} test.c ${INCS}
-	${CC} ${CFLAGS} ${OBJS} test.o -L. ${LIBFT} -o a.out
-	./a.out | cat -e
-	
-norm:
-	python3 -m norminette ${SRCS}
 
 clean:
 	${RM} ${OBJS} ${OBJSD} 
@@ -97,5 +88,7 @@ lib_fclean:
 
 fclean: clean lib_fclean
 	${RM} ${NAME}
-	
+
+re: fclean all
+
 .PHONY: all, clean, fclean, re
