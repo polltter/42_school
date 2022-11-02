@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/02 08:20:06 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/02 08:31:23 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <fcntl.h> //testing only
 #include <stdio.h> //testing only
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[FOPEN_MAX];
 	char		*return_line;
 
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (line)
+		if (line[fd])
 		{
-			free(line);
-			line = NULL;
+			free(line[fd]);
+			line[fd] = NULL;
 		}
 		return (NULL);
 	}
-	if (!line)
-		line = (char *)ft_calloc(1, 1);
-	else if (ft_strchr(line, '\n'))
+	if (!line[fd])
+		line[fd] = (char *)ft_calloc(1, 1);
+	else if (ft_strchr(line[fd], '\n'))
 	{
-		return_line = ft_strdup_until_nl(line);
-		line = forward_line(line);
+		return_line = ft_strdup_until_nl(line[fd]);
+		line[fd] = forward_line(line[fd]);
 		return (return_line);
 	}
-	line = read_copy(line, fd);
-	return_line = ft_strdup_until_nl(line);
-	line = forward_line(line);
+	line[fd] = read_copy(line[fd], fd);
+	return_line = ft_strdup_until_nl(line[fd]);
+	line[fd] = forward_line(line[fd]);
 	return (return_line);
 }
 
