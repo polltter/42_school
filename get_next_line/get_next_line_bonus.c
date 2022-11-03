@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 11:57:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/02 08:31:23 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/03 19:02:35 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*line[FOPEN_MAX];
+	static char	*line[1024];
 	char		*return_line;
 
-	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 1024)
 	{
 		if (line[fd])
 		{
