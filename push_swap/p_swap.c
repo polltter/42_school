@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/10 18:47:18 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/10 19:14:25 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	main(int ac, char **av)
 	int	i;
 
 	stack_a = (int *)malloc(sizeof(int) * (ac - 1));
-	if (ac < 2 || !verify_args(av, &stack_a))
+	if (ac < 2)
+		return (0);
+	else if (!verify_args(av, &stack_a))
 		write(2, "Error\n", 6);
 	else
 	{
