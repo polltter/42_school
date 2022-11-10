@@ -3,23 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/10 14:24:17 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:47:18 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int verify_args(char **av)
+int	verify_args(char **av, int **stack_a)
 {
+	int			i;
+	long int	n;
+
+	i = 0;
 	av++;
 	while (*av)
 	{
-		if (!is_d(*av) || ft_atoi(*av) > INT_MAX || ft_atoi(*av) < INT_MIN)
+		n = ft_atoi(*av, stack_a, i);
+		if (!is_d(*av) || n > INT_MAX || n < INT_MIN)
+		{
+			free (*stack_a);
 			return (0);
+		}
 		av++;
+		i++;
 	}
 	return (1);
 }
@@ -32,26 +41,17 @@ int	check_doubles(int *stack, int i, int a)
 	return (1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	if (ac < 2 || !verify_args(av))
+	int	*stack_a;
+	int	i;
+
+	stack_a = (int *)malloc(sizeof(int) * (ac - 1));
+	if (ac < 2 || !verify_args(av, &stack_a))
 		write(2, "Error\n", 6);
 	else
 	{
-		int	stack_a[ac - 1];
-		int	i;
-
-		i = -1;
-		while (*(++av))
-		{
-			stack_a[++i] = ft_atoi(*av);
-			if (!check_doubles(stack_a, i, stack_a[i]))
-			{
-				write(2, "Error\n", 6);
-				return (0);
-			}
-		}
-			
+		i = 0;
+		free(stack_a);
 	}
 }
-
