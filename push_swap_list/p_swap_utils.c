@@ -1,37 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   p_swap_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/12 15:08:35 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/11/12 14:01:57 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	rotate(t_stack *stack)
+int	is_d(char *c)
 {
-	int	temp;
-	int	i;
-
-	i = 0;
-	temp = (stack->arr)[0];
-	while (++i < stack->len)
-		(stack->arr)[i - 1] = (stack->arr)[i];
-	(stack->arr)[stack->len - 1] = temp;
+	while (*c)
+	{
+		if (*c == '-')
+			c++;
+		if (*c < '0' || *c > '9')
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
-void	rev_rotate(t_stack *stack)
+long int	ft_atoi(char *s, t_stack **stack_a)
 {
-	int	temp;
-	int	i;
+	int			i;
+	int			sign;
+	long int	n;
 
+	n = 0;
 	i = 0;
-	temp = (stack->arr)[stack->len - 1];
-	while (++i < stack->len)
-		(stack->arr)[i - 1] = (stack->arr)[i];
-	(stack->arr)[stack->len - 1] = temp;
+	sign = 1;
+	if (s[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (s[i])
+	{
+		n = n * 10 + s[i] - '0';
+		i++;
+	}
+	ft_lstadd_back(stack_a, create_node(n * sign));
+	return (n * sign);
 }
