@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 10:08:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/12 16:19:28 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/13 17:30:42 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,23 @@ void	delete_last(t_stack **stack)
 	last = temp->next;
 	free(last);
 	temp->next = NULL;
+}
+
+int	list_size(char c, int p, int increase)
+{
+	static int	size_a;
+	static int	size_b;
+
+	if (c == 'a')
+	{
+		size_a += increase;
+		size_b -= p;
+		return (size_a);
+	}
+	else
+	{
+		size_b += increase;
+		size_a -= p;
+		return (size_b);
+	}
 }

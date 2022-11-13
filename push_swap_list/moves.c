@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/12 16:39:07 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/13 15:13:13 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	rev_rotate(t_stack **stack)
 	ft_lstadd_front(stack, temp);
 	delete_last(stack);
 	*stack = temp;
+
 }
 
 void	push_a(t_stack **stack_a, t_stack **stack_b)

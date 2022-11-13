@@ -1,7 +1,8 @@
 SRCS	= p_swap.c \
 			p_swap_utils.c \
 			p_swap_lst.c \
-			sorting.c
+			moves.c \
+			split.c
 
 CC		= gcc
 
