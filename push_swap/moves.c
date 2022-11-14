@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:48:18 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:47:04 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:56:44 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	push(t_stack *from, t_stack *to)
 	i = to->len;
 	while (i != 0 && --i > 0)
 		(to->arr)[i] = (to->arr)[i - 1]; 
-	(to->arr)[i--] = (from->arr)[i];
+	(to->arr)[i] = (from->arr)[i];
+	i--;
 	while (++i < from->len - 1)
 		(from->arr)[i] = (from->arr)[i - 1];
 	(to->len)++;

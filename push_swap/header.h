@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 13:28:46 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:59:47 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void		print_arr(int *arr, int len);
 void		rotate(int **arr, int len);
 void		rev_rotate(int **arr, int len);
 void		swap(int **arr);
+void		push(t_stack *from, t_stack *to);
 
 //sorts
 void		sort_3(int *arr);
 void		sort_2(int *arr);
+void		sort_5(t_stack *a, t_stack *b);
 
 #endif

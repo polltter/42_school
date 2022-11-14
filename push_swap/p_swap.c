@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:32 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:00:33 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int	verify_args(char **av, t_stack *stack_a)
 int	main(int ac, char **av)
 {
 	t_stack	stack_a;
+	t_stack	stack_b;
 
 	stack_a.arr = (int *)malloc(sizeof(int) * (ac - 1));
 	stack_a.len = 0;
+	stack_b.arr = (int *)malloc(sizeof(int) * (ac - 1));
+	stack_b.len = 0;
 	if (ac < 2)
 		return (0);
 	else if (ac == 2 && !verify_args(split(av[1]), &stack_a))
@@ -62,5 +65,7 @@ int	main(int ac, char **av)
 			sort_2(stack_a.arr);
 		else if (stack_a.len == 3)
 			sort_3(stack_a.arr);
+		else
+			sort_5(&stack_a, &stack_b);
 	}
 }
