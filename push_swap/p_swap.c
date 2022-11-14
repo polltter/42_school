@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/12 09:26:37 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/14 13:52:32 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+int	check_doubles(int *stack, int i, int a)
+{
+	while (--i >= 0)
+		if (stack[i] == a)
+			return (0);
+	return (1);
+}
 
 int	verify_args(char **av, t_stack *stack_a)
 {
@@ -18,7 +26,7 @@ int	verify_args(char **av, t_stack *stack_a)
 	long int	n;
 
 	i = 0;
-	av++;
+	
 	while (*av)
 	{
 		n = ft_atoi(*av, stack_a, i);
@@ -30,33 +38,29 @@ int	verify_args(char **av, t_stack *stack_a)
 		}
 		av++;
 		i++;
+		(stack_a->len)++;
 	}
 	return (1);
 }
 
-int	check_doubles(int *stack, int i, int a)
-{
-	while (--i >= 0)
-		if (stack[i] == a)
-			return (0);
-	return (1);
-}
 
 int	main(int ac, char **av)
 {
 	t_stack	stack_a;
 
 	stack_a.arr = (int *)malloc(sizeof(int) * (ac - 1));
-	stack_a.len = ac - 1;
+	stack_a.len = 0;
 	if (ac < 2)
 		return (0);
-	else if (!verify_args(av, &stack_a))
-		write(2, "Error\n", 6);
+	else if (ac == 2 && !verify_args(split(av[1]), &stack_a))
+		ft_printf("Error\n");	
+	else if (ac > 2 && !verify_args(++av, &stack_a))
+		ft_printf("Error\n");
 	else
 	{
-		rotate(&stack_a);
-		for (int i = 0; i < ac - 1; i++)
-			printf("%d ", stack_a.arr[i]);
-		free(stack_a.arr);
+		if (stack_a.len == 2)
+			sort_2(stack_a.arr);
+		else if (stack_a.len == 3)
+			sort_3(stack_a.arr);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 19:55:53 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/13 21:48:39 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/14 12:47:37 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,4 @@ int	main(void)
 		rotate(&arr, 3);
 		write(1, "r\n", 2);
 	}
-	print_arr(arr, 3);
 }
