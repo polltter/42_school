@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/15 08:55:22 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:55:12 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@ typedef struct s_stack{
 int			is_d(char *c);
 long int	ft_atoi(char *s, t_stack *stack_a, int index);
 char		**split(char *s);
+void		cut_lines_2(t_stack *a, t_stack *b);
+void		cut_lines(t_stack *a, t_stack *b);
+void		helper(t_stack *a, t_stack *b, int i);
+void		helper_2(t_stack *a, t_stack *b);
+int			word_count(char *s);
 
 //moves
-void		print_arr(int *arr, int len);
+void		print_arr(t_stack *stack);
 void		rotate(t_stack *stack);
 void		rev_rotate(t_stack *stack);
 void		swap(t_stack *stack);
@@ -41,5 +46,7 @@ void		push(t_stack *from, t_stack *to);
 void		sort_3(t_stack *stack);
 void		sort_2(t_stack *stack);
 void		sort_5(t_stack *a, t_stack *b);
+void		cut_lines_2(t_stack *a, t_stack *b);
+void		cut_lines(t_stack *a, t_stack *b);
 
 #endif

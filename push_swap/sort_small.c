@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:49:23 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/15 08:58:27 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:47:11 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,17 @@ void	sort_5(t_stack *a, t_stack *b)
 	while (a->len > 3)
 		push(a, b);
 	sort_3(a);
-	sort_2(b);
+	if (b->len == 2)
+		sort_2(b);
+	if ((b->arr)[0] < (a->arr)[0])
+		helper(a, b, 0);
+	else if ((b->arr)[0] < (a->arr)[1])
+	{
+		helper(a, b, 3);
+		helper_2(a, b);
+	}
+	else if ((b->arr)[0] < (a->arr)[2])
+		cut_lines(a, b);
+	else
+		cut_lines_2(a, b);
 }
