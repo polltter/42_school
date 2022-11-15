@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:59:47 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/15 08:55:22 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include "SOURCES/ft_printf/ft_printf.h"
 
 typedef struct s_stack{
-	int	*arr;
-	int	len;
+	int		*arr;
+	int		len;
+	char	c;
 }	t_stack;
 
 //utils
@@ -31,14 +32,14 @@ char		**split(char *s);
 
 //moves
 void		print_arr(int *arr, int len);
-void		rotate(int **arr, int len);
-void		rev_rotate(int **arr, int len);
-void		swap(int **arr);
+void		rotate(t_stack *stack);
+void		rev_rotate(t_stack *stack);
+void		swap(t_stack *stack);
 void		push(t_stack *from, t_stack *to);
 
 //sorts
-void		sort_3(int *arr);
-void		sort_2(int *arr);
+void		sort_3(t_stack *stack);
+void		sort_2(t_stack *stack);
 void		sort_5(t_stack *a, t_stack *b);
 
 #endif

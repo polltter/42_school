@@ -6,53 +6,45 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:49:23 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 16:57:57 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/15 08:58:27 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	sort_2(int *arr)
+void	sort_2(t_stack *stack)
 {
-	if (arr[0] > arr[1])
-		ft_printf("%s", "sa\n");
+	if ((stack->arr)[0] < (stack->arr)[1])
+		swap(stack);
 }
 
-void	sort_3(int *arr)
+void	sort_3(t_stack *stack)
 {
+	int	*arr;
+
+	arr = stack->arr;
 	if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] > arr[0])
 	{
-		rev_rotate(&arr, 3);
-		swap(&arr);
-		ft_printf("%s", "rra\nsa\n");
+		rev_rotate(stack);
+		swap(stack);
 	}
-	if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] > arr[0])
+	else if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] > arr[0])
+		swap(stack);
+	else if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
+		rev_rotate(stack);
+	else if (arr[0] > arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
 	{
-		swap(&arr);
-		ft_printf("%s", "sa\n");
+		swap(stack);
+		rev_rotate(stack);
 	}
-	if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
-	{
-		rev_rotate(&arr, 3);
-		ft_printf("%s", "rra\n");
-	}
-	if (arr[0] > arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
-	{
-		swap(&arr);
-		rev_rotate(&arr, 3);
-		ft_printf("%s", "sa\nrra\n");
-	}
-	if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] < arr[0])
-	{
-		rotate(&arr, 3);
-		ft_printf("%s", "ra\n");
-	}
+	else if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] < arr[0])
+		rotate(stack);
 }
 
 void	sort_5(t_stack *a, t_stack *b)
 {
-	ft_printf("pa\npa\n");
-	push(a, b);
-	push(a, b);
-	sort_3(a->arr);
+	while (a->len > 3)
+		push(a, b);
+	sort_3(a);
+	sort_2(b);
 }

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/14 17:00:33 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/15 08:56:58 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	main(int ac, char **av)
 
 	stack_a.arr = (int *)malloc(sizeof(int) * (ac - 1));
 	stack_a.len = 0;
+	stack_a.c = 'a';
 	stack_b.arr = (int *)malloc(sizeof(int) * (ac - 1));
 	stack_b.len = 0;
+	stack_b.c = 'b';
 	if (ac < 2)
 		return (0);
 	else if (ac == 2 && !verify_args(split(av[1]), &stack_a))
@@ -62,9 +64,9 @@ int	main(int ac, char **av)
 	else
 	{
 		if (stack_a.len == 2)
-			sort_2(stack_a.arr);
+			sort_2(&stack_a);
 		else if (stack_a.len == 3)
-			sort_3(stack_a.arr);
+			sort_3(&stack_a);
 		else
 			sort_5(&stack_a, &stack_b);
 	}
