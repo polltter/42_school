@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/15 18:06:05 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/15 20:06:21 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	verify_args(char **av, t_stack *stack_a, int malloced)
 		n = ft_atoi(*av, stack_a, i);
 		if (!is_d(*av) || n > INT_MAX || n < INT_MIN \
 		|| !check_doubles(stack_a->arr, i, (stack_a->arr)[i]))
-		{
-			free (stack_a->arr);
 			return (0);
-		}
 		if (malloced)
 			free(*av);
 		av++;
@@ -52,6 +49,10 @@ void	create_stacks(t_stack *a, t_stack *b, char *av, int ac)
 {
 	int	n;
 
+	a->len = 0;
+	a->c = 'a';
+	b->len = 0;
+	b->c = 'b';
 	n = word_count(av);
 	if (n > ac - 1)
 	{
@@ -70,10 +71,6 @@ int	main(int ac, char **av)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	stack_a.len = 0;
-	stack_a.c = 'a';
-	stack_b.len = 0;
-	stack_b.c = 'b';
 	create_stacks(&stack_a, &stack_b, av[1], ac);
 	if (ac < 2)
 		return (0);
