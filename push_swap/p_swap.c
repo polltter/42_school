@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/15 20:06:21 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/17 09:02:30 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	create_stacks(t_stack *a, t_stack *b, char *av, int ac)
 	a->c = 'a';
 	b->len = 0;
 	b->c = 'b';
+	a->max = INT_MIN;
+	a->min = INT_MAX;
+	b->max = INT_MIN;
+	b->min = INT_MAX;
 	n = word_count(av);
 	if (n > ac - 1)
 	{

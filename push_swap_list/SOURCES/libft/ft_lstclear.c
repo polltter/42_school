@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/17 15:27:30 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/10/15 11:55:17 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/15 16:12:53 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "libft.h"
 
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*next;
+
+	while (*lst)
+	{
+		next = (*lst)->next;
+		(*del)((*lst)->content);
+		free(*lst);
+		*lst = next;
+	}
+}

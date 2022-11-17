@@ -1,14 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/17 15:27:30 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/10/14 22:09:01 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/15 16:19:07 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "libft.h"
 
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (lst && new)
+	{		
+		new->next = *lst;
+		*lst = new;
+	}
+}

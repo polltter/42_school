@@ -1,12 +1,24 @@
-SRCS	= p_swap.c \
-			p_swap_utils.c \
-			p_swap_lst.c \
-			moves.c \
-			split.c
+SRCS	= ${wildcard *.c} ${wildcard SOURCES/*/*.c}
+
+OBJS	=${SRCS:.c=.o}
+
+NAME	= push_swap
 
 CC		= gcc
 
 CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
 
-test:
-		@${CC} ${CFLAGS} ${SRCS}
+all: ${NAME}
+
+${NAME}: ${OBJS}
+		@${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+
+clean:
+		@rm -rf ${OBJS}
+
+fclean: clean
+		@rm -rf ${NAME}
+
+re: fclean ${NAME}
+
+.PHONY: all clean fclean re

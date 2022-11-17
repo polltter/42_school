@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/15 17:55:12 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/17 09:18:16 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 typedef struct s_stack{
 	int		*arr;
 	int		len;
+	int		min;
+	int		max;
 	char	c;
 }	t_stack;
 
@@ -41,6 +43,7 @@ void		rotate(t_stack *stack);
 void		rev_rotate(t_stack *stack);
 void		swap(t_stack *stack);
 void		push(t_stack *from, t_stack *to);
+void		find_edge(t_stack *stack);
 
 //sorts
 void		sort_3(t_stack *stack);

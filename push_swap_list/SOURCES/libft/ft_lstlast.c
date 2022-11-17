@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/17 15:27:30 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/10/15 10:48:45 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/10/15 11:03:20 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "libft.h"
 
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst)
+		while (lst->next)
+			lst = lst->next;
+	return (lst);
+}

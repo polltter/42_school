@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/11 21:57:32 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/17 09:24:41 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ long int	ft_atoi(char *s, t_stack *stack_a, int index)
 		n = n * 10 + s[i] - '0';
 		i++;
 	}
-	(stack_a->arr)[index] = n * sign;
+	stack_a->arr[index] = n * sign;
+	if (stack_a->max < n * sign)
+		stack_a->max = n * sign;
+	if (stack_a->min > n * sign)
+		stack_a->min = n * sign;
 	return (n * sign);
 }
