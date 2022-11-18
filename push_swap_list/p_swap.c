@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:43 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/17 20:20:56 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		curr = ft_lstlast(*stack_a);
 		if (!is_d(*av) || n > INT_MAX || n < INT_MIN \
 		|| !check_doubles(*stack_a, curr))
+		{
+			ft_lstclear(&head, NULL);
 			return (0);
+		}
 		if (malloced)
 			free(*av);
 		av++;
@@ -59,5 +62,6 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
 		write(2, "Error\n", 6);
-	ft_lstclear(&head, NULL);
+	else
+		ft_lstclear(&head, NULL);
 }
