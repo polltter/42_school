@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 15:36:17 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:51 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@
 int			is_d(char *c);
 long int	ft_atoi(char *s, t_list **stack_a);
 int			check_doubles(t_list *stack_a, t_list *curr);
-char		**split(char *s);
+char		**split(char *s, char c);
 
-//moving
+//moving and list utils
+void		print_lst(t_list *a);
+void		push(t_list **from, t_list **to, char c);
+void		swap(t_list **a, t_list **b, char c);
+void		rev_rotate(t_list **a, t_list **b, char c);
+void		rotate(t_list **a, t_list **b, char c);
 
 #endif

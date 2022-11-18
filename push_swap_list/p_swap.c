@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/18 13:18:28 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/18 14:54:10 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,19 @@ int	check_doubles(t_list *stack_a, t_list *curr)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	t_list	*head;
+	//t_list	*head;
 
 	stack_a = NULL;
-	head = stack_a;
+	//head = stack_a;
 	if (ac < 2)
 		return (0);
-	else if (ac == 2 && !verify_args(split(av[1]), &stack_a, 1))
+	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
 		write(2, "Error\n", 6);
 	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
 		write(2, "Error\n", 6);
 	else
-		ft_lstclear(&head, NULL);
+	{
+		print_lst(stack_a);
+		ft_lstclear(&stack_a, NULL);
+	}
 }

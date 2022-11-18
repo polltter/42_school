@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:11:46 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/17 19:33:00 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:40 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**rec_split(char **splited, int words, char c, const char *s)
 	return (splited);
 }
 
-char	**split(const char *s, char c)
+char	**split(char *s, char c)
 {
 	return (rec_split(0, 0, c, s));
 }
