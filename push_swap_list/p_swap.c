@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/18 14:54:10 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/18 17:01:00 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		if (!is_d(*av) || n > INT_MAX || n < INT_MIN \
 		|| !check_doubles(*stack_a, curr))
 		{
-			ft_lstclear(stack_a, NULL);
+			ft_lstclear(stack_a);
 			return (0);
 		}
 		if (malloced)
@@ -49,13 +49,25 @@ int	check_doubles(t_list *stack_a, t_list *curr)
 	return (1);
 }
 
+int	is_sorted(t_list *lst)
+{
+	if (lst)
+	{
+		while (lst->next)
+		{
+			if (lst->next->content < lst->content)
+				return (0);
+			lst = lst->next;
+		}
+		return (1);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	//t_list	*head;
 
 	stack_a = NULL;
-	//head = stack_a;
 	if (ac < 2)
 		return (0);
 	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
@@ -65,6 +77,6 @@ int	main(int ac, char **av)
 	else
 	{
 		print_lst(stack_a);
-		ft_lstclear(&stack_a, NULL);
+		ft_lstclear(&stack_a);
 	}
 }
