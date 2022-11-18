@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 20:20:56 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/18 13:18:28 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		if (!is_d(*av) || n > INT_MAX || n < INT_MIN \
 		|| !check_doubles(*stack_a, curr))
 		{
-			ft_lstclear(&head, NULL);
+			ft_lstclear(stack_a, NULL);
 			return (0);
 		}
 		if (malloced)
