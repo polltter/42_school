@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstdellast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 11:52:08 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 19:29:53 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/11/19 19:31:13 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/11/19 19:33:41 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../header.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdellast(t_list *a)
 {
-	if (lst)
+	if (a)
 	{
-		if (del)
-			(*del)(lst->content);
-		free(lst);
-		lst = NULL;
+		while (a->next->next)
+			a = a->next;
+		free(a->next);
+		a->next = NULL;
 	}
 }

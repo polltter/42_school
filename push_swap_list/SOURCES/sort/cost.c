@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:15:36 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/19 12:18:44 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/19 19:00:07 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "/nfs/homes/mvenanci/Documents/42_school/push_swap_list/header.h"
+#include "../../header.h"
 
 t_list	*find_nearest(t_list *a, t_list *elem)
 {

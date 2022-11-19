@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 13:02:19 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/19 19:41:34 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int ac, char **av)
 			if (ft_lstsize(stack_a) == 2)
 				sort_2(&stack_a);
 			else if (ft_lstsize(stack_a) == 3)
-				sort_3(stack_a);
+				sort_3(&stack_a);
 		}
 		print_lst(stack_a);
 		ft_lstclear(&stack_a);

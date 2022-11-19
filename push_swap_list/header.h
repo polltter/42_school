@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 13:02:09 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/19 19:42:45 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		rotate(t_list **a, t_list **b, char c);
 //sorting
 int			cost(t_list **a, t_list **b, t_list *elem);
 void		sort_2(t_list **a);
-void		sort_3(t_list *stack);
+void		sort_3(t_list **stack);
 int			**lst_to_arr(t_list *stack);
 
 #endif
