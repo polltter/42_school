@@ -3,47 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:52:01 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/18 17:22:22 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:02:03 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_list/header.h"
+#include "/nfs/homes/mvenanci/Documents/42_school/push_swap_list/header.h"
 
 void	sort_2(t_list **a)
 {
 	swap(a, NULL, 'a');
 }
 
-int	*lst_to_arr(t_list *stack)
+int	**lst_to_arr(t_list *stack)
 {
 	int	size;
-	int	*arr;
+	int	**arr;
 
 	size = ft_lstsize(stack);
-	arr = malloc(sizeof(int) * size);
+	arr = malloc(sizeof(int *) * size);
 	size = 0;
+	while (stack)
+	{
+		arr[size] = (int *)stack->content;
+		size++;
+		stack = stack->next;
+	}
+	return (arr);
 }
 
 void	sort_3(t_list *stack)
 {
-	
-	if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] > arr[0])
+	void	*pos_0;
+	void	*pos_1;
+	void	*pos_2;
+
+	pos_0 = stack->content;
+	pos_1 = stack->next->content;
+	pos_2 = stack->next->next->content;
+	if (pos_0 < pos_1 && pos_1 > pos_2 && pos_2 > pos_0)
 	{
-		rev_rotate(stack);
-		swap(stack);
+		rev_rotate(&stack, NULL, 'a');
+		swap(&stack, NULL, 'a');
 	}
-	else if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] > arr[0])
-		swap(stack);
-	else if (arr[0] < arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
-		rev_rotate(stack);
-	else if (arr[0] > arr[1] && arr[1] > arr[2] && arr[2] < arr[0])
+	else if (pos_0 > pos_1 && pos_1 < pos_2 && pos_2 > pos_0)
+		swap(&stack, NULL, 'a');
+	else if (pos_0 < pos_1 && pos_1 > pos_2 && pos_2 < pos_0)
+		rev_rotate(&stack, NULL, 'a');
+	else if (pos_0 > pos_1 && pos_1 > pos_2 && pos_2 < pos_0)
 	{
-		swap(stack);
-		rev_rotate(stack);
+		swap(&stack, NULL, 'a');
+		rev_rotate(&stack, NULL, 'a');
 	}
-	else if (arr[0] > arr[1] && arr[1] < arr[2] && arr[2] < arr[0])
-		rotate(stack);
+	else if (pos_0 > pos_1 && pos_1 < pos_2 && pos_2 < pos_0)
+		rotate(&stack, NULL, 'a');
 }

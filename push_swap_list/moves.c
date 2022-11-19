@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/18 17:17:49 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:23:29 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	rev_rotate(t_list **a, t_list **b, char c)
 	{
 		ft_lstadd_front(a, ft_lstnew(ft_lstlast(*a)->content));
 		ft_lstdelone(ft_lstlast(*a), NULL);
+		print_lst(*a);
+		ft_printf("\n");
 		ft_printf("rr%c\n", c);
 	}
 	if (c == 'r' && b && *b && (*b)->next)
