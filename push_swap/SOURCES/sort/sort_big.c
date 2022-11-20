@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/20 20:45:21 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/20 21:02:07 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ void	sort(t_list **a, t_list **b)
 			rev_rotate_until(a, b, elem, find_nearest(*b, elem));
 		push(a, b, 'b');
 	}
-	ft_printf("b: %p, max(b): %p\n", (*b)->content, lmax(*b)->content);
-/* 	if (*b != lmax(*b) && lstsize(*b) - lstsize(lmax(*b)) < lstsize(lmax(*b)))
+	if (*b != lmax(*b) && lstsize(*b) - lstsize(lmax(*b)) < lstsize(lmax(*b)))
 		while (*b != lmax(*b))
 			rotate(b, NULL, 'b');
 	else if (*b != lmax(*b))
 		while (*b != lmax(*b))
 			rev_rotate(b, NULL, 'b');
 	while (lstsize(*b))
-		push(b, a, 'a'); */
+		push(b, a, 'a');
 }
