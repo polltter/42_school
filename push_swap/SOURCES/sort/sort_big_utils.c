@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:16:04 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/20 20:46:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/20 20:52:47 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,14 @@ void	rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 		while (*a != elem)
 			rotate(a, NULL, 'a');
 	else if (*b && *b != nearest)
+	{		
 		while (*b != nearest)
+		{
+			printf("%p\n", nearest->content);
+			sleep(3);
 			rev_rotate(b, NULL, 'b');
+		}
+	}
 }
 
 void	rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
