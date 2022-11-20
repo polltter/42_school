@@ -3,71 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:11:46 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/13 15:02:45 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/18 14:45:40 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	word_count(char *s)
-{
-	int	i;
-	int	words;
-
-	i = -1;
-	words = 0;
-	while (s[++i])
-	{
-		if (s[i] != ' ')
-		{
-			words++;
-			while (s[i] != ' ' && s[i + 1])
-				i++;
-		}
-	}
-	return (words);
-}
-
-char	*populate(char *s, int i, int j)
+char	**rec_split(char **splited, int words, char c, const char *s)
 {
 	char	*word;
+	int		i;
 
-	if (s[i + j] == ' ' || !s[i + j])
+	i = 0;
+	while (*s && *s == c)
+		s++;
+	while (s[i] && s[i] != c)
+		i++;
+	word = NULL;
+	if (i)
 	{
-		word = malloc(sizeof(char) * (j + 1));
-		word[j] = 0;
+		word = (char *)malloc(i + 1);
+		while (*s && *s != c)
+			*word++ = *s++;
+		*word = 0;
 	}
-	else
+	if (*s == c)
+		splited = rec_split(splited, words + 1, c, s);
+	else if (!*s)
 	{
-		word = populate(s, i, j + 1);
-		word[j] = s[i + j];
+		splited = malloc(sizeof(char *) * (words + 2));
+		splited[words + 1] = 0;
 	}
-	return (word);
+	splited[words] = word - i;
+	return (splited);
 }
 
-char	**split(char *s)
+char	**split(char *s, char c)
 {
-	int		n_words;
-	char	**words;
-	int		i;
-	int		w;
-
-	n_words = word_count(s);
-	words = malloc(sizeof(char *) * (n_words + 1));
-	if (!words)
-		return (NULL);
-	words[n_words] = 0;
-	i = -1;
-	w = -1;
-	while (s[++i])
-	{
-		if (s[i] != ' ')
-			words[++w] = populate(s, i, 0);
-		while (s[i] != ' ' && s[i + 1])
-			i++;
-	}
-	return (words);
+	return (rec_split(0, 0, c, s));
 }

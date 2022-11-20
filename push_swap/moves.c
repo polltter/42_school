@@ -5,82 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 12:48:18 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 09:18:02 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2022/11/20 20:41:30 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	print_arr(t_stack *stack)
+void	rotate(t_list **a, t_list **b, char c)
 {
-	int	i;
+	t_list	*temp;
 
-	i = -1;
-	while (++i < stack->len)
-		ft_printf("%d\n", (stack->arr)[i]);
-}
-
-void	rotate(t_stack *stack)
-{
-	int	i;
-	int	temp;
-
-	i = -1;
-	temp = (stack->arr)[0];
-	while (++i < stack->len -1)
-		(stack->arr)[i] = (stack->arr)[i + 1];
-	(stack->arr)[i] = temp;
-	ft_printf("r%c\n", stack->c);
-}
-
-void	rev_rotate(t_stack *stack)
-{
-	int	i;
-	int	temp;
-
-	i = stack->len;
-	temp = (stack->arr)[stack->len -1];
-	while (--i > 0)
-		(stack->arr)[i] = (stack->arr)[i - 1];
-	(stack->arr)[i] = temp;
-	ft_printf("rr%c\n", stack->c);
-}
-
-void	swap(t_stack *stack)
-{
-	int	temp;
-
-	if (stack->len > 1)
+	if (a && *a && (*a)->next)
 	{
-		temp = (stack->arr)[0];
-		(stack->arr)[0] = (stack->arr)[1];
-		(stack->arr)[1] = temp;
-		ft_printf("s%c\n", stack->c);
+		ft_lstadd_back(a, ft_lstnew((*a)->content));
+		temp = *a;
+		*a = (*a)->next;
+		ft_lstdelone(temp, NULL);
+		ft_printf("r%c\n", c);
+	}
+	if (c == 'r' && b && *b && (*b)->next)
+	{
+		ft_lstadd_back(b, ft_lstnew((*b)->content));
+		temp = *b;
+		*b = (*b)->next;
+		ft_lstdelone(temp, NULL);
 	}
 }
 
-void	push(t_stack *from, t_stack *to)
+void	rev_rotate(t_list **a, t_list **b, char c)
 {
-	int	i;
-
-	if (from->len > 0)
+	if (a && *a && (*a)->next)
 	{
-		if (from->max == from->arr[0] || from->min == from->arr[0])
-			find_edge(from);
-		if (from->arr[0] > to->max)
-			to->max = from->arr[0];
-		if (from->arr[0] < to->min)
-			to->min = from->arr[0];
-		i = to->len + 1;
-		while (i != 0 && --i > 0)
-			(to->arr)[i] = (to->arr)[i - 1];
-		(to->arr)[i] = (from->arr)[i];
-		i--;
-		while (++i < (from->len - 1))
-			(from->arr)[i] = (from->arr)[i + 1];
-		(to->len)++;
-		(from->len)--;
-		ft_printf("p%c\n", to->c);
+		ft_lstadd_front(a, ft_lstnew(ft_lstlast(*a)->content));
+		ft_lstdellast(*a);
+		ft_printf("rr%c\n", c);
+	}
+	if (c == 'r' && b && *b && (*b)->next)
+	{
+		ft_lstadd_front(b, ft_lstnew(ft_lstlast(*b)->content));
+		ft_lstdelone(ft_lstlast(*b), NULL);
+	}
+}
+
+void	swap(t_list **a, t_list **b, char c)
+{
+	void	*temp_content;
+
+	if (a && *a && (*a)->next)
+	{
+		temp_content = (*a)->content;
+		(*a)->content = (*a)->next->content;
+		(*a)->next->content = temp_content;
+		ft_printf("s%c\n", c);
+	}
+	if (c == 's' && b && *b && (*b)->next)
+	{
+		temp_content = (*b)->content;
+		(*b)->content = (*b)->next->content;
+		(*b)->next->content = temp_content;
+	}
+}
+
+void	push(t_list **from, t_list **to, char c)
+{
+	t_list	*temp;
+
+	if (*from)
+	{
+		ft_lstadd_front(to, ft_lstnew((*from)->content));
+		temp = *from;
+		*from = (*from)->next;
+		ft_lstdelone(temp, NULL);
+		ft_printf("p%c\n", c);
+	}
+}
+
+void	print_lst(t_list *a)
+{
+	while (a)
+	{
+		ft_printf("%d\n", a->content);
+		a = a->next;
 	}
 }

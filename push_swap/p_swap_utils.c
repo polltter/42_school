@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 09:24:41 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/17 14:18:39 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_d(char *c)
 	return (1);
 }
 
-long int	ft_atoi(char *s, t_stack *stack_a, int index)
+long int	ft_atoi(char *s, t_list **stack_a)
 {
 	int			i;
 	int			sign;
@@ -44,10 +44,6 @@ long int	ft_atoi(char *s, t_stack *stack_a, int index)
 		n = n * 10 + s[i] - '0';
 		i++;
 	}
-	stack_a->arr[index] = n * sign;
-	if (stack_a->max < n * sign)
-		stack_a->max = n * sign;
-	if (stack_a->min > n * sign)
-		stack_a->min = n * sign;
+	ft_lstadd_back(stack_a, ft_lstnew((void *)(n * sign)));
 	return (n * sign);
 }

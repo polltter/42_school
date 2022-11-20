@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 09:18:16 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/20 20:45:27 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,37 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
+# include "SOURCES/libft/libft.h"
 # include "SOURCES/ft_printf/ft_printf.h"
 
-typedef struct s_stack{
-	int		*arr;
-	int		len;
-	int		min;
-	int		max;
-	char	c;
-}	t_stack;
-
-//utils
 int			is_d(char *c);
-long int	ft_atoi(char *s, t_stack *stack_a, int index);
-char		**split(char *s);
-void		cut_lines_2(t_stack *a, t_stack *b);
-void		cut_lines(t_stack *a, t_stack *b);
-void		helper(t_stack *a, t_stack *b, int i);
-void		helper_2(t_stack *a, t_stack *b);
-int			word_count(char *s);
+long int	ft_atoi(char *s, t_list **stack_a);
+int			check_doubles(t_list *stack_a, t_list *curr);
+char		**split(char *s, char c);
 
-//moves
-void		print_arr(t_stack *stack);
-void		rotate(t_stack *stack);
-void		rev_rotate(t_stack *stack);
-void		swap(t_stack *stack);
-void		push(t_stack *from, t_stack *to);
-void		find_edge(t_stack *stack);
+//moving and list utils
+void		print_lst(t_list *a);
+void		push(t_list **from, t_list **to, char c);
+void		swap(t_list **a, t_list **b, char c);
+void		rev_rotate(t_list **a, t_list **b, char c);
+void		rotate(t_list **a, t_list **b, char c);
 
-//sorts
-void		sort_3(t_stack *stack);
-void		sort_2(t_stack *stack);
-void		sort_5(t_stack *a, t_stack *b);
-void		cut_lines_2(t_stack *a, t_stack *b);
-void		cut_lines(t_stack *a, t_stack *b);
+//sorting
+int			cost(t_list **a, t_list **b, t_list *elem, int *path);
+void		sort_2(t_list **a);
+void		sort_3(t_list **stack);
+int			**lst_to_arr(t_list *stack);
+int			is_sorted(t_list *lst);
+void		sort(t_list **a, t_list **b);
+
+
+//sorting utils
+t_list		*find_nearest(t_list *a, t_list *elem);
+void		rev_rotate_until(t_list **a, t_list **b, \
+t_list *elem, t_list *nearest);
+void		rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+void		rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+void		rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+
 
 #endif

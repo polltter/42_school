@@ -6,91 +6,90 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 09:02:30 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/20 18:40:09 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	check_doubles(int *stack, int i, int a)
+int	verify_args(char **av, t_list **stack_a, int malloced)
 {
-	while (--i >= 0)
-		if (stack[i] == a)
-			return (0);
-	return (1);
-}
-
-int	verify_args(char **av, t_stack *stack_a, int malloced)
-{
-	int			i;
 	long int	n;
+	t_list		*curr;
 	char		**temp;
 
-	i = 0;
 	temp = av;
 	while (*av)
 	{
-		n = ft_atoi(*av, stack_a, i);
+		n = ft_atoi(*av, stack_a);
+		curr = ft_lstlast(*stack_a);
 		if (!is_d(*av) || n > INT_MAX || n < INT_MIN \
-		|| !check_doubles(stack_a->arr, i, (stack_a->arr)[i]))
+		|| !check_doubles(*stack_a, curr))
+		{
+			ft_lstclear(stack_a);
 			return (0);
+		}
 		if (malloced)
 			free(*av);
 		av++;
-		i++;
-		(stack_a->len)++;
 	}
 	if (malloced)
 		free(temp);
 	return (1);
 }
 
-void	create_stacks(t_stack *a, t_stack *b, char *av, int ac)
+int	check_doubles(t_list *stack_a, t_list *curr)
 {
-	int	n;
+	while (stack_a != curr && stack_a->next)
+	{
+		if (stack_a->content == curr->content)
+			return (0);
+		stack_a = stack_a->next;
+	}
+	return (1);
+}
 
-	a->len = 0;
-	a->c = 'a';
-	b->len = 0;
-	b->c = 'b';
-	a->max = INT_MIN;
-	a->min = INT_MAX;
-	b->max = INT_MIN;
-	b->min = INT_MAX;
-	n = word_count(av);
-	if (n > ac - 1)
+int	is_sorted(t_list *lst)
+{
+	if (lst)
 	{
-		a->arr = (int *)malloc(sizeof(int) * n);
-		b->arr = (int *)malloc(sizeof(int) * n);
+		while (lst->next)
+		{
+			if (lst->next->content < lst->content)
+				return (0);
+			lst = lst->next;
+		}
+		return (1);
 	}
-	else
-	{
-		a->arr = (int *)malloc(sizeof(int) * (ac - 1));
-		b->arr = (int *)malloc(sizeof(int) * (ac - 1));
-	}
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
-	create_stacks(&stack_a, &stack_b, av[1], ac);
+	stack_a = NULL;
+	stack_b = NULL;
 	if (ac < 2)
 		return (0);
-	else if (ac == 2 && !verify_args(split(av[1]), &stack_a, 1))
-		ft_printf("Error\n");
+	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
+		write(2, "Error\n", 6);
 	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 	else
 	{
-		if (stack_a.len == 2)
-			sort_2(&stack_a);
-		else if (stack_a.len == 3)
-			sort_3(&stack_a);
-		else
-			sort_5(&stack_a, &stack_b);
+		if (!is_sorted(stack_a))
+		{
+			if (lstsize(stack_a) == 2)
+				sort_2(&stack_a);
+			else if (lstsize(stack_a) == 3)
+				sort_3(&stack_a);
+			else
+				sort(&stack_a, &stack_b);
+		}
+		//print_lst(stack_b);
+		ft_lstclear(&stack_a);
+		ft_lstclear(&stack_b);
 	}
-	free(stack_a.arr);
-	free(stack_b.arr);
 }
