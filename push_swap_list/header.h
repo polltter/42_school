@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 19:42:45 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:03:58 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,21 @@ void		rev_rotate(t_list **a, t_list **b, char c);
 void		rotate(t_list **a, t_list **b, char c);
 
 //sorting
-int			cost(t_list **a, t_list **b, t_list *elem);
+int			cost(t_list **a, t_list **b, t_list *elem, int *path);
 void		sort_2(t_list **a);
 void		sort_3(t_list **stack);
 int			**lst_to_arr(t_list *stack);
+int			is_sorted(t_list *lst);
+void		sort(t_list **a, t_list **b);
+
+
+//sorting utils
+t_list		*find_nearest(t_list *a, t_list *elem);
+void		rev_rotate_until(t_list **a, t_list **b, \
+t_list *elem, t_list *nearest);
+void		rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+void		rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+void		rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
+
 
 #endif

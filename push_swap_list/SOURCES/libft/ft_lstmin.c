@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 10:48:45 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/20 14:09:09 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/11/20 17:46:28 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2022/11/20 17:48:39 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	lstsize(t_list *lst)
+t_list	*ft_lstmin(t_list *lst)
 {
-	int	i;
+	t_list	*min;
 
-	i = 0;
+	min = lst;
 	while (lst)
 	{
-		i++;
+		if (lst->content < min->content)
+			min = lst;
 		lst = lst->next;
 	}
-	return (i);
+	return (min);
 }

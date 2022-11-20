@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 19:41:34 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:08:09 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ int	is_sorted(t_list *lst)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
+	t_list	*stack_b;
 
 	stack_a = NULL;
+	stack_b = NULL;
 	if (ac < 2)
 		return (0);
 	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
@@ -79,12 +81,15 @@ int	main(int ac, char **av)
 	{
 		if (!is_sorted(stack_a))
 		{
-			if (ft_lstsize(stack_a) == 2)
+			if (lstsize(stack_a) == 2)
 				sort_2(&stack_a);
-			else if (ft_lstsize(stack_a) == 3)
+			else if (lstsize(stack_a) == 3)
 				sort_3(&stack_a);
+			else
+				sort(&stack_a, &stack_b);
 		}
-		print_lst(stack_a);
+		print_lst(stack_b);
 		ft_lstclear(&stack_a);
+		ft_lstclear(&stack_b);
 	}
 }

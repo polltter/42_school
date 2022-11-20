@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:52:01 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/19 19:42:24 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:07:23 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	**lst_to_arr(t_list *stack)
 	int	size;
 	int	**arr;
 
-	size = ft_lstsize(stack);
+	size = lstsize(stack);
 	arr = malloc(sizeof(int *) * size);
 	size = 0;
 	while (stack)
