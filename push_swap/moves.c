@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/20 20:41:30 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/21 14:40:32 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 void	rotate(t_list **a, t_list **b, char c)
 {
-	t_list	*temp;
+	t_list	*temp_a;
+	t_list	*temp_b;
 
 	if (a && *a && (*a)->next)
 	{
 		ft_lstadd_back(a, ft_lstnew((*a)->content));
-		temp = *a;
+		temp_a = *a;
 		*a = (*a)->next;
-		ft_lstdelone(temp, NULL);
+		ft_lstdelone(temp_a, NULL);
 		ft_printf("r%c\n", c);
 	}
 	if (c == 'r' && b && *b && (*b)->next)
 	{
 		ft_lstadd_back(b, ft_lstnew((*b)->content));
-		temp = *b;
+		temp_b = *b;
 		*b = (*b)->next;
-		ft_lstdelone(temp, NULL);
+		ft_lstdelone(temp_b, NULL);
 	}
 }
 
@@ -44,7 +45,7 @@ void	rev_rotate(t_list **a, t_list **b, char c)
 	if (c == 'r' && b && *b && (*b)->next)
 	{
 		ft_lstadd_front(b, ft_lstnew(ft_lstlast(*b)->content));
-		ft_lstdelone(ft_lstlast(*b), NULL);
+		ft_lstdellast(*b);
 	}
 }
 
