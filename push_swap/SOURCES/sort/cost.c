@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 09:15:36 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/20 19:53:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/21 20:22:30 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*find_nearest(t_list *a, t_list *elem)
 
 	if (!elem || !a)
 		return (NULL);
-	if (elem->content < ft_lstmin(a)->content)
+	if (elem->content < lmin(a)->content)
 		return (lmax(a));
 	nearest = a;
 	diff_smallest = INT_MAX;

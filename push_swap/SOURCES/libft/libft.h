@@ -39,6 +39,7 @@ t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdellast(t_list *a);
 t_list	*lmax(t_list *lst);
+t_list	*lmin(t_list *lst);
 t_list	*ft_lstmin(t_list *lst);
 int		lsum(t_list *lst);
 int		lmean(t_list *lst);

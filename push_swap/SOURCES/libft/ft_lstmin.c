@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 17:46:28 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/20 18:32:40 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/21 20:21:45 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmin(t_list *lst)
+t_list	*lmin(t_list *lst)
 {
 	t_list	*min;
 

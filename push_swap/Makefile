@@ -6,7 +6,7 @@ NAME	= push_swap
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS	= -g -fsanitize=address
 
 all: ${NAME}
 

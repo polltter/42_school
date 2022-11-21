@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:13:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/21 14:14:45 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/21 20:03:35 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	lmean(t_list *lst)
 {
-	return (lsum(lst) / lstsize(lst));
+	return ((lsum(lst) / lstsize(lst))*0.9);
 }
