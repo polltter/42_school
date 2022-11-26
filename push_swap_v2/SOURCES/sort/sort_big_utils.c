@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:16:04 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/24 18:36:49 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 22:04:16 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 	int	tempa;
 	int	tempb;
 
-	tempa = elem->content;
+	if (elem)
+		tempb = elem->content;
 	if (nearest)
-		tempb = nearest->content;
+		tempa = nearest->content;
 	while (*a && *b && (*a)->content != tempa && (*b)->content != tempb)
 		rotate(a, b, 'r');
 	if (*a && (*a)->content != tempa)
@@ -35,9 +36,10 @@ void	rev_rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 	int	tempa;
 	int	tempb;
 
-	tempa = elem->content;
+	if (elem)
+		tempb = elem->content;
 	if (nearest)
-		tempb = nearest->content;
+		tempa = nearest->content;
 	while (*a && *b && (*a)->content != tempa && (*b)->content != tempb)
 		rev_rotate(a, b, 'r');
 	if (*a && (*a)->content != tempa)
@@ -53,9 +55,10 @@ void	rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 	int	tempa;
 	int	tempb;
 
-	tempa = elem->content;
+	if (elem)
+		tempb = elem->content;
 	if (nearest)
-		tempb = nearest->content;
+		tempa = nearest->content;
 	while (*a && *b && (*a)->content != tempa && (*b)->content != tempb)
 	{
 		rotate(a, NULL, 'a');
@@ -74,9 +77,10 @@ void	rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 	int	tempa;
 	int	tempb;
 
-	tempa = elem->content;
+	if (elem)
+		tempb = elem->content;
 	if (nearest)
-		tempb = nearest->content;
+		tempa = nearest->content;
 	while (*a && *b && (*a)->content != tempa && (*b)->content != tempb)
 	{
 		rev_rotate(a, NULL, 'a');
@@ -87,6 +91,5 @@ void	rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 			rev_rotate(a, NULL, 'a');
 	else if (*b && (*b)->content != tempb)
 		while ((*b)->content != tempb)
-			rev_rotate(b, NULL, 'b');
+			rotate(b, NULL, 'b');
 }
-

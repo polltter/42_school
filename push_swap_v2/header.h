@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/24 18:44:11 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 21:35:29 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void		sort_3(t_list **stack);
 int			*lst_to_arr(t_list *stack);
 int			is_sorted(t_list *lst);
 void		sort(t_list **a, t_list **b);
-
+void		send_to_b(t_list **a, t_list **b, int abs_mean_a);
+void		organize_best(t_list **a, t_list **b, t_list *elem, int path);
+void		min_a_top(t_list **a);
 
 //sorting utils
 t_list		*find_nearest(t_list *a, t_list *elem);
@@ -48,6 +50,5 @@ t_list *elem, t_list *nearest);
 void		rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest);
 void		rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
 void		rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest);
-
 
 #endif

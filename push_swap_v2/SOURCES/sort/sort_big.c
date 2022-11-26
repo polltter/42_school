@@ -6,64 +6,96 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/24 18:48:07 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 21:55:14 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
 
-t_list	*elem_to_move(t_list *a, t_list *b, int *path, int mean)
+t_list	*elem_to_move(t_list *to, t_list *from, int *path)
 {
 	t_list	*elem;
-	t_list	*head;
+	t_list	*head_from;
 	int		min_cost;
 	int		cost_elem;
-	int		temp;
+	int		temp_path;
 
-	elem = a;
-	head = a;
+	temp_path = 0;
+	elem = from;
+	head_from = from;
 	min_cost = INT_MAX;
-	temp = 0;
-	while (a)
+	while (from)
 	{
-		cost_elem = cost(&head, &b, elem, path);
-		if (cost_elem < min_cost && mean > a->content - temp)
+		cost_elem = cost(&to, &head_from, from, &temp_path);
+		if (cost_elem < min_cost)
 		{
 			min_cost = cost_elem;
-			elem = a;
+			elem = from;
+			*path = temp_path;
 		}
-		a = a->next;
+		from = from->next;
 	}
 	return (elem);
 }
 
 void	sort(t_list **a, t_list **b)
 {
-	int		path;
 	t_list	*elem;
+	int		path;
 
-	while ((!is_sorted(*a) || (*a)->content < (lmax(*b))->content) && \
-	lstsize(*a))
-	{
-		elem = elem_to_move(*a, *b, &path, lmean(*a));
-		if (path == 0)
-			rotate_until(a, b, elem, find_nearest(*b, elem));
-		else if (path == 1)
-			rot_a_rev_b(a, b, elem, find_nearest(*b, elem));
-		else if (path == 2)
-			rev_a_rot_b(a, b, elem, find_nearest(*b, elem));
-		else if (path == 3)
-			rev_rotate_until(a, b, elem, find_nearest(*b, elem));
-		push(a, b, 'b');
-	}
-	if (*b != lmax(*b) && lstsize(*b) - lstsize(lmax(*b)) < lstsize(lmax(*b)))
-		while (*b != lmax(*b))
-			rotate(b, NULL, 'b');
-	else if (*b != lmax(*b))
-		while (*b != lmax(*b))
-			rev_rotate(b, NULL, 'b');
+	send_to_b(a, b, lmean(*a) * 0.45);
+	sort_3(a);
 	while (lstsize(*b))
+	{
+		elem = elem_to_move(*a, *b, &path);
+		organize_best(a, b, elem, path);
 		push(b, a, 'a');
+	}
+	min_a_top(a);
 }
 
-void	send_to_b(t_list **a, t_list **b)
+void	min_a_top(t_list **a)
+{
+	t_list	*b;
+
+	b = NULL;
+	if (lstsize(*a) - lstsize(lmin(*a)) < lstsize(lmin(*a)))
+		rotate_until(a, &b, NULL, lmin(*a));
+	else
+		rev_rotate_until(a, &b, NULL, lmin(*a));
+}
+
+void	organize_best(t_list **a, t_list **b, t_list *elem, int path)
+{
+	t_list	*nearest;
+
+	nearest = find_nearest(*a, elem);
+	if (path == 0)
+		rotate_until(a, b, elem, nearest);
+	else if (path == 1)
+		rev_a_rot_b(a, b, elem, nearest);
+	else if (path == 2)
+		rot_a_rev_b(a, b, elem, nearest);
+	else if (path == 3)
+		rev_rotate_until(a, b, elem, nearest);
+}
+
+void	send_to_b(t_list **a, t_list **b, int abs_mean_a)
+{
+	int	dyn_mean_a;
+
+	if (lstsize(*a) > 3)
+	{
+		dyn_mean_a = lmean(*a);
+		if ((*a)->content < dyn_mean_a)
+		{
+			push(a, b, 'b');
+			if ((*b)->content < abs_mean_a)
+				rotate(b, NULL, 'b');
+		}
+		else
+			rotate(a, NULL, 'a');
+		send_to_b(a, b, abs_mean_a);
+	}
+	return ;
+}
