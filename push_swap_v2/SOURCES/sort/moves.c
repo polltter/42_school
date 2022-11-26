@@ -6,11 +6,11 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/24 18:41:29 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 22:21:13 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../../header.h"
 
 void	rotate(t_list **a, t_list **b, char c)
 {

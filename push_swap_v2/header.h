@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/26 21:35:29 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 22:34:17 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void		sort(t_list **a, t_list **b);
 void		send_to_b(t_list **a, t_list **b, int abs_mean_a);
 void		organize_best(t_list **a, t_list **b, t_list *elem, int path);
 void		min_a_top(t_list **a);
+void		sort_5(t_list **a, t_list **b);
+t_list		*elem_to_move(t_list *to, t_list *from, int *path);
 
 //sorting utils
 t_list		*find_nearest(t_list *a, t_list *elem);

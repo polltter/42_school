@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/21 14:17:59 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/26 22:25:48 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../../header.h"
 
 int	verify_args(char **av, t_list **stack_a, int malloced)
 {
@@ -85,6 +85,8 @@ int	main(int ac, char **av)
 				sort_2(&stack_a);
 			else if (lstsize(stack_a) == 3)
 				sort_3(&stack_a);
+			else if (lstsize(stack_a) == 3)
+				sort_5(&stack_a, &stack_b);
 			else
 				sort(&stack_a, &stack_b);
 		}
