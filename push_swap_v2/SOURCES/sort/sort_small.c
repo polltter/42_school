@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:52:01 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/26 22:29:40 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/26 22:48:35 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,11 @@ void	sort_3(t_list **stack)
 
 void	sort_5(t_list **a, t_list **b)
 {
-	t_list	*elem;
-	int		path;
-
-	send_to_b(a, b, INT_MAX);
-	sort_3(a);
-	while (lstsize(*b))
-	{
-		elem = elem_to_move(*a, *b, &path);
-		organize_best(a, b, elem, path);
-		push(b, a, 'a');
-	}
 	min_a_top(a);
+	push(a, b, 'b');
+	min_a_top(a);
+	push(a, b, 'b');
+	sort_3(a);
+	push(b, a, 'a');
+	push(b, a, 'a');
 }
