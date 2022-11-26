@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_big_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:16:04 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/21 14:56:06 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:36:49 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 {
-	void	*tempa;
-	void	*tempb;
+	int	tempa;
+	int	tempb;
 
 	tempa = elem->content;
 	if (nearest)
@@ -32,8 +32,8 @@ void	rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 
 void	rev_rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 {
-	void	*tempa;
-	void	*tempb;
+	int	tempa;
+	int	tempb;
 
 	tempa = elem->content;
 	if (nearest)
@@ -50,8 +50,8 @@ void	rev_rotate_until(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 
 void	rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 {
-	void	*tempa;
-	void	*tempb;
+	int	tempa;
+	int	tempb;
 
 	tempa = elem->content;
 	if (nearest)
@@ -71,8 +71,8 @@ void	rot_a_rev_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 
 void	rev_a_rot_b(t_list **a, t_list **b, t_list *elem, t_list *nearest)
 {
-	void	*tempa;
-	void	*tempb;
+	int	tempa;
+	int	tempb;
 
 	tempa = elem->content;
 	if (nearest)

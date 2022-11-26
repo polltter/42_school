@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:13:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/21 20:03:35 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:31:02 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	lmean(t_list *lst)
 {
-	return ((lsum(lst) / lstsize(lst))*0.9);
+	return ((lsum(lst) / lstsize(lst)));
 }

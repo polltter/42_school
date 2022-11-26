@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_big.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/21 20:00:59 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:48:07 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*elem_to_move(t_list *a, t_list *b, int *path, int mean)
 	t_list	*head;
 	int		min_cost;
 	int		cost_elem;
-	void	*temp;
+	int		temp;
 
 	elem = a;
 	head = a;
@@ -65,3 +65,5 @@ void	sort(t_list **a, t_list **b)
 	while (lstsize(*b))
 		push(b, a, 'a');
 }
+
+void	send_to_b(t_list **a, t_list **b)

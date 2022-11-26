@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsum.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:59:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/21 14:13:01 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:30:49 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 int	lsum(t_list *lst)
 {
 	int		sum;
-	int		temp;
-	void	*tes;
 
-	tes = 0;
 	if (lst)
 	{
 		sum = 0;
 		while (lst)
 		{
-			temp = lst->content - tes;
-			sum += temp;
+			sum += lst->content;
 			lst = lst->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/20 20:45:27 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/24 18:44:11 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		rotate(t_list **a, t_list **b, char c);
 int			cost(t_list **a, t_list **b, t_list *elem, int *path);
 void		sort_2(t_list **a);
 void		sort_3(t_list **stack);
-int			**lst_to_arr(t_list *stack);
+int			*lst_to_arr(t_list *stack);
 int			is_sorted(t_list *lst);
 void		sort(t_list **a, t_list **b);
 

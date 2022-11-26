@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:52:29 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/21 14:40:32 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:41:29 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rev_rotate(t_list **a, t_list **b, char c)
 
 void	swap(t_list **a, t_list **b, char c)
 {
-	void	*temp_content;
+	int	temp_content;
 
 	if (a && *a && (*a)->next)
 	{

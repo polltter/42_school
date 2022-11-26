@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/17 14:18:39 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/24 18:29:35 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ long int	ft_atoi(char *s, t_list **stack_a)
 		n = n * 10 + s[i] - '0';
 		i++;
 	}
-	ft_lstadd_back(stack_a, ft_lstnew((void *)(n * sign)));
+	ft_lstadd_back(stack_a, ft_lstnew((n * sign)));
 	return (n * sign);
 }
