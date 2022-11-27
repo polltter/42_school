@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/26 22:39:26 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/27 10:52:38 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ int	is_sorted(t_list *lst)
 	return (0);
 }
 
+void	select_sort(t_list **stack_a, t_list **stack_b)
+{
+	if (!is_sorted(*stack_a))
+	{
+		if (lstsize(*stack_a) == 2)
+			sort_2(stack_a);
+		else if (lstsize(*stack_a) == 3)
+			sort_3(stack_a);
+		else if (lstsize(*stack_a) == 5)
+			sort_5(stack_a, stack_b);
+		else
+			sort(stack_a, stack_b);
+	}
+	ft_lstclear(stack_a);
+	ft_lstclear(stack_b);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
@@ -78,19 +95,5 @@ int	main(int ac, char **av)
 	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
 		write(2, "Error\n", 6);
 	else
-	{
-		if (!is_sorted(stack_a))
-		{
-			if (lstsize(stack_a) == 2)
-				sort_2(&stack_a);
-			else if (lstsize(stack_a) == 3)
-				sort_3(&stack_a);
-			else if (lstsize(stack_a) == 5)
-				sort_5(&stack_a, &stack_b);
-			else
-				sort(&stack_a, &stack_b);
-		}
-		ft_lstclear(&stack_a);
-		ft_lstclear(&stack_b);
-	}
+		select_sort(&stack_a, &stack_b);
 }

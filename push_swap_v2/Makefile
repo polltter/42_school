@@ -13,8 +13,8 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 		@${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 
-dg: ${OBJS}
-		@${CC} -Wall -Werror -Wextra -g  ${OBJS} -o ${NAME}
+dg:
+		@${CC} -Wall -Werror -Wextra -g  ${SRCS} -o ${NAME}
 
 clean:
 		@rm -rf ${OBJS}

@@ -27,7 +27,6 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
