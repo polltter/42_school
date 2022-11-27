@@ -4,6 +4,7 @@
 		"stdarg.h": "c",
 		"header.h": "c",
 		"libft.h": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"checker.h": "c"
 	}
 }

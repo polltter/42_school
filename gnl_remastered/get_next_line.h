@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmin.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 17:46:28 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/21 20:21:45 by mvenanci         ###   ########.fr       */
+/*   Created: 2022/11/02 08:20:15 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2022/11/27 16:13:53 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-t_list	*lmin(t_list *lst)
-{
-	t_list	*min;
+# include <unistd.h>
+# include <stdlib.h>
 
-	min = lst;
-	while (lst)
-	{
-		if (lst->content < min->content)
-			min = lst;
-		lst = lst->next;
-	}
-	return (min);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+char	*strjoin(char *line, char *buffer);
+char	*get_next_line(int fd);
+
+
+#endif
