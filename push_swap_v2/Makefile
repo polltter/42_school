@@ -1,6 +1,6 @@
 SRCS	= ${wildcard *.c} ${wildcard SOURCES/*/*.c}
 
-CHECKER_SRCS	= ${wildcard checker_folder/*.c} ${wildcard checker_folder/*/*.c} /home/miguel/Documents/42_school/push_swap_v2/checker_folder/checker_moves.c \
+CHECKER_SRCS	= ${wildcard checker_folder/*.c} ${wildcard checker_folder/*/*.c} \
 					${wildcard /home/miguel/Documents/42_school/push_swap_v2/SOURCES/libft/*.c} \
 					${wildcard /home/miguel/Documents/42_school/push_swap_v2/SOURCES/ft_printf/*.c} \
 					/home/miguel/Documents/42_school/push_swap_v2/SOURCES/sort/split.c \
