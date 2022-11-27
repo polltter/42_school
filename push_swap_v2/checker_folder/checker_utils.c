@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:40:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 17:42:58 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:47:52 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,22 @@ int	move_code(char *move)
 	while (move[++i] && move[i] != '\n')
 		code += move[i];
 	return (code);
+}
+
+void	cut_lines(t_list **stack_a, t_list **stack_b)
+{
+	char	*s;
+
+	s = get_next_line(0);
+	while (s)
+	{
+		aply_moves(stack_a, stack_b, s);
+		free (s);
+		s = get_next_line(0);
+	}
+	free(s);
+	if (is_sorted(*stack_a))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
 }

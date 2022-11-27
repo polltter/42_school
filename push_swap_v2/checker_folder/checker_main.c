@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:46:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 18:38:14 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:47:26 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,39 +66,34 @@ int	is_sorted(t_list *lst)
 
 void	aply_moves(t_list **a, t_list **b, char *move)
 {
-	int	code;
-
-	code = move_code(move); 
-	if (code == 209)
+	if (move_code(move) == 209)
 		checker_push(b, a);
-	else if (code == 210)
+	else if (move_code(move) == 210)
 		checker_push(a, b);
-	else if (code == 212 && *move == 's')
+	else if (move_code(move) == 212 && *move == 's')
 		checker_swap(a, NULL, 'a');
-	else if (code == 213)
+	else if (move_code(move) == 213)
 		checker_swap(b, NULL, 'b');
-	else if (code == 211)
+	else if (move_code(move) == 211)
 		checker_rotate(a, NULL, 'a');
-	else if (code == 212 && *move == 's')
+	else if (move_code(move) == 212 && *move == 's')
 		checker_rotate(b, NULL, 'b');
-	else if (code == 228)
+	else if (move_code(move) == 228)
 		checker_rotate(a, b, 'r');
-	else if (code == 230)
+	else if (move_code(move) == 230)
 		checker_swap(a, b, 's');
-	else if (code == 325)
+	else if (move_code(move) == 325)
 		checker_rev_rotate(a, NULL, 'a');
-	else if (code == 326)
+	else if (move_code(move) == 326)
 		checker_rev_rotate(b, NULL, 'b');
-	else if (code == 342)
+	else if (move_code(move) == 342)
 		checker_rev_rotate(a, b, 'r');
-		
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	char	*s;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -109,20 +104,7 @@ int	main(int ac, char **av)
 	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
 		write(2, "Error\n", 6);
 	else
-	{
-		s = get_next_line(0);
-		while (s)
-		{
-			aply_moves(&stack_a, &stack_b, s);
-			free (s);
-			s = get_next_line(0);
-		}
-		free(s);
-		if (is_sorted(stack_a))
-			write(1, "OK\n", 3);
-		else
-			write(1, "KO\n", 3);
-	}
+		cut_lines(&stack_a, &stack_b);
 	ft_lstclear(&stack_a);
 	ft_lstclear(&stack_b);
 }
