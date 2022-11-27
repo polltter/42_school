@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:20:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/27 16:13:53 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:27:52 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@
 
 char	*strjoin(char *line, char *buffer);
 char	*get_next_line(int fd);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:39:29 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 16:13:03 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/27 17:27:13 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*get_next_line(int fd)
 	int			i;
 	int			j;
 	int			flag;
-	
-	if(read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
+
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	flag = 0;
