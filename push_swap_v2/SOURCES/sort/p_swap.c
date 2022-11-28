@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 10:52:38 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 17:34:07 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		|| !check_doubles(*stack_a, curr))
 		{
 			ft_lstclear(stack_a);
+			if (malloced)
+				free(temp);
+			if (malloced)
+				free(*av);
 			return (0);
 		}
 		if (malloced)

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:39:29 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 16:13:03 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:27:14 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE  + 1];
 	char		*line;
 	int			i;
 	int			j;
@@ -24,6 +24,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = NULL;
 	flag = 0;
+	buffer[BUFFER_SIZE] = 0;
 	while (!flag && (buffer[0] || (read(fd, buffer, BUFFER_SIZE) > 0)))
 	{
 		line = strjoin(line, buffer);
