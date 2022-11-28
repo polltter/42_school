@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/26 22:35:58 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 18:12:50 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	organize_best(t_list **a, t_list **b, t_list *elem, int path)
 		rev_rotate_until(a, b, elem, nearest);
 }
 
-void	send_to_b(t_list **a, t_list **b, int abs_mean_a)
+void	send_to_b(t_list **a, t_list **b, long int abs_mean_a)
 {
-	int	dyn_mean_a;
+	long int	dyn_mean_a;
 
 	if (lstsize(*a) > 3)
 	{

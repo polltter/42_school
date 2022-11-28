@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 16:52:01 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/26 22:48:35 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 17:46:55 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ void	sort_5(t_list **a, t_list **b)
 {
 	min_a_top(a);
 	push(a, b, 'b');
-	min_a_top(a);
-	push(a, b, 'b');
+	if (lstsize(*a) == 4)
+	{
+		min_a_top(a);
+		push(a, b, 'b');
+	}
 	sort_3(a);
 	push(b, a, 'a');
 	push(b, a, 'a');

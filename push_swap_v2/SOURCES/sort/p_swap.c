@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 17:35:38 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:52:31 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	select_sort(t_list **stack_a, t_list **stack_b)
 			sort_2(stack_a);
 		else if (lstsize(*stack_a) == 3)
 			sort_3(stack_a);
-		else if (lstsize(*stack_a) == 5)
+		else if (lstsize(*stack_a) <= 5)
 			sort_5(stack_a, stack_b);
 		else
 			sort(stack_a, stack_b);

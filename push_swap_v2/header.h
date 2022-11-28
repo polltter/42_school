@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 18:43:13 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:54:42 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		sort_3(t_list **stack);
 int			*lst_to_arr(t_list *stack);
 int			is_sorted(t_list *lst);
 void		sort(t_list **a, t_list **b);
-void		send_to_b(t_list **a, t_list **b, int abs_mean_a);
+void		send_to_b(t_list **a, t_list **b, long int abs_mean_a);
 void		organize_best(t_list **a, t_list **b, t_list *elem, int path);
 void		min_a_top(t_list **a);
 void		sort_5(t_list **a, t_list **b);

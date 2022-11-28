@@ -27,18 +27,18 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstdelone(t_list *lst, void (*del)(int));
-void	ft_lstclear(t_list **lst);
-t_list	*ft_lstnew(int content);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdellast(t_list *a);
-t_list	*lmax(t_list *lst);
-t_list	*lmin(t_list *lst);
-t_list	*ft_lstmin(t_list *lst);
-int		lsum(t_list *lst);
-int		lmean(t_list *lst);
+void		ft_lstadd_front(t_list **lst, t_list *new);
+long int	lstsize(t_list *lst);
+t_list		*ft_lstlast(t_list *lst);
+void		ft_lstdelone(t_list *lst, void (*del)(int));
+void		ft_lstclear(t_list **lst);
+t_list		*ft_lstnew(int content);
+void		ft_lstadd_back(t_list **lst, t_list *new);
+void		ft_lstdellast(t_list *a);
+t_list		*lmax(t_list *lst);
+t_list		*lmin(t_list *lst);
+t_list		*ft_lstmin(t_list *lst);
+long int	lsum(t_list *lst);
+long int	lmean(t_list *lst);
 
 #endif
