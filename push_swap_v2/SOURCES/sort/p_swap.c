@@ -6,15 +6,14 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 17:52:31 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 18:18:13 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
 
-int	verify_args(char **av, t_list **stack_a, int malloced)
+int	verify_args(char **av, t_list **stack_a, int malloced, long int n)
 {
-	long int	n;
 	t_list		*curr;
 	char		**temp;
 
@@ -94,9 +93,9 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (ac < 2)
 		return (0);
-	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
+	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1, 0))
 		write(2, "Error\n", 6);
-	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
+	else if (ac > 2 && !verify_args(++av, &stack_a, 0, 0))
 		write(2, "Error\n", 6);
 	else
 		select_sort(&stack_a, &stack_b);

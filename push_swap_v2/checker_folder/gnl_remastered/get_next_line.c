@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 15:39:29 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 17:27:14 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:20:31 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE  + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			i;
 	int			j;
 	int			flag;
-	
-	if(read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
+
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	flag = 0;
-	buffer[BUFFER_SIZE] = 0;
 	while (!flag && (buffer[0] || (read(fd, buffer, BUFFER_SIZE) > 0)))
 	{
 		line = strjoin(line, buffer);

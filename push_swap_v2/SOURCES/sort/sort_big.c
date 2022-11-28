@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/28 18:12:50 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 19:37:10 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sort(t_list **a, t_list **b)
 	t_list	*elem;
 	int		path;
 
-	send_to_b(a, b, lmean(*a) * 0.45);
+	send_to_b(a, b, lmean(*a) * 0.42);
 	sort_3(a);
 	while (lstsize(*b))
 	{

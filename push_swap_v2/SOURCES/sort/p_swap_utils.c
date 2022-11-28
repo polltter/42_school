@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 11:21:02 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:52:43 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_d(char *c)
 {
 	while (*c)
 	{
-		if (*c == '-')
+		if (*c == '-' || *c == '+')
 			c++;
 		if (*c < '0' || *c > '9')
 			return (0);
@@ -35,9 +35,10 @@ long int	ft_atoi(char *s, t_list **stack_a)
 	n = 0;
 	i = 0;
 	sign = 1;
-	if (s[i] == '-')
+	if (s[i] == '-' || s[i] == '+')
 	{
-		sign = -1;
+		if (s[i] == '-')
+			sign = -1;
 		i++;
 	}
 	while (s[i])

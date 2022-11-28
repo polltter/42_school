@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 08:20:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/28 17:27:22 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:21:03 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@
 
 char	*strjoin(char *line, char *buffer);
 char	*get_next_line(int fd);
-
 
 #endif

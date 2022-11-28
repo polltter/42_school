@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checker_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:46:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 11:46:15 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:47:16 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	verify_args(char **av, t_list **stack_a, int malloced)
+int	verify_args(char **av, t_list **stack_a, int malloced, long int n)
 {
-	long int	n;
 	t_list		*curr;
 	char		**temp;
 
@@ -27,6 +26,10 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		|| !check_doubles(*stack_a, curr))
 		{
 			ft_lstclear(stack_a);
+			if (malloced)
+				free(*av);
+			if (malloced)
+				free(temp);
 			return (0);
 		}
 		if (malloced)
@@ -99,9 +102,9 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (ac < 2)
 		return (0);
-	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1))
+	else if (ac == 2 && !verify_args(split(av[1], ' '), &stack_a, 1, 0))
 		write(2, "Error\n", 6);
-	else if (ac > 2 && !verify_args(++av, &stack_a, 0))
+	else if (ac > 2 && !verify_args(++av, &stack_a, 0, 0))
 		write(2, "Error\n", 6);
 	else
 		cut_lines(&stack_a, &stack_b);
