@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:46:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 18:47:26 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 11:46:15 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	aply_moves(t_list **a, t_list **b, char *move)
 		checker_swap(b, NULL, 'b');
 	else if (move_code(move) == 211)
 		checker_rotate(a, NULL, 'a');
-	else if (move_code(move) == 212 && *move == 's')
+	else if (move_code(move) == 212 && *move == 'r')
 		checker_rotate(b, NULL, 'b');
 	else if (move_code(move) == 228)
 		checker_rotate(a, b, 'r');

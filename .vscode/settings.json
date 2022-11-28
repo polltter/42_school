@@ -5,6 +5,7 @@
 		"header.h": "c",
 		"libft.h": "c",
 		"string.h": "c",
-		"checker.h": "c"
+		"checker.h": "c",
+		"get_next_line.h": "c"
 	}
 }

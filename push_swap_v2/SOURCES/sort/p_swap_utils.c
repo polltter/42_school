@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   p_swap_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:07:38 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/26 22:21:16 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/28 11:21:02 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header.h"
+#include "../../checker_folder/checker.h"
 
 int	is_d(char *c)
 {

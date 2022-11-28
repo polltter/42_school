@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:40:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/27 18:47:52 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 11:49:53 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	cut_lines(t_list **stack_a, t_list **stack_b)
 	while (s)
 	{
 		aply_moves(stack_a, stack_b, s);
-		free (s);
+		free(s);
 		s = get_next_line(0);
 	}
 	free(s);

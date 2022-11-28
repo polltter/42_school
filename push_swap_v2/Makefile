@@ -1,10 +1,10 @@
 SRCS	= ${wildcard *.c} ${wildcard SOURCES/*/*.c}
 
 CHECKER_SRCS	= ${wildcard checker_folder/*.c} ${wildcard checker_folder/*/*.c} \
-					${wildcard /home/miguel/Documents/42_school/push_swap_v2/SOURCES/libft/*.c} \
-					${wildcard /home/miguel/Documents/42_school/push_swap_v2/SOURCES/ft_printf/*.c} \
-					/home/miguel/Documents/42_school/push_swap_v2/SOURCES/sort/split.c \
-					/home/miguel/Documents/42_school/push_swap_v2/SOURCES/sort/p_swap_utils.c
+					${wildcard SOURCES/libft/*.c} \
+					${wildcard SOURCES/ft_printf/*.c} \
+					${wildcard  SOURCES/sort/split.c} \
+					${wildcard  SOURCES/sort/p_swap_utils.c}
 
 OBJS	=${SRCS:.c=.o}
 
@@ -38,6 +38,13 @@ clean_checker:
 fclean: clean
 		@rm -rf ${NAME}
 
+fclean_checker: clean_checker
+		@rm -rf ${CHECKER_NAME}
+
+fclean_all: fclean fclean_checker
+
 re: fclean ${NAME}
+
+re_checker: fclean_checker checker
 
 .PHONY: all clean fclean re
