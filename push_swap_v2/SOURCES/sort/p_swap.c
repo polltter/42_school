@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 10:34:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 17:34:07 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:35:38 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	verify_args(char **av, t_list **stack_a, int malloced)
 		{
 			ft_lstclear(stack_a);
 			if (malloced)
-				free(temp);
-			if (malloced)
 				free(*av);
+			if (malloced)
+				free(temp);
 			return (0);
 		}
 		if (malloced)
