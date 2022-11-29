@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:40:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 12:06:30 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:09:42 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int	move_code(char *move)
 	while (move[++i] && move[i] != '\n')
 		code += move[i];
 	return (code);
+}
+
+int	ft_sl(char *move)
+{
+	int	i;
+
+	i = 0;
+	if (!move)
+		return (0);
+	while (move[i] && move[i] != '\n')
+		i++;
+	return (i);
 }
 
 void	cut_lines(t_list **stack_a, t_list **stack_b)

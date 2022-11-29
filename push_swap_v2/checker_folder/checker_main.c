@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:46:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 18:47:16 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/29 19:21:54 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,30 @@ int	is_sorted(t_list *lst)
 
 void	aply_moves(t_list **a, t_list **b, char *move)
 {
-	if (move_code(move) == 209)
+	if (move_code(move) == 209 && *move == 'p' && ft_sl(move) == 2)
 		checker_push(b, a);
-	else if (move_code(move) == 210)
+	else if (move_code(move) == 210 && *move == 'p' && ft_sl(move) == 2)
 		checker_push(a, b);
-	else if (move_code(move) == 212 && *move == 's')
+	else if (move_code(move) == 212 && *move == 's' && ft_sl(move) == 2)
 		checker_swap(a, NULL, 'a');
-	else if (move_code(move) == 213)
+	else if (move_code(move) == 213 && *move == 's' && ft_sl(move) == 2)
 		checker_swap(b, NULL, 'b');
-	else if (move_code(move) == 211)
+	else if (move_code(move) == 211 && *move == 'r' && ft_sl(move) == 2)
 		checker_rotate(a, NULL, 'a');
-	else if (move_code(move) == 212 && *move == 'r')
+	else if (move_code(move) == 212 && *move == 'r' && ft_sl(move) == 2)
 		checker_rotate(b, NULL, 'b');
-	else if (move_code(move) == 228)
+	else if (move_code(move) == 228 && *move == 'r' && ft_sl(move) == 2)
 		checker_rotate(a, b, 'r');
-	else if (move_code(move) == 230)
+	else if (move_code(move) == 230 && *move == 's' && ft_sl(move) == 2)
 		checker_swap(a, b, 's');
-	else if (move_code(move) == 325)
+	else if (move_code(move) == 325 && ft_sl(move) == 3 && move[2] == 'a')
 		checker_rev_rotate(a, NULL, 'a');
-	else if (move_code(move) == 326)
+	else if (move_code(move) == 326 && ft_sl(move) == 3 && move[2] == 'b')
 		checker_rev_rotate(b, NULL, 'b');
-	else if (move_code(move) == 342)
+	else if (move_code(move) == 342 && ft_sl(move) == 3 && move[2] == 'r')
 		checker_rev_rotate(a, b, 'r');
+	else if (write(2, "Error\n", 6))
+		exit(0);
 }
 
 int	main(int ac, char **av)

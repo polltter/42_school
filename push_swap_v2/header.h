@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:09:16 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/28 17:54:42 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/29 19:08:54 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int			is_d(char *c);
 long int	ft_atoi(char *s, t_list **stack_a);
 int			check_doubles(t_list *stack_a, t_list *curr);
 char		**split(char *s, char c);
+int			ft_sl(char *move);
 
 //moving and list utils
 void		print_lst(t_list *a);
