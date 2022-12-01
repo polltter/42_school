@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:46:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/11/29 19:21:54 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/11/29 19:43:11 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	aply_moves(t_list **a, t_list **b, char *move)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	t_list	*stack_b;
+	t_list	*stack_b;git@vogsphere.42lisboa.com:vogsphere/intra-uuid-d6271173-8258-40ba-8bbd-9fefae16493a-4570522-mvenanci
 
 	stack_a = NULL;
 	stack_b = NULL;
