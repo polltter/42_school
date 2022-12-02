@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/01 20:34:42 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/02 18:52:47 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,25 @@ int	create_trgb(int t, int r, int g, int b)
 
 void	draw_line(t_data *img)
 {
-	t__imaginary	pixel;
-	t__imaginary	center;
+	t_im			pixel;
+	t_im			center;
 	int				color;
 	int				n;
-	
-	center.imaginary = 1080 / 2;
+
+	center.im = 1080 / 2;
 	center.real = 1920 / 2;
 	pixel.real = -1;
 	while (++pixel.real <= 1920)
 	{
-		pixel.imaginary = -1;
-		while (++pixel.imaginary <= 1080)
+		pixel.im = -1;
+		while (++pixel.im <= 1080)
 		{
 			if (sqrt(pow(pixel.real - center.real, 2) \
-			+ pow(pixel.imaginary - center.imaginary, 2)) <= 300)
+			+ pow(pixel.im - center.im, 2)) <= 255)
 			{
-				n = abs(pixel.real - center.real) % 2 + abs(pixel.imaginary - center.imaginary) % 255;
-				color = create_trgb(0, n, n, n);
-				my_mlx_pixel_put(img, pixel.real, pixel.imaginary, color);
+				n = sqrt(pow(pixel.real - center.real, 2) + pow(pixel.im - center.im, 2));
+				color = create_trgb(n, n, n, n);
+				my_mlx_pixel_put(img, pixel.real, pixel.im, color);
 			}	
 		}
 	}
