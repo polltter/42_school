@@ -6,13 +6,13 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:07:30 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/02 19:11:38 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/03 15:50:59 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/fractol.h"
 
-t_im	init_number(int real, int im)
+t_im	init_number(double real, double im)
 {
 	t_im	number;
 
@@ -30,10 +30,10 @@ double	raio(t_im n)
 
 double	ang(t_im n)
 {
-	if ((n.real >= 0 && n.im >= 0) || n.real <= 0 && n.im <= 0)
-		return (atan(n.im / n.real));
+	if ((n.real >= 0 && n.im >= 0) || (n.real >= 0 && n.im <= 0))
+		return (atan2(n.im, n.real));
 	else
-		return (atan(n.im / n.real) + PI);
+		return (atan2(n.im, n.real) + PI);
 }
 
 void	calc_real_im(t_im *n)

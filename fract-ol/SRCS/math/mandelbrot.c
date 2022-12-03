@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   imaginary_mult.c                                   :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 18:53:42 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/03 11:54:29 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/12/03 11:05:43 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2022/12/03 12:25:47 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/fractol.h"
 
-t_im	sum_imaginary(t_im first, t_im second)
+t_im	mandelbrot(t_im pixel, t_im c)
 {
-	t_im	new;
-
-	new.real = first.real + second.real;
-	new.im = first.im + second.im;
-	new.theta = ang(new);
-	new.r = raio(new);
-	return (new);
-}
-
-t_im	multiply_imaginary(t_im	frist, t_im second)
-{
-	t_im	new;
-
-	new.r = frist.r * second.r;
-	new.theta = frist.theta + second.theta;
-	calc_real_im(&new);
-	return (new);
+	return (sum_imaginary(multiply_imaginary(pixel, pixel), c));
 }
