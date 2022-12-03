@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/03 19:25:03 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/03 20:29:00 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	draw_line(t_data *img)
 	int		color;
 	double	real;
 	double	im;
+	int x = 0, y;
 
 	color = 0;
 	seed = init_number(0, 0);
@@ -41,24 +42,35 @@ void	draw_line(t_data *img)
 	while (++real < IMG_W / 2)
 	{
 		im = -IMG_H / 2 - 1;
+		y = 0;
 		while (++im < IMG_H / 2)
 		{
-			pixel = init_number(real / 960, im / 960);
+			pixel = init_number(real / (IMG_W / 4), im / (IMG_W / 4));
 			temp = mandelbrot(seed, pixel);
-			for (int po = 0; po < 15; po ++)
+			for (int po = 0; po < 50; po ++)
 			{
 
 				temp = mandelbrot(temp, pixel);
+				if (temp.r > 2)
+				{
+					color = create_trgb(0, 96, 43, 54);
+					my_mlx_pixel_put(img, x, y, color);
+					break ;
+				}
 			}
-			if (temp.r > 2)
-			{
-				color = create_trgb(0, (int)temp.r % 255 - (int)pixel.r % 255, 0, 0);
-				my_mlx_pixel_put(img, pixel.real * 480 + 1920 / 2, pixel.im * 480 + 1080 / 2, color);
-			}
+			y++;
 		}
+		x++;
 	}
 	printf("%lf\n", temp.r);
 	write(1, "cona\n", 5);
+}
+
+int	ft_close(void *o)
+{
+	(void) o;
+	exit(0);
+	return (0);
 }
 
 int	main(void)
@@ -68,11 +80,12 @@ int	main(void)
 	t_data	img;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_win = mlx_new_window(mlx, IMG_W, IMG_H, "Hello world!");
 	img.img = mlx_new_image(mlx, IMG_W, IMG_H);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 	&img.line_length, &img.endian);
 	draw_line(&img);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_hook(mlx_win, 17, 0, ft_close, NULL);
 	mlx_loop(mlx);
 }
