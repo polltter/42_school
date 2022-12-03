@@ -8,6 +8,8 @@ CC		= gcc
 
 #CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
 
+all: $(NAME)
+
 %.o: %.c
 	$(CC) -Wall -Wextra  -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
@@ -19,3 +21,5 @@ clean:
 
 fclean: clean
 	rm -rf ${NAME}
+
+re: fclean all
