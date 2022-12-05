@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/03 20:29:00 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/05 15:56:27 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	draw_line(t_data *img)
 				temp = mandelbrot(temp, pixel);
 				if (temp.r > 2)
 				{
-					color = create_trgb(0, 96, 43, 54);
+					color = create_trgb(0, temp.r * 10, temp.r * 15, temp.r * 7);
 					my_mlx_pixel_put(img, x, y, color);
 					break ;
 				}
@@ -62,8 +62,6 @@ void	draw_line(t_data *img)
 		}
 		x++;
 	}
-	printf("%lf\n", temp.r);
-	write(1, "cona\n", 5);
 }
 
 int	ft_close(void *o)
