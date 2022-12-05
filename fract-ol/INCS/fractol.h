@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/05 15:56:38 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/05 16:08:21 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define PI 3.14159265358979323846
 # define IMG_W 1920	
-# define IMG_H 1080
+# define IMG_H 1000
 
 typedef struct s_data {
 	void	*img;

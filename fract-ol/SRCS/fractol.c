@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/05 15:56:27 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/05 18:24:02 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	draw_line(t_data *img)
 	double	real;
 	double	im;
 	int x = 0, y;
+	int	flag;
 
 	color = 0;
 	seed = init_number(0, 0);
@@ -47,16 +48,24 @@ void	draw_line(t_data *img)
 		{
 			pixel = init_number(real / (IMG_W / 4), im / (IMG_W / 4));
 			temp = mandelbrot(seed, pixel);
-			for (int po = 0; po < 50; po ++)
+			flag = 0;
+			for (int po = 0; po < 100; po ++)
 			{
-
 				temp = mandelbrot(temp, pixel);
 				if (temp.r > 2)
 				{
-					color = create_trgb(0, temp.r * 10, temp.r * 15, temp.r * 7);
+					int mult = 1000;
+					color = create_trgb(0, x*x / temp.r / mult, x*y / temp.r / mult, y*y / temp.r/ mult);
 					my_mlx_pixel_put(img, x, y, color);
+					flag = 1;
 					break ;
 				}
+			}
+			if (!flag)
+			{
+				int mult = 3000;
+				color = create_trgb(0, x*x / temp.r / mult, x*y / temp.r / mult, y*y / temp.r/ mult);
+				my_mlx_pixel_put(img, x, y, color);
 			}
 			y++;
 		}
