@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/06 12:13:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/06 16:19:50 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	draw_mandelbrot(t_data *img, t_im seed)
 				if (temp.r > 2)
 				{
 					int mult = 1000;
-					color = create_trgb(0, x*x / temp.r / mult, x*y / temp.r / mult, y*y / temp.r/ mult);
+					int t = pixel.real * (IMG_W / 4);
+					int u = pixel.im * (IMG_W / 4);
+					color = create_trgb(0, abs(t*t) / temp.r / mult, abs(t*u) / temp.r / mult, u*u / temp.r/ mult);
 					my_mlx_pixel_put(img, x, y, color);
 					flag = 1;
 					break ;

@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/06 12:14:55 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/06 17:23:28 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ int	key_hook(int keycode, t_mlx_data *data)
 	return (0);
 }
 
+void	enter_screen(int button, int x, int y, void *param)
+{
+	printf("butotn %d\n", button);
+}
+
 int	main(void)
 {
 	t_mlx_data	data;
@@ -64,6 +69,7 @@ int	main(void)
 	draw_mandelbrot(&(data.img), init_number(0, 0));
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);
 	mlx_hook(data.mlx_win, 17, 0, ft_close, NULL);
-	mlx_hook(data.mlx_win, 2, 1L<<0, key_hook, &data);
+	mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
+	mlx_hook(data.mlx_win, 4, 1l << 2, enter_screen, NULL);
 	mlx_loop(data.mlx);
 }

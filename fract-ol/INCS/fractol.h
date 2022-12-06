@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/06 12:14:27 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/06 17:19:31 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 
 # define PI 3.14159265358979323846
-# define IMG_W 800	
-# define IMG_H 600
+# define IMG_W 1920	
+# define IMG_H 1080
 
 typedef struct s_data {
 	void	*img;
@@ -56,7 +56,6 @@ t_im	sum_imaginary(t_im first, t_im second);
 t_im	multiply_imaginary(t_im	frist, t_im second);
 void	calc_real_im(t_im *n);
 
-
 //fractal sets
 t_im	mandelbrot(t_im pixel, t_im c);
 
@@ -64,6 +63,5 @@ t_im	mandelbrot(t_im pixel, t_im c);
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_mandelbrot(t_data *img, t_im seed);
-
 
 #endif
