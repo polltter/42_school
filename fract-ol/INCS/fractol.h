@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/06 17:19:31 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/06 17:50:56 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_mlx_data {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+	double	scale;
 }	t_mlx_data;
 
 //math functions
@@ -62,6 +63,6 @@ t_im	mandelbrot(t_im pixel, t_im c);
 //drawing
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_mandelbrot(t_data *img, t_im seed);
+void	draw_mandelbrot(t_data *img, t_im seed, double scale);
 
 #endif

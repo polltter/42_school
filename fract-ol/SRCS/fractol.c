@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/06 17:23:28 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/06 18:44:41 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	key_hook(int keycode, t_mlx_data *data)
 		ft_close(0);
 	else if (keycode == 113)
 	{
-		draw_mandelbrot(&(data->img), init_number(0, -1));
+		draw_mandelbrot(&(data->img), init_number(0, -1), data->scale);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, (data->img).img, 0, 0);
 		return (1);
 	}
 	else if (keycode == 97)
 	{
-		draw_mandelbrot(&(data->img), init_number(0, 0));
+		draw_mandelbrot(&(data->img), init_number(0, 0), data->scale);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, (data->img).img, 0, 0);
 		return (1);
 	}
@@ -52,9 +52,16 @@ int	key_hook(int keycode, t_mlx_data *data)
 	return (0);
 }
 
-void	enter_screen(int button, int x, int y, void *param)
+void	zoom(int button, int x, int y, t_mlx_data *data)
 {
-	printf("butotn %d\n", button);
+	if (button == 4)
+	{
+		data->scale /= 1.1;
+		printf("entrou\n");
+		draw_mandelbrot(&(data->img), init_number(0, 0), data->scale);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, (data->img).img, 0, 0);
+	}
+
 }
 
 int	main(void)
@@ -66,10 +73,11 @@ int	main(void)
 	data.img.img = mlx_new_image(data.mlx, IMG_W, IMG_H);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, \
 	&data.img.line_length, &data.img.endian);
-	draw_mandelbrot(&(data.img), init_number(0, 0));
+	data.scale = 4;
+	draw_mandelbrot(&(data.img), init_number(0, 0), data.scale);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);
 	mlx_hook(data.mlx_win, 17, 0, ft_close, NULL);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
-	mlx_hook(data.mlx_win, 4, 1l << 2, enter_screen, NULL);
+	mlx_hook(data.mlx_win, 4, 1l << 2, zoom, &data);
 	mlx_loop(data.mlx);
 }
