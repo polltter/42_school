@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_chars.c                                   :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 10:35:24 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/10/31 15:34:06 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "mlx_int.h"
 
-size_t	print_char(char c)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	ft_putchar_fd(c, 1);
-	return (1);
-}
-
-size_t	print_strs(char *s)
-{
-	if (!s)
-		return (write(1, "(null)", 6));
-	ft_putstr_fd(s, 1);
-	return (ft_strlen(s));
+	XCloseDisplay(xvar->display);
 }
