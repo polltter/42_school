@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/08 14:23:31 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/08 18:47:39 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void	draw_mandelbrot(t_data *img, t_im seed, t_im offset, double scale)
 	int		flag;
 	
 	x = -1;
-	
 	while (++x <= IMG_W)
 	{
 		y = -1;
 		while (++y <= IMG_H)
 		{
-			pixel = subtract_imaginary(init_number(x, y), sum_imaginary(seed, offset));
+			pixel = subtract_imaginary(init_number(x, y), sum_imaginary(seed, offset), scale);
 			temp = mandelbrot(init_number(0, 0), pixel);
 			iterations = 32;
 			flag = 0;

@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/08 14:18:10 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/08 18:48:12 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void move(int keycode , t_mlx_data *data)
 		data->offset = sum_imaginary(data->offset, init_number(0, 100));
 	else if (keycode == 65364)
 		data->offset = sum_imaginary(data->offset, init_number(0, -100));
-	printf("offset: %f, %f\n", (data->offset).real, (data->offset).im);
+	else if (keycode == 65307)
+		ft_close(0);
 	draw_mandelbrot(&(data->img), init_number(IMG_W_2, IMG_H_2), data->offset, \
 	data->scale);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, (data->img).img, 0, 0);
@@ -69,13 +70,12 @@ void move(int keycode , t_mlx_data *data)
 void	zoom(int button, int x, int y, t_mlx_data *data)
 {
 	if (button == 4)
-	{
-		return ;
-	}
+		data->scale /= 1.5;
 	else if (button == 5)
-	{
-		return ;
-	}
+		data->scale *= 1.5;
+	draw_mandelbrot(&(data->img), init_number(IMG_W_2, IMG_H_2), data->offset, \
+	data->scale);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, (data->img).img, 0, 0);
 }
 
 int	main(void)
@@ -95,5 +95,6 @@ int	main(void)
 	mlx_hook(data.mlx_win, 17, 0, ft_close, NULL);
 	mlx_hook(data.mlx_win, 2, 1L << 0, close_esc, &data);
 	mlx_hook(data.mlx_win, 2, 1l << 0, move, &data);
+	mlx_hook(data.mlx_win, 4, 1l << 2, zoom, &data);
 	mlx_loop(data.mlx);
 }

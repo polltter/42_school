@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/08 14:05:56 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/08 15:14:24 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ double	raio(t_im n);
 double	ang(t_im n);
 t_im	sum_imaginary(t_im first, t_im second);
 t_im	multiply_imaginary(t_im	frist, t_im second);
-t_im	subtract_imaginary(t_im first, t_im second);
+t_im	subtract_imaginary(t_im first, t_im second, double scale);
 void	calc_real_im(t_im *n);
 
 //fractal sets
