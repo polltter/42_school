@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/08 15:14:24 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2022/12/14 22:26:38 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <limits.h>
 
 # define PI 3.14159265358979323846
-# define IMG_W 800	
+# define IMG_W 900	
 # define IMG_H 600
 # define IMG_W_2 IMG_W / 2 
 # define IMG_H_2 IMG_H / 2
@@ -51,6 +51,8 @@ typedef struct s_mlx_data {
 	t_data	img;
 	double	scale;
 	t_im	offset;
+	t_im	seed;
+	char	fractal_set;
 }	t_mlx_data;
 
 //math functions
@@ -64,10 +66,13 @@ void	calc_real_im(t_im *n);
 
 //fractal sets
 t_im	mandelbrot(t_im pixel, t_im c);
+t_im	julia(t_im pixel, t_im c);
 
 //drawing
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_mandelbrot(t_data *img, t_im seed, t_im offset, double scale);
+void	draw_mandelbrot(t_mlx_data data, t_im seed);
+void	draw_julia(t_mlx_data data, t_im seed);
+int		get_color(t_im temp, t_im pixel);
 
 #endif
