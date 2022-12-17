@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/14 22:45:55 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:25:22 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ void	fractal_manager(t_mlx_data data)
 		draw_julia(data, data.seed);
 }
 
-t_mlx_data	data_init(char **av)
+void data_init(char **av, t_mlx_data *data)
 {
-	t_mlx_data	data;
-
-	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, IMG_W, IMG_H, "Farct-ol!");
-	data.img.img = mlx_new_image(data.mlx, IMG_W, IMG_H);
-	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, \
-	&data.img.line_length, &data.img.endian);
-	data.scale = IMG_W / 4;
-	data.offset = init_number(0, 0);
-	data.seed = init_number(0, 0);
-	data.fractal_set = av[1][0];
-	return (data);
+	if (av)
+	{
+		data->mlx = mlx_init();
+		data->mlx_win = mlx_new_window(data->mlx, IMG_W, IMG_H, "Farct-ol!");
+		data->img.img = mlx_new_image(data->mlx, IMG_W, IMG_H);
+		data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, \
+		&data->img.line_length, &data->img.endian);
+		data->fractal_set = av[1][0];
+	}
+	data->scale = IMG_W / 4;
+	data->offset = init_number(0, 0);
+	data->seed = init_number(0, 0);
 }
 
 int	ft_close(void *o)
@@ -58,13 +58,15 @@ void	move(int keycode , t_mlx_data *data)
 	else if (keycode == 65307)
 		ft_close(0);
 	else if (keycode == 'a')
-		data->seed = sum_imaginary(data->seed, init_number(-0.05, 0));
+		data->seed = sum_imaginary(data->seed, init_number(-0.025, 0));
 	else if (keycode == 'd')
-		data->seed = sum_imaginary(data->seed, init_number(0.05, 0));
+		data->seed = sum_imaginary(data->seed, init_number(0.025, 0));
 	else if (keycode == 'w')
-		data->seed = sum_imaginary(data->seed, init_number(0, 0.05));
+		data->seed = sum_imaginary(data->seed, init_number(0, 0.025));
 	else if (keycode == 's')
-		data->seed = sum_imaginary(data->seed, init_number(0, -0.05));
+		data->seed = sum_imaginary(data->seed, init_number(0, -0.025));	
+	else if (keycode == 'r')
+		data_init(NULL, data);
 	fractal_manager(*data);
 }
 
@@ -94,7 +96,7 @@ int	main(int ac, char **av)
 	t_mlx_data	data;
 
 	(void) ac;
-	data = data_init(av);
+	data_init(av, &data);
 	fractal_manager(data);
 	mlx_hook(data.mlx_win, 17, 0, ft_close, NULL);
 	mlx_hook(data.mlx_win, 2, 1l << 0, move, &data);

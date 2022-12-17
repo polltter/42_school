@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:04:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/14 21:42:49 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:26:33 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_julia_utils(t_mlx_data data, t_im seed, int x, int y)
 	{
 		if (temp.r > 2)
 		{
-			my_mlx_pixel_put(&(data.img), x, y, get_color(temp, init_number(x, y)));
+			my_mlx_pixel_put(&(data.img), x, y, color_manager(temp, temp, iterations, 0));
 			flag = 1;
 			break ;
 		}

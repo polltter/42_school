@@ -1,4 +1,4 @@
-SRCS	= ${wildcard SRCS/*.c} ${wildcard SRCS/*/*.c}
+SRCS	= ${wildcard SRCS/*.c} ${wildcard SRCS/*/*.c} ${wildcard SRCS/*/*/*.c}
 
 NAME	= fractol
 

@@ -6,25 +6,12 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/14 22:46:50 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:06:54 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../INCS/fractol.h"
-
-int	get_color(t_im temp, t_im pixel)
-{
-	int	mult;
-	int	t;
-	int	u;
-
-	t = pixel.real * (IMG_W_2);
-	u = pixel.im * (IMG_W_2);
-	mult = 1000;
-	return (create_trgb(0, abs(t * t) / temp.r / mult, \
-	abs(t * u) / temp.r / mult, u * u / temp.r / mult));
-}
 
 void	draw_mandelbrot_utils(t_data *img, t_im pixel, int x, int y)
 {
@@ -33,13 +20,13 @@ void	draw_mandelbrot_utils(t_data *img, t_im pixel, int x, int y)
 	int		flag;
 
 	temp = mandelbrot(init_number(0, 0), pixel);
-	iterations = 42;
+	iterations = 50;
 	flag = 0;
 	while (iterations)
 	{
 		if (temp.r > 2)
 		{
-			my_mlx_pixel_put(img, x, y, get_color(temp, pixel));
+			my_mlx_pixel_put(img, x, y, color_manager(temp, pixel, iterations, 1));
 			flag = 1;
 			break ;
 		}
