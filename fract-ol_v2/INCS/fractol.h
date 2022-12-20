@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/17 16:33:01 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:11:00 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 
 # define PI 3.14159265358979323846
-# define IMG_W 800	
-# define IMG_H 600
+# define IMG_W 1000	
+# define IMG_H 800
 # define IMG_W_2 IMG_W / 2 
 # define IMG_H_2 IMG_H / 2
 
@@ -63,6 +63,7 @@ t_im	sum_imaginary(t_im first, t_im second);
 t_im	multiply_imaginary(t_im	frist, t_im second);
 t_im	subtract_imaginary(t_im first, t_im second, double scale);
 void	calc_real_im(t_im *n);
+t_im	find_coords(t_im a, double ang, double side);
 
 //fractal sets
 t_im	mandelbrot(t_im pixel, t_im c);
@@ -76,6 +77,7 @@ void	draw_julia(t_mlx_data data, t_im seed);
 int		get_color(t_im temp, t_im pixel);
 int		color_manager(t_im temp, t_im pixel, int iterations, int color_scheme);
 int		get_color_iter(int iter, int color_scheme);
+void	draw_koch_snowflake(t_mlx_data data, int iter);
 
 
 #endif

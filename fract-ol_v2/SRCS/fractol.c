@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/17 16:25:22 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/19 23:53:41 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	fractal_manager(t_mlx_data data)
 		draw_mandelbrot(data, init_number(IMG_W_2, IMG_H_2));
 	else if (data.fractal_set == 'J')
 		draw_julia(data, data.seed);
+	else if (data.fractal_set == 'K')
+		draw_koch_snowflake(data, 0);
 }
 
 void data_init(char **av, t_mlx_data *data)
@@ -87,7 +89,6 @@ void	zoom(int button, int x, int y, t_mlx_data *data)
 		data->offset.real /= 1.5;
 		data ->offset.im /= 1.5;
 	}
-	printf("data offset %f\n", data->offset);
 	fractal_manager(*data);
 }
 
