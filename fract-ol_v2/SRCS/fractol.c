@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/19 23:53:41 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:45:21 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fractal_manager(t_mlx_data data)
 	else if (data.fractal_set == 'J')
 		draw_julia(data, data.seed);
 	else if (data.fractal_set == 'K')
-		draw_koch_snowflake(data, 0);
+		draw_koch_snowflake(&data);
 }
 
 void data_init(char **av, t_mlx_data *data)
@@ -36,6 +36,7 @@ void data_init(char **av, t_mlx_data *data)
 	data->scale = IMG_W / 4;
 	data->offset = init_number(0, 0);
 	data->seed = init_number(0, 0);
+	data->iterations = 0;
 }
 
 int	ft_close(void *o)
@@ -69,6 +70,8 @@ void	move(int keycode , t_mlx_data *data)
 		data->seed = sum_imaginary(data->seed, init_number(0, -0.025));	
 	else if (keycode == 'r')
 		data_init(NULL, data);
+	else if (keycode == 'p')
+		data->iterations += 1;
 	fractal_manager(*data);
 }
 

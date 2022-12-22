@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/20 01:11:00 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:54:04 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_mlx_data {
 	t_im	offset;
 	t_im	seed;
 	char	fractal_set;
+	int		iterations;
 }	t_mlx_data;
 
 //math functions
@@ -64,6 +65,8 @@ t_im	multiply_imaginary(t_im	frist, t_im second);
 t_im	subtract_imaginary(t_im first, t_im second, double scale);
 void	calc_real_im(t_im *n);
 t_im	find_coords(t_im a, double ang, double side);
+int		find_color(t_mlx_data *data, t_im first);
+int		compare_coords(t_im a, t_im b);
 
 //fractal sets
 t_im	mandelbrot(t_im pixel, t_im c);
@@ -77,7 +80,7 @@ void	draw_julia(t_mlx_data data, t_im seed);
 int		get_color(t_im temp, t_im pixel);
 int		color_manager(t_im temp, t_im pixel, int iterations, int color_scheme);
 int		get_color_iter(int iter, int color_scheme);
-void	draw_koch_snowflake(t_mlx_data data, int iter);
+void	draw_koch_snowflake(t_mlx_data *data);
 
 
 #endif

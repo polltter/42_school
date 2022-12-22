@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/20 01:39:26 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:28:44 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,25 @@ void	draw_line(t_mlx_data *data, t_im f, t_im s)
 	slope = (s.im - f.im) / (s.real - f.real);
 	dir = (s.real - f.real) / fabs(s.real - f.real);
 	x = f.real;
-	while ((int)x != (int)s.real)
+	while (fabs(x - s.real) > 0.5)
 	{
 		my_mlx_pixel_put(&(data->img), x, slope * (x - f.real) + f.im, 0x0000FF00);
+		x += dir;
+	}
+}
+
+void	erase_line(t_mlx_data *data, t_im f, t_im s)
+{
+	double	slope;
+	double	x;
+	int		dir;
+
+	slope = (s.im - f.im) / (s.real - f.real);
+	dir = (s.real - f.real) / fabs(s.real - f.real);
+	x = f.real;
+	while (fabs(x - s.real) > 0.5)
+	{
+		my_mlx_pixel_put(&(data->img), x, slope * (x - f.real) + f.im, 0);
 		x += dir;
 	}
 }
@@ -35,13 +51,12 @@ void	draw_triangle(t_mlx_data *data, t_im first, double side)
 	temp = find_coords(first, 0, side);
 	draw_line(data, first, temp);
 	first = find_coords(temp, PI / 2 + PI / 6, side);
-	printf("%f %f\n", first.real, first.im);
 	draw_line(data, temp, first);
 	temp = find_coords(first, PI + PI / 3, side);
 	draw_line(data, first, temp);
 }
 
-void draw_basic_shape(t_mlx_data *data, t_im first, double ang, double side)
+t_im	draw_basic_shape(t_mlx_data *data, t_im first, double ang, double side)
 {
 	t_im	temp;
 
@@ -53,17 +68,53 @@ void draw_basic_shape(t_mlx_data *data, t_im first, double ang, double side)
 	draw_line(data, first, temp);
 	first = find_coords(temp, ang, side);
 	draw_line(data, temp, first);
+	return (first);
 }
 
-void	draw_koch_snowflake(t_mlx_data data, int iter)
+double	find_angle(t_mlx_data *data, t_im first, double ang, double size)
 {
-	t_im	a = init_number(300, 500);
-	t_im	b = init_number(600, 500);
-	double	size_side;
+	if (find_color(data, find_coords(first, ang + 0.0, 1)))
+		return (0);
+	else if (find_color(data, find_coords(first, ang - PI / 3, size)))
+		return (-PI / 3);
+	else if (find_color(data, find_coords(first, ang + 4 / 6.0 * PI , size)))
+		return (4 / 6.0 * PI);
+	else
+		return (-1);
+}
 
-	size_side = 100 * pow((1 / 3), iter);
-	draw_basic_shape(&data, a, 0, size_side);
-	draw_basic_shape(&data, find_coords(a, 0, 300), PI / 2 + PI / 6, size_side);	
-	draw_basic_shape(&data, find_coords(a, PI / 3, 300), PI + PI / 3, size_side);	
-	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);
+t_im	find_line(t_mlx_data *data, t_im first, double ang, double size)
+{
+	double	next_point_ang;
+
+	next_point_ang = find_angle(data, first, ang, size);
+	return (find_coords(first, ang, size));
+}
+
+void	draw_koch_snowflake(t_mlx_data *data)
+{
+	t_im	a;
+	t_im	curr;
+	double	size_side;
+	double	ang;
+
+	a = init_number(300, 500);
+	curr = init_number(0, 0);
+	size_side = 300 * pow((1.0 / 3.0), data->iterations);
+	if (!data->iterations)
+		draw_triangle(data, a, size_side);
+	else
+	{
+		ang = find_angle(data, a, 0, size_side / (1 / 3.0));
+		curr = find_line(data, a, ang, size_side / (1 / 3.0));
+		while (compare_coords(a, curr) && ang + 1)
+		{
+			write(1, "aqui\n", 5);
+			erase_line(data, a, curr);
+			ang = -1;
+		}
+		
+	}
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
+	
 }
