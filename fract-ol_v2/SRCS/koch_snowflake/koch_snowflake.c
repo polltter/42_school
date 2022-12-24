@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/24 00:42:38 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/24 13:13:43 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ t_im	draw_basic_shape(t_mlx_data *data, t_im first, double ang, double side)
 
 double	find_angle(t_mlx_data *data, t_im first, double ang, double size)
 {
-	if (find_color(data, find_coords(first, ang + 0.0, 1)))
-		return (0);
+	if (find_color(
+		data, find_coords(first, ang + 0.0, 1)))
+		return (ang);
 	else if (find_color(data, find_coords(first, ang - PI / 3, size)))
-		return (-PI / 3);
+		return (ang - PI / 3);
 	else if (find_color(data, find_coords(first, ang + 4 / 6.0 * PI , size)))
-		return (4 / 6.0 * PI);
+		return (ang + 4 / 6.0 * PI);
 	else
 		return (-1);
 }
@@ -90,7 +91,8 @@ t_im	find_line(t_mlx_data *data, t_im first, double ang, double size)
 	double	next_point_ang;
 
 	next_point_ang = find_angle(data, first, ang, size);
-	return (find_coords(first, next_point_ang, size));
+	printf("new point angle: %f\n", ang);
+	return (find_coords(first, ang, size));
 }
 
 void	draw_koch_snowflake(t_mlx_data *data)
@@ -106,19 +108,20 @@ void	draw_koch_snowflake(t_mlx_data *data)
 	curr = init_number(0, 0);
 	size_side = 300 * pow((1.0 / 3.0), data->iterations);
 	ang = 0;
+	printf("===============================================\n");
 	if (!data->iterations)
 		draw_triangle(data, a, size_side);
 	else
 	{
 		while (!compare_coords(a, curr))
 		{
-			curr = find_line(data, temp, ang, size_side / (1 / 3.0));
+			printf("start angle: %f\n", ang);
 			ang = find_angle(data, temp, ang, size_side);
+			curr = find_line(data, temp, ang, size_side / (1 / 3.0));
+			printf("curr coords: %f %f %f %f\n", curr.real, curr. im, ang, size_side);
 			erase_line(data, temp, curr);
-			curr = draw_basic_shape(data, temp, ang, size_side);
+			draw_basic_shape(data, temp, ang, size_side);
 			temp = curr;
-			printf("%f, %f, %f\n", curr.real, curr.im, ang);
-			sleep(1);
 		}
 		
 	}

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 00:53:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/24 00:42:44 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/24 13:10:59 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	find_color(t_mlx_data *data, t_im first)
 
 int	compare_coords(t_im a, t_im b)
 {
-	return (abs(a.real == b.real) * abs(a.im == b.im));
+	return (abs(((int)a.real == (int)(b.real + 0.00001)) * abs((int)a.im == (int)(b.im + 0.00001))));
 }
