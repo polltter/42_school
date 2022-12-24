@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 00:53:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/22 20:27:40 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/24 00:42:44 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ t_im	find_coords(t_im a, double ang, double side)
 int	find_color(t_mlx_data *data, t_im first)
 {
 	int	offset;
-	
-	offset = (int)first.im * data->img.line_length + (int)first.real * (data->img.bits_per_pixel / 8);
-	return (*((int *)(data->img.addr + offset)));
+
+	if ((int)first.im * (int)first.real > 0)
+	{
+		offset = (int)first.im * data->img.line_length + (int)first.real * (data->img.bits_per_pixel / 8);
+		return (*((int *)(data->img.addr + offset)));
+	}
+	return (0);
 }
 
 int	compare_coords(t_im a, t_im b)
 {
-	printf("%f, %f\n", a.real, a.im);
-	printf("%f, %f\n", b.real, b.im);
-	printf("%d\n", abs(a.real == b.real));
-	return (abs(a.real == b.real) + abs(a.im == b.im));
+	return (abs(a.real == b.real) * abs(a.im == b.im));
 }
