@@ -6,18 +6,19 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/29 02:28:29 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/29 13:59:52 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/fractol.h"
 
-void	draw_line(t_mlx_data *data, t_im f, t_im s)
+void	draw_line(t_mlx_data *data, t_im f, t_im s, double size)
 {
 	double	slope;
 	double	x;
 	int		dir;
 	int		a;
+	int		color;
 
 	slope = (s.im - f.im) / (s.real - f.real);
 	dir = (s.real - f.real) / fabs(s.real - f.real);
@@ -26,7 +27,10 @@ void	draw_line(t_mlx_data *data, t_im f, t_im s)
 	{
 		a = slope * (x - f.real) + f.im + 0.00001;
 		if (x <= IMG_W && a <= IMG_H && x > 0 && a > 0)
-			my_mlx_pixel_put(&(data->img), x, a, 0x0000FF00);
+		{
+			color = create_trgb(0, x, 1000 / size, a);
+			my_mlx_pixel_put(&(data->img), x, a, color);
+		}
 		x += dir;
 	}
 }
@@ -55,7 +59,7 @@ void	draw_koch_curve(t_mlx_data *data, t_im a, t_im b, int iter)
 
 	if (iter == 0)
 	{
-		draw_line(data, a, b);
+		draw_line(data, a, b, find_size(a, b));
 		return;
 	}
 	alfa = find_angle(a, b);
