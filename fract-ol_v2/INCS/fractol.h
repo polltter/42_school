@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/24 00:42:21 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:11:24 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,14 @@ int		color_manager(t_im temp, t_im pixel, int iterations, int color_scheme);
 int		get_color_iter(int iter, int color_scheme);
 void	draw_koch_snowflake(t_mlx_data *data);
 
+//utils
+int		print_coords(t_im a);
+
+//koch
+double	find_angle(t_im a, t_im b);
+t_im	find_midpoint(t_im a, t_im b);
+t_im	find_line(t_mlx_data *data, t_im first, double ang, double size);
+t_im	find_vertice(t_im midpoint, double alfa, double triangle_heigth);
+double	find_size(t_im a, t_im b);
 
 #endif

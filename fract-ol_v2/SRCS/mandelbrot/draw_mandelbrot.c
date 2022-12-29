@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/18 00:00:18 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:45:41 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_mandelbrot_utils(t_data *img, t_im pixel, int x, int y)
 	{
 		if (temp.r > 2)
 		{
-			my_mlx_pixel_put(img, x, y, color_manager(temp, pixel, iterations, 0));
+			my_mlx_pixel_put(img, x, y, color_manager(temp, pixel, iterations, 1));
 			flag = 1;
 			break ;
 		}
