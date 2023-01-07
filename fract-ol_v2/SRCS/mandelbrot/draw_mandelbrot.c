@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/28 21:45:41 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:11:20 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_mandelbrot_utils(t_data *img, t_im pixel, int x, int y)
 	int		flag;
 
 	temp = mandelbrot(init_number(0, 0), pixel);
-	iterations = 50;
+	iterations = 32;
 	flag = 0;
 	while (iterations)
 	{

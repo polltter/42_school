@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/29 02:11:24 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/31 00:18:21 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct s_mlx_data {
 	void	*mlx_win;
 	t_data	img;
 	double	scale;
+	double	kscale;
 	t_im	offset;
+	t_im	koffset;
 	t_im	seed;
 	char	fractal_set;
 	int		iterations;
@@ -67,6 +69,7 @@ void	calc_real_im(t_im *n);
 t_im	find_coords(t_im a, double ang, double side);
 int		find_color(t_mlx_data *data, t_im first);
 int		compare_coords(t_im a, t_im b);
+t_im	multiply_imaginary_by_scalar(t_im	frist, double scalar);
 
 //fractal sets
 t_im	mandelbrot(t_im pixel, t_im c);
@@ -91,5 +94,10 @@ t_im	find_midpoint(t_im a, t_im b);
 t_im	find_line(t_mlx_data *data, t_im first, double ang, double size);
 t_im	find_vertice(t_im midpoint, double alfa, double triangle_heigth);
 double	find_size(t_im a, t_im b);
+
+//keys and mouse handles
+void	move(int keycode , t_mlx_data *data);
+void	kmove(int keycode , t_mlx_data *data);
+void	change_seed(int keycode , t_mlx_data *data);
 
 #endif

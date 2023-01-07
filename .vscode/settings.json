@@ -6,6 +6,10 @@
 		"libft.h": "c",
 		"string.h": "c",
 		"checker.h": "c",
-		"get_next_line.h": "c"
-	}
+		"get_next_line.h": "c",
+		"fractol.h": "c",
+		"random": "c",
+		"complex": "c"
+	},
+	"cmake.configureOnOpen": false
 }

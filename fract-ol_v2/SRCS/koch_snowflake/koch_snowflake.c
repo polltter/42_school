@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/29 13:59:52 by mvenanci         ###   ########.fr       */
+/*   Updated: 2022/12/31 01:55:54 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_line(t_mlx_data *data, t_im f, t_im s, double size)
 		if (x <= IMG_W && a <= IMG_H && x > 0 && a > 0)
 		{
 			color = create_trgb(0, x, 1000 / size, a);
-			my_mlx_pixel_put(&(data->img), x, a, color);
+			my_mlx_pixel_put(&(data->img), x, a, 0x0000FF00);
 		}
 		x += dir;
 	}
@@ -47,6 +47,19 @@ void clean_screen(t_mlx_data *data)
 		while (++x <= IMG_W)
 			my_mlx_pixel_put(&(data->img), x, y, 0);
 	}
+}
+
+t_im	init_point(t_mlx_data *data, double x, double y)
+{
+	t_im	new;
+	int		c_off_x;
+	int		c_off_y;
+
+	c_off_x = (x - IMG_W_2) * data->kscale / 1 ;
+	c_off_y = (y - IMG_H_2) * data->kscale / 1;
+	new = init_number(x + c_off_x, y + c_off_y);
+	new = sum_imaginary(new, multiply_imaginary_by_scalar(data->koffset, data->kscale));
+	return (new);
 }
 
 void	draw_koch_curve(t_mlx_data *data, t_im a, t_im b, int iter)
@@ -78,12 +91,10 @@ void	draw_koch_snowflake(t_mlx_data *data)
 	t_im	a;
 	t_im	b;
 	t_im	c;
-	double	size_side;
-	double	ang;
 
-	a = sum_imaginary(init_number(300, 500), init_number(0,0));
-	b = sum_imaginary(init_number(800, 500), init_number(0,0));
-	c = sum_imaginary(init_number(550, 66.98729811), init_number(0,0));
+	a = init_point(data, 350, 486.6025404);
+	b = init_point(data, 650, 486.6025404);
+	c = init_point(data, 500, 226.7949192);
 	clean_screen(data);
 	draw_koch_curve(data, a, b, data->iterations);
 	draw_koch_curve(data, b, c, data->iterations);
