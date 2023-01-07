@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   iterations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 22:10:40 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/07 16:36:13 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2023/01/07 16:54:26 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2023/01/07 17:18:26 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/fractol.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	zoom(int button, int x, int y, t_mlx_data *data)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	if (button == 4)
+		zoom_in(x, y, data);
+	else if (button == 5)
+		zoom_out(x, y, data);
+	fractal_manager(*data);
 }
 
-int	create_trgb(int t, int r, int g, int b)
+void	color_change(t_mlx_data *data)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	if (data->color == 2)
+		data->color = 0;
+	else
+		data->color++;
 }

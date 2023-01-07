@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/31 00:18:21 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:18:41 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 # define PI 3.14159265358979323846
 # define IMG_W 1000	
 # define IMG_H 800
-# define IMG_W_2 IMG_W / 2 
+# define IMG_W_2 IMG_W / 2
 # define IMG_H_2 IMG_H / 2
-
 
 typedef struct s_data {
 	void	*img;
@@ -56,6 +55,7 @@ typedef struct s_mlx_data {
 	t_im	seed;
 	char	fractal_set;
 	int		iterations;
+	int		color;
 }	t_mlx_data;
 
 //math functions
@@ -81,7 +81,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_mandelbrot(t_mlx_data data, t_im seed);
 void	draw_julia(t_mlx_data data, t_im seed);
 int		get_color(t_im temp, t_im pixel);
-int		color_manager(t_im temp, t_im pixel, int iterations, int color_scheme);
+int		color_mng(t_im temp, t_im pixel, int iterations, int color_scheme);
 int		get_color_iter(int iter, int color_scheme);
 void	draw_koch_snowflake(t_mlx_data *data);
 
@@ -96,8 +96,12 @@ t_im	find_vertice(t_im midpoint, double alfa, double triangle_heigth);
 double	find_size(t_im a, t_im b);
 
 //keys and mouse handles
-void	move(int keycode , t_mlx_data *data);
-void	kmove(int keycode , t_mlx_data *data);
-void	change_seed(int keycode , t_mlx_data *data);
+void	move(int keycode, t_mlx_data *data);
+void	kmove(int keycode, t_mlx_data *data);
+void	change_seed(int keycode, t_mlx_data *data);
+void	zoom_in(int x, int y, t_mlx_data *data);
+void	zoom_out(int x, int y, t_mlx_data *data);
+void	zoom(int button, int x, int y, t_mlx_data *data);
+void	color_change(t_mlx_data *data);
 
 #endif

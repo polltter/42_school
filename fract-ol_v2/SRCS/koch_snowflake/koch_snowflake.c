@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   koch_snowflake.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/31 01:55:54 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:41:42 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	draw_line(t_mlx_data *data, t_im f, t_im s, double size)
 		a = slope * (x - f.real) + f.im + 0.00001;
 		if (x <= IMG_W && a <= IMG_H && x > 0 && a > 0)
 		{
-			color = create_trgb(0, x, 1000 / size, a);
+			color = create_trgb(0, a, 1000 / size, a);
 			my_mlx_pixel_put(&(data->img), x, a, 0x0000FF00);
 		}
 		x += dir;
 	}
 }
 
-void clean_screen(t_mlx_data *data)
+void	clean_screen(t_mlx_data *data)
 {
 	int	x;
 	int	y;
@@ -58,7 +58,7 @@ t_im	init_point(t_mlx_data *data, double x, double y)
 	c_off_x = (x - IMG_W_2) * data->kscale / 1 ;
 	c_off_y = (y - IMG_H_2) * data->kscale / 1;
 	new = init_number(x + c_off_x, y + c_off_y);
-	new = sum_imaginary(new, multiply_imaginary_by_scalar(data->koffset, data->kscale));
+	new = sum_imaginary(new, data->offset);
 	return (new);
 }
 
@@ -73,7 +73,7 @@ void	draw_koch_curve(t_mlx_data *data, t_im a, t_im b, int iter)
 	if (iter == 0)
 	{
 		draw_line(data, a, b, find_size(a, b));
-		return;
+		return ;
 	}
 	alfa = find_angle(a, b);
 	height = sqrt(3) / 2 * find_size(a, b) / 3;

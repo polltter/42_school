@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   koch_snowflake_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 00:30:37 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/29 02:09:53 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:43:01 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	find_angle(t_im a, t_im b)
 	if (diff_x >= 0)
 		return (atan2(diff_y, diff_x));
 	else
-		return (atan2(diff_y, diff_x));	
+		return (atan2(diff_y, diff_x));
 }
 
 t_im	find_midpoint(t_im a, t_im b)

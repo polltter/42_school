@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 12:01:46 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/17 16:13:11 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/07 16:37:51 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../INCS/fractol.h"
 
-int	color_manager(t_im temp, t_im pixel, int iterations, int color_scheme)
+int	color_mng(t_im temp, t_im pixel, int iterations, int color_scheme)
 {
 	if (color_scheme == 0)
 		return (get_color(temp, pixel));
@@ -35,7 +35,7 @@ int	get_color(t_im temp, t_im pixel)
 
 int	get_color_iter(int iter, int color_scheme)
 {
-	int color;
+	int	color;
 
 	color = (55 - iter) * 255 / 50;
 	return (create_trgb(0, color, color, color));

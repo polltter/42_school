@@ -3,38 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   draw_mandelbrot.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/12/30 23:11:20 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:24:40 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../INCS/fractol.h"
 
-void	draw_mandelbrot_utils(t_data *img, t_im pixel, int x, int y)
+void	draw_mandelbrot_utils(t_mlx_data *data, t_im pixel, int x, int y)
 {
 	t_im	temp;
-	int		iterations;
+	int		iter;
 	int		flag;
 
 	temp = mandelbrot(init_number(0, 0), pixel);
-	iterations = 32;
+	iter = 32;
 	flag = 0;
-	while (iterations)
+	while (iter)
 	{
 		if (temp.r > 2)
 		{
-			my_mlx_pixel_put(img, x, y, color_manager(temp, pixel, iterations, 1));
+			my_mlx_pixel_put(&(data->img), x, y, \
+			color_mng(temp, pixel, iter, data->color));
 			flag = 1;
 			break ;
 		}
 		temp = mandelbrot(temp, pixel);
-		iterations--;
+		iter--;
 	}
 	if (!flag)
-		my_mlx_pixel_put(img, x, y, 0x00000000);
+		my_mlx_pixel_put(&(data->img), x, y, 0x00000000);
 }
 
 void	draw_mandelbrot(t_mlx_data data, t_im seed)
@@ -48,7 +49,7 @@ void	draw_mandelbrot(t_mlx_data data, t_im seed)
 		y = -1;
 		while (++y <= IMG_H)
 		{
-			draw_mandelbrot_utils(&(data.img), \
+			draw_mandelbrot_utils(&data, \
 			subtract_imaginary(init_number(x, y), \
 			sum_imaginary(seed, data.offset), data.scale), \
 			x, y);
