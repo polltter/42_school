@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_inputs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 12:33:47 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 13:44:44 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:19:38 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,21 @@ int	is_double(char *s)
 
 void	error_handle(void)
 {
-	write(1, "\nIncorrect inputs!\n", 19);
-	write(1, "==========================================\n", 43);
-	write(1, "The first parameter shoud be one of the following:\n", 51);
-	write(1, "M for the Mandlebrot set\n", 25);
-	write(1, "J for the Julia set\n", 20);
-	write(1, "K for the Koch triangle\n", 24);
-	write(1, "==========================================\n", 43);
-	write(1, "The second parameter shoud be the number of iterations, \
-a positive int:\n", 77);
-	write(1, "==========================================\n", 43);
-	write(1, "The third and fourth parameters shoud be the initial seed \
-for the julia set. Both are doubles\n\n", 95);
+	int	a;
+
+	a = write(1, "\nIncorrect inputs!\n", 19);
+	a = write(1, "==========================================\n", 43);
+	a = write(1, "The first parameter shoud be one of the following:\n", 51);
+	a = write(1, "M for the Mandlebrot set\n", 25);
+	a = write(1, "J for the Julia set\n", 20);
+	a = write(1, "K for the Koch triangle\n", 24);
+	a = write(1, "==========================================\n", 43);
+	a = write(1, "The second parameter shoud be the number of iterations, \
+a positive int.\n", 77);
+	a = write(1, "==========================================\n", 43);
+	a = write(1, "The third and fourth parameters shoud be the initial seed \
+for the julia set. Both are doubles.\n\n", 95);
+	(void)a;
 	exit (0);
 }
 
@@ -74,10 +77,9 @@ int	verify_input(int ac, char **av)
 		if (i == 1 && av[1][0] != 'M' && av[1][0] != 'J' && av[1][0] != 'K')
 			return (0);
 		else if (i == 2 && !is_digit(av[i]))
-		{
-			write(1, "aqui2\n", 5);
 			return (0);
-		}
+		else if (i == 2 && is_digit(av[i]) && ft_atoi(av[i]) <= 0)
+			return (0);
 		else if (i > 2 && !is_double(av[i]))
 			return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 14:02:06 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:59:06 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@ void	fractal_manager(t_mlx_data data)
 void	data_init(char **av, t_mlx_data *data, int ac)
 {
 	static int	j;
+	static t_im	oseed;
 
 	if (av)
 	{
 		j = ac;
+		if (j == 5)
+			oseed = init_number(ft_atod(av[3]), ft_atod(av[4]));
 		data->mlx = mlx_init();
 		data->mlx_win = mlx_new_window(data->mlx, IMG_W, IMG_H, "Farct-ol!");
 		data->img.img = mlx_new_image(data->mlx, IMG_W, IMG_H);
@@ -42,7 +45,7 @@ void	data_init(char **av, t_mlx_data *data, int ac)
 	data->kscale = 1;
 	data->offset = init_number(0, 0);
 	if (j == 5)
-		data->seed = init_number(ft_atod(av[3]), ft_atod(av[4]));
+		data->seed = oseed;
 	data->iterations = 0;
 }
 
@@ -55,10 +58,8 @@ int	ft_close(t_mlx_data *data)
 	exit(0);
 }
 
-void	handle_keys(int k, t_mlx_data *data)
+int	handle_keys(int k, t_mlx_data *data)
 {
-	t_im	offset;
-
 	if (k >= 65361 && k <= 65364)
 		move(k, data);
 	else if (k == 65307)
@@ -74,6 +75,7 @@ void	handle_keys(int k, t_mlx_data *data)
 	else if (k == 'm')
 		color_change(data);
 	fractal_manager(*data);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -91,4 +93,7 @@ int	main(int ac, char **av)
 		mlx_hook(data.mlx_win, 4, 1l << 2, zoom, &data);
 		mlx_loop(data.mlx);
 	}
+	else
+		error_handle();
+	return (0);
 }

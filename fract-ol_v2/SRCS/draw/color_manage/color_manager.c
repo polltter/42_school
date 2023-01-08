@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 12:01:46 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/08 11:59:15 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 18:12:14 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_color(t_im temp, t_im pixel)
 	abs(t * u) / temp.r / mult, u * u / temp.r / mult));
 }
 
-int	get_color_iter(int iter, int color_scheme)
+int	get_color_iter(int iter)
 {
 	int	color;
 
@@ -41,10 +41,8 @@ int	get_color_iter(int iter, int color_scheme)
 	}
 }
 
-int	black_and_white_color(t_im temp, int iter)
+int	black_and_white_color(int iter)
 {
-	double	smooth;
-
 	if (iter % 2)
 		return (0);
 	else
@@ -56,7 +54,8 @@ int	color_mng(t_im temp, t_im pixel, int iterations, int color_scheme)
 	if (color_scheme == 0)
 		return (get_color(temp, pixel));
 	else if (color_scheme == 1)
-		return (get_color_iter(iterations, color_scheme));
+		return (get_color_iter(iterations));
 	else if (color_scheme == 2)
-		return (black_and_white_color(temp, iterations));
+		return (black_and_white_color(iterations));
+	return (0);
 }

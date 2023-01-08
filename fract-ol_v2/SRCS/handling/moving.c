@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:21:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/07 14:44:29 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 18:10:24 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	zoom_in(int x, int y, t_mlx_data *data)
 
 void	zoom_out(int x, int y, t_mlx_data *data)
 {
+	(void)x;
+	(void)y;
 	data->scale /= 1.5;
 	data->kscale /= 1.5;
 	data->offset = multiply_imaginary_by_scalar(data->offset, 1 / 1.5);

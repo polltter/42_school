@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 16:29:11 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:11:22 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_im {
 	double	r;
 	double	theta;
 }	t_im;
-
 
 typedef struct s_mlx_data {
 	void	*mlx;
@@ -83,7 +82,7 @@ void	draw_mandelbrot(t_mlx_data data, t_im seed);
 void	draw_julia(t_mlx_data data, t_im seed);
 int		get_color(t_im temp, t_im pixel);
 int		color_mng(t_im temp, t_im pixel, int iterations, int color_scheme);
-int		get_color_iter(int iter, int color_scheme);
+int		get_color_iter(int iter);
 void	draw_koch_snowflake(t_mlx_data *data);
 
 //utils
@@ -96,10 +95,10 @@ double	ft_atod(char *s);
 //koch
 double	find_angle(t_im a, t_im b);
 t_im	find_midpoint(t_im a, t_im b);
-t_im	find_line(t_mlx_data *data, t_im first, double ang, double size);
+t_im	find_line(t_im first, double ang, double size);
 t_im	find_vertice(t_im midpoint, double alfa, double triangle_heigth);
 double	find_size(t_im a, t_im b);
-int		color_mng_kt(double size, t_mlx_data *data, int x, int y);
+int		color_mng_kt(t_mlx_data *data, int x, int y);
 
 //keys and mouse handles
 void	move(int keycode, t_mlx_data *data);
@@ -107,7 +106,10 @@ void	kmove(int keycode, t_mlx_data *data);
 void	change_seed(int keycode, t_mlx_data *data);
 void	zoom_in(int x, int y, t_mlx_data *data);
 void	zoom_out(int x, int y, t_mlx_data *data);
-void	zoom(int button, int x, int y, t_mlx_data *data);
+int		zoom(int button, int x, int y, t_mlx_data *data);
 void	color_change(t_mlx_data *data);
+void	fractal_manager(t_mlx_data data);
+int		ft_close(t_mlx_data *data);
+
 
 #endif

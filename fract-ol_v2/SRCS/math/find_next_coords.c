@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_next_coords.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 00:53:26 by mvenanci          #+#    #+#             */
-/*   Updated: 2022/12/28 16:59:57 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:41:01 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,11 @@ int	find_color(t_mlx_data *data, t_im first)
 		{
 			if (y * x > 0)
 			{
-				offset = y * data->img.line_length + x * (data->img.bits_per_pixel / 8);
+				offset = y * data->img.line_length + \
+				x * (data->img.bits_per_pixel / 8);
 				sum += *((int *)(data->img.addr + offset));
 			}
 		}
 	}
 	return (sum);
-}
-
-int	compare_coords(t_im a, t_im b)
-{
-	return (abs(((int)a.real == (int)(b.real + 0.00001)) * abs((int)a.im == (int)(b.im + 0.00001))));
 }

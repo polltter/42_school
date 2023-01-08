@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 00:30:37 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/07 14:43:01 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 18:01:21 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_im	find_midpoint(t_im a, t_im b)
 	return (init_number((a.real + b.real) / 2, (a.im + b.im) / 2));
 }
 
-t_im	find_line(t_mlx_data *data, t_im first, double ang, double size)
+t_im	find_line(t_im first, double ang, double size)
 {
 	return (find_coords(first, ang, size));
 }
