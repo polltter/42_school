@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 12:42:01 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 13:55:40 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		print_coords(t_im a);
 int		ft_atoi(char *nptr);
 int		verify_input(int ac, char **av);
 void	error_handle(void);
+double	ft_atod(char *s);
 
 //koch
 double	find_angle(t_im a, t_im b);

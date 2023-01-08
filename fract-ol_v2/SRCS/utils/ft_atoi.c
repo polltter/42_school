@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 08:52:40 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/08 12:56:39 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 14:02:17 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ int	ft_atoi(char *nptr)
 	return (sign * nb);
 }
 
-double	atod(char *s)
+double	ft_atod(char *s)
 {
+	int		i;
+	double	d;
+	int		sign;
+	
+	sign = 1;
+	d = 0;
+	i = ft_atoi(s);
+	if (*s == '-')
+		sign = -1;
+	while (*s)
+		s++;
+	while (*(--s) >= '0' && *s <= '9')
+	{
+		d += *s - '0';
+		d /= 10.0;
+	}
+	return (sign * d + i);
 }

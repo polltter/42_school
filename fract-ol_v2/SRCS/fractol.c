@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 13:02:40 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 14:02:06 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	data_init(char **av, t_mlx_data *data, int ac)
 	data->kscale = 1;
 	data->offset = init_number(0, 0);
 	if (j == 5)
-		data->seed = init_number(ft_atoi(av[3]), ft_atoi(av[4]));
+		data->seed = init_number(ft_atod(av[3]), ft_atod(av[4]));
 	data->iterations = 0;
 }
 

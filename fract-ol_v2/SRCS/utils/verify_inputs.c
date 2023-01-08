@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_inputs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 12:33:47 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 13:03:22 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 13:44:44 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_digit(char *s)
 {
-	while (s)
+	while (*s)
 	{
 		if (!(*s <= '9' && *s >= '0'))
 			return (0);
@@ -25,7 +25,9 @@ int	is_digit(char *s)
 
 int	is_double(char *s)
 {
-	while (s)
+	if (*s == '-')
+		s++;
+	while (*s)
 	{
 		if (*s == '.')
 		{
@@ -36,7 +38,7 @@ int	is_double(char *s)
 			return (0);
 		s++;
 	}
-	while (s)
+	while (*s)
 	{
 		if (!(*s <= '9' && *s >= '0'))
 			return (0);
@@ -47,7 +49,7 @@ int	is_double(char *s)
 
 void	error_handle(void)
 {
-	write(1, "\nIncorrect inputs!\n", 18);
+	write(1, "\nIncorrect inputs!\n", 19);
 	write(1, "==========================================\n", 43);
 	write(1, "The first parameter shoud be one of the following:\n", 51);
 	write(1, "M for the Mandlebrot set\n", 25);
@@ -72,8 +74,11 @@ int	verify_input(int ac, char **av)
 		if (i == 1 && av[1][0] != 'M' && av[1][0] != 'J' && av[1][0] != 'K')
 			return (0);
 		else if (i == 2 && !is_digit(av[i]))
+		{
+			write(1, "aqui2\n", 5);
 			return (0);
-		else if (!is_double(av[i]))
+		}
+		else if (i > 2 && !is_double(av[i]))
 			return (0);
 	}
 	return (1);
