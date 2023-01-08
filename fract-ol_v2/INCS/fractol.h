@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 12:00:49 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 12:42:01 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 
 # define PI 3.14159265358979323846
-# define IMG_W 1920	
-# define IMG_H 1080
+# define IMG_W 1000	
+# define IMG_H 800
 # define IMG_W_2 IMG_W / 2
 # define IMG_H_2 IMG_H / 2
 
@@ -55,6 +55,7 @@ typedef struct s_mlx_data {
 	t_im	seed;
 	char	fractal_set;
 	int		iterations;
+	int		max_iter;
 	int		color;
 }	t_mlx_data;
 
@@ -87,6 +88,9 @@ void	draw_koch_snowflake(t_mlx_data *data);
 
 //utils
 int		print_coords(t_im a);
+int		ft_atoi(char *nptr);
+int		verify_input(int ac, char **av);
+void	error_handle(void);
 
 //koch
 double	find_angle(t_im a, t_im b);

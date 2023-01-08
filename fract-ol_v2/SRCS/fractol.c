@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:17:02 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/07 17:25:23 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 13:02:40 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,27 @@ void	fractal_manager(t_mlx_data data)
 		draw_koch_snowflake(&data);
 }
 
-void	data_init(char **av, t_mlx_data *data)
+void	data_init(char **av, t_mlx_data *data, int ac)
 {
+	static int	j;
+
 	if (av)
 	{
+		j = ac;
 		data->mlx = mlx_init();
 		data->mlx_win = mlx_new_window(data->mlx, IMG_W, IMG_H, "Farct-ol!");
 		data->img.img = mlx_new_image(data->mlx, IMG_W, IMG_H);
 		data->img.addr = mlx_get_data_addr(data->img.img, \
 		&data->img.bits_per_pixel, &data->img.line_length, &data->img.endian);
 		data->fractal_set = av[1][0];
+		data->max_iter = ft_atoi(av[2]);
 		data->color = 0;
 	}
 	data->scale = IMG_W / 4;
 	data->kscale = 1;
 	data->offset = init_number(0, 0);
-	data->seed = init_number(0, 0);
+	if (j == 5)
+		data->seed = init_number(ft_atoi(av[3]), ft_atoi(av[4]));
 	data->iterations = 0;
 }
 
@@ -61,7 +66,7 @@ void	handle_keys(int k, t_mlx_data *data)
 	else if (k == 'a' || k == 'd' || k == 'w' || k == 's')
 		change_seed(k, data);
 	else if (k == 'r')
-		data_init(NULL, data);
+		data_init(NULL, data, 0);
 	else if (k == 'p')
 		data->iterations += 1;
 	else if (k == 'l')
@@ -75,11 +80,15 @@ int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
-	(void) ac;
-	data_init(av, &data);
-	fractal_manager(data);
-	mlx_hook(data.mlx_win, 17, 0, ft_close, &data);
-	mlx_hook(data.mlx_win, 2, 1l << 0, handle_keys, &data);
-	mlx_hook(data.mlx_win, 4, 1l << 2, zoom, &data);
-	mlx_loop(data.mlx);
+	if (ac == 3 || ac == 5)
+	{
+		if (!verify_input(ac, av))
+			error_handle();
+		data_init(av, &data, ac);
+		fractal_manager(data);
+		mlx_hook(data.mlx_win, 17, 0, ft_close, &data);
+		mlx_hook(data.mlx_win, 2, 1l << 0, handle_keys, &data);
+		mlx_hook(data.mlx_win, 4, 1l << 2, zoom, &data);
+		mlx_loop(data.mlx);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 15:04:11 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/07 18:25:56 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 12:12:04 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_julia_utils(t_mlx_data data, t_im seed, int x, int y)
 	tmp = subtract_imaginary(init_number(x, y), \
 	sum_imaginary(init_number(IMG_W_2, IMG_H_2), data.offset), data.scale);
 	tmp = julia(tmp, seed);
-	iter = 32;
+	iter = data.max_iter;
 	flag = 0;
 	while (iter)
 	{
