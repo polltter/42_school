@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/07 17:18:41 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 12:00:49 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 
 # define PI 3.14159265358979323846
-# define IMG_W 1000	
-# define IMG_H 800
+# define IMG_W 1920	
+# define IMG_H 1080
 # define IMG_W_2 IMG_W / 2
 # define IMG_H_2 IMG_H / 2
 
