@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 18:57:15 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 13:55:40 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:29:11 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_im	find_midpoint(t_im a, t_im b);
 t_im	find_line(t_mlx_data *data, t_im first, double ang, double size);
 t_im	find_vertice(t_im midpoint, double alfa, double triangle_heigth);
 double	find_size(t_im a, t_im b);
+int		color_mng_kt(double size, t_mlx_data *data, int x, int y);
 
 //keys and mouse handles
 void	move(int keycode, t_mlx_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   koch_snowflake.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 22:58:34 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/07 14:41:42 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/08 16:29:42 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ void	draw_line(t_mlx_data *data, t_im f, t_im s, double size)
 	{
 		a = slope * (x - f.real) + f.im + 0.00001;
 		if (x <= IMG_W && a <= IMG_H && x > 0 && a > 0)
-		{
-			color = create_trgb(0, a, 1000 / size, a);
-			my_mlx_pixel_put(&(data->img), x, a, 0x0000FF00);
-		}
+			my_mlx_pixel_put(&(data->img), x, a, color_mng_kt(size, data, x, a));
 		x += dir;
 	}
 }
