@@ -6,32 +6,36 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:46:43 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/08 12:11:40 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/10 15:02:15 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/fractol.h"
 
-void	draw_mandelbrot_utils(t_mlx_data *data, t_im pixel, int x, int y)
+void	draw_mandelbrot_utils(t_mlx_data *data, t_im pixel, int x, int y, t_im seed)
 {
-	t_im	temp;
 	int		iter;
 	int		flag;
+	float	re;
+	float	im;
 
-	temp = mandelbrot(init_number(0, 0), pixel);
 	iter = data->max_iter;
 	flag = 0;
-	while (iter)
+	re = 0;
+	im = 0;
+	while (iter--)
 	{
-		if (temp.r > 2)
+		if (sqrt(pow(re, 2) + pow(im, 2)) > 2)
 		{
 			my_mlx_pixel_put(&(data->img), x, y, \
-			color_mng(temp, pixel, iter, data->color));
+			color_mng(init_number(seed.real, seed.im), pixel, iter, data->color));
 			flag = 1;
 			break ;
 		}
-		temp = mandelbrot(temp, pixel);
-		iter--;
+		re = pow(seed.real, 2) - pow(seed.im, 2) + pixel.real;
+		im = 2 * seed.real*seed.im + pixel.im;
+		seed.real = re;
+		seed.im = im;
 	}
 	if (!flag)
 		my_mlx_pixel_put(&(data->img), x, y, 0x00000000);
@@ -51,7 +55,7 @@ void	draw_mandelbrot(t_mlx_data data, t_im seed)
 			draw_mandelbrot_utils(&data, \
 			subtract_imaginary(init_number(x, y), \
 			sum_imaginary(seed, data.offset), data.scale), \
-			x, y);
+			x, y, init_number(0, 0));
 		}	
 	}
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.img.img, 0, 0);

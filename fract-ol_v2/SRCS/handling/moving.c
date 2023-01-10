@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 23:21:30 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/08 18:10:24 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/10 15:04:21 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	change_seed(int keycode, t_mlx_data *data)
 
 void	zoom_in(int x, int y, t_mlx_data *data)
 {
-	data->scale *= 1.5;
+	data->scale *= 1.1;
 	data->kscale *= 1.5;
-	data->offset = multiply_imaginary_by_scalar(data->offset, 1.5);
+	data->offset = multiply_imaginary_by_scalar(data->offset, 1.1);
 	data->offset = sum_imaginary(data->offset, \
 	subtract_imaginary(init_number(IMG_W_2, IMG_H_2), init_number(x, y), \
-	1));
+	10));
 }
 
 void	zoom_out(int x, int y, t_mlx_data *data)
