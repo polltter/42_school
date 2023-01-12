@@ -9,7 +9,8 @@
 		"get_next_line.h": "c",
 		"fractol.h": "c",
 		"random": "c",
-		"complex": "c"
+		"complex": "c",
+		"pipex.h": "c"
 	},
 	"cmake.configureOnOpen": false
 }

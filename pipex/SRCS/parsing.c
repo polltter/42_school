@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsum.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 13:59:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/09 15:21:24 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2023/01/11 20:47:04 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../INCS/pipex.h"
 
-long int	lsum(t_list *lst)
+int	check_if_path(char *s)
 {
-	long int		sum;
+	int	i;
 
-	sum = 0;
-	if (lst)
-	{
-		sum = 0;
-		while (lst)
-		{
-			sum += lst->content;
-			lst = lst->next;
-		}
-	}
-	return (sum);
+	i = 0;
+	if (s[++i] == 'A')
+		if (s[++i] == 'T')
+			if (s[++i] == 'H')
+				return (1);
+	return (0);
 }
+
+char	*find_path_var(char **env)
+{
+	while (*env)
+	{
+		if ((*env)[0] == 'P')
+			if (check_if_path(*env))
+				return (*env + 5);
+		env++;
+	}
+	return (NULL);
+}
+

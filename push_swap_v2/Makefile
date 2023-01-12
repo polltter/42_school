@@ -16,7 +16,7 @@ CHECKER_NAME	= checker
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS	= -g -O3 -fsanitize=address
 
 all: ${NAME}
 

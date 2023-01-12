@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 13:31:17 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2022/11/28 19:37:10 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/09 15:24:04 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	send_to_b(t_list **a, t_list **b, long int abs_mean_a)
 		if ((*a)->content < dyn_mean_a)
 		{
 			push(a, b, 'b');
-			if ((*b)->content < abs_mean_a)
+			if ((*b)->content < lmean(*b))
 				rotate(b, NULL, 'b');
 		}
 		else

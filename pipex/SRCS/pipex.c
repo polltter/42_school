@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsum.c                                        :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 13:59:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/09 15:21:24 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
+/*   Updated: 2023/01/12 20:15:57 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../INCS/pipex.h"
 
-long int	lsum(t_list *lst)
+int	main(int ac, char **av, char **env)
 {
-	long int		sum;
+	char	**paths;
 
-	sum = 0;
-	if (lst)
+	if (ac > 3)
 	{
-		sum = 0;
-		while (lst)
-		{
-			sum += lst->content;
-			lst = lst->next;
-		}
+		paths = split(find_path_var(env), ':');
 	}
-	return (sum);
+
 }

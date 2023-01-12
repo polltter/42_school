@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsum.c                                        :+:      :+:    :+:   */
+/*   ft_print_chars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 13:59:52 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/01/09 15:21:24 by mvenanci@st      ###   ########.fr       */
+/*   Created: 2022/10/16 10:35:24 by mvenanci          #+#    #+#             */
+/*   Updated: 2022/11/14 12:59:25 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-long int	lsum(t_list *lst)
+size_t	print_char(char c)
 {
-	long int		sum;
+	return (write(1, &c, 1));
+}
 
-	sum = 0;
-	if (lst)
-	{
-		sum = 0;
-		while (lst)
-		{
-			sum += lst->content;
-			lst = lst->next;
-		}
-	}
-	return (sum);
+size_t	print_strs(char *s)
+{
+	int	i;
+
+	i = -1;
+	if (!s)
+		return (write(1, "(null)", 6));
+	while (s[++i])
+		print_char(s[i]);
+	return (i);
 }
