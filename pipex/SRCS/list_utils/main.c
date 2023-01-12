@@ -16,6 +16,10 @@ int main()
 {
 	void *e = creat_array();
 	array(e)->add("o ezequiel gosta de cona\n")->del = NULL;
+	t_elems *elem =  array(e)->add("oghgha\n");
+	elem->del = NULL; 
+	array(e)->add("ghvgh\n")->del = NULL;
+	array(e)->remove(elem);
 	a(e);
 	array(e)->destroy();
 }
