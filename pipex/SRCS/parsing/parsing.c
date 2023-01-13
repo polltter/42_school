@@ -6,11 +6,23 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/13 15:49:28 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/13 19:07:27 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/pipex.h"
+
+char	*str_dup(char *s)
+{
+	char	*new;
+	int		i;
+
+	i = -1;
+	new = ft_calloc(str_len(s) + 1);
+	while (s[++i])
+		new[i] = s[i];
+	return (new);
+}
 
 int	check_if_path(char *s)
 {
@@ -28,9 +40,8 @@ char	*find_path_var(char **env)
 {
 	while (*env)
 	{
-		if ((*env)[0] == 'P')
-			if (check_if_path(*env))
-				return (*env + 5);
+		if ((*env)[0] == 'P' && check_if_path(*env))
+			return (*env + 5);
 		env++;
 	}
 	return (NULL);
@@ -63,17 +74,7 @@ char	*str_join(char *s1, char *s2, char sep)
 	return (path);	
 }
 
-t_cmd	*create_cmd(char *path)
-{
-	t_cmd	*new;
-
-	new = ft_calloc(sizeof(t_cmd));
-	new->path = path;
-	new->args = split(path, ' ');
-	return (new);
-}
-
-void	find_cmds(char **paths, char **av, void *cmds)
+void	find_cmds(char **paths, char **av)
 {
 	char	*temp;
 	char	**og_path;
@@ -86,14 +87,15 @@ void	find_cmds(char **paths, char **av, void *cmds)
 			temp = str_join(*paths, *av, '/');
 			if (!access(temp, F_OK))
 			{
-				array(cmds)->add(create_cmd(temp));
+				array(*cmds())->add(create_cmd(temp));
 				break ;
 			}
 			free(temp);
 			paths++;
 		}
-		if (!paths)
-			array(cmds)->add(create_cmd(str_join(*og_path, *av, '/')));
+		if (!*paths)
+			array(*cmds())->add(create_cmd(str_dup(*av)));
+		array(*cmds())->end->del = del_cmd;
 		av++;
 		paths = og_path;
 	}

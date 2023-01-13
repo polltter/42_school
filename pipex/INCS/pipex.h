@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:14:07 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/13 15:25:44 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/13 19:04:05 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@ struct s_cmd{
 	int		fd[2];	
 };
 
+//
+int		str_len(char *s);
+char	**split(char *s, char c);
+char	*str_join(char *s1, char *s2, char sep);
+char	*str_dup(char *s);
+
+//commands
+t_cmd	*create_cmd(char *path);
+void	del_cmd(void *cmd);
+void	**cmds(void);
 
 //parsing
 char	*find_path_var(char **env);
-char	*str_join(char *s1, char *s2, char sep);
-char	**split(char *s, char c);
-void	find_cmds(char **paths, char **av, void *cmds);
-
+void	find_cmds(char **paths, char **av);
 #endif
