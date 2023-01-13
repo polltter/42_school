@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 10:11:46 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/11 10:44:02 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/13 09:19:00 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../INCS/pipex.h"
+#include "../../INCS/pipex.h"
 
 char	**rec_split(char **splited, int words, char c, const char *s)
 {
