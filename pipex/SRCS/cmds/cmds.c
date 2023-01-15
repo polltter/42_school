@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:28 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/13 16:41:29 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/15 19:38:09 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@ void	del_cmd(void *cmd)
 	int		i;
 
 	tmp = (t_cmd *)cmd;
-	free(tmp->path);
 	i = -1;
 	while (*(tmp->args + ++i))
 		free(*(tmp->args + i));
 	free(tmp->args);
 	free(tmp);
-	
 }
 
-t_cmd	*create_cmd(char *path)
+t_cmd	*create_cmd(char *arg, char **paths)
 {
 	t_cmd	*new;
 
 	new = ft_calloc(sizeof(t_cmd));
-	new->path = path;
-	new->args = split(path, ' ');
+	new->args = split(arg, ' ');
+	new->path = find_cmds(paths, *new->args);
+	pipe(new->fd);
 	return (new);
 }

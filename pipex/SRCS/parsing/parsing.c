@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/13 19:07:27 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/15 19:41:31 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,20 @@ char	*str_join(char *s1, char *s2, char sep)
 	path[i++] = sep;
 	while (s2 && s2[++j])
 		path[i + j] = s2[j];
-	return (path);	
+	return (path);
 }
 
-void	find_cmds(char **paths, char **av)
+char	*find_cmds(char **paths, char *av)
 {
 	char	*temp;
-	char	**og_path;
-	
-	og_path = paths;
-	while (*(av + 1))
+
+	while (*paths)
 	{
-		while (*paths)
-		{
-			temp = str_join(*paths, *av, '/');
-			if (!access(temp, F_OK))
-			{
-				array(*cmds())->add(create_cmd(temp));
-				break ;
-			}
-			free(temp);
-			paths++;
-		}
-		if (!*paths)
-			array(*cmds())->add(create_cmd(str_dup(*av)));
-		array(*cmds())->end->del = del_cmd;
-		av++;
-		paths = og_path;
+		temp = str_join(*paths, av, '/');
+		if (!access(temp, F_OK))
+			return (temp);
+		free(temp);
+		paths++;
 	}
+	return (str_dup(av));
 }
