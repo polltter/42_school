@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:14:07 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 20:24:37 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/15 20:58:30 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct s_cmd{
 	int		pid;
 };
 
-//
+//strs
 int		str_len(char *s);
 char	**split(char *s, char c);
 char	*str_join(char *s1, char *s2, char sep);

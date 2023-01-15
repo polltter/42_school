@@ -6,11 +6,18 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:28 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 20:23:38 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/15 20:55:58 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../INCS/pipex.h"
+
+void	**cmds(void)
+{
+	static void	*cmds;
+
+	return (&cmds);
+}
 
 void	del_cmd(void *cmd)
 {
