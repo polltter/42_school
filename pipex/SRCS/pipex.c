@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 21:27:35 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/16 10:50:14 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/pipex.h"
 
-void	dup_and_close(int fd_in, int fd_out)
+int	dup_and_close(int fd_in, int fd_out)
 {
-	dup2(fd_out, 1);
+	if(dup2(fd_out, 1) < 0)
+		return (-1);
 	close(fd_out);
-	dup2(fd_in, 0);
+	if (dup2(fd_in, 0)< 0)
+		return (-1);
 	if (fd_in)
 		close(fd_in);
+	return(1);
 }
 
 void	execute(t_elems *elem, int fd_in, char **env)
@@ -38,8 +41,8 @@ void	execute(t_elems *elem, int fd_in, char **env)
 		exit(0);
 	else if (!cmd->pid)
 	{	
-		dup_and_close(fd_in, fd_out);
-		execve(cmd->path, cmd->args, env);
+		if (dup_and_close(fd_in, fd_out) >= 0)
+			execve(cmd->path, cmd->args, env);
 		perror("");
 		exit(127);
 	}
@@ -53,19 +56,19 @@ int	main(int ac, char **av, char **env)
 	int		fd_in;
 	int		fd_out;
 	int		flag;
-	// int		fd[2];
+	int		fd[2];
 
 	if (ac > 4)
 	{
 		flag = 2;
 		fd_in = open(av[1], O_RDONLY);
-		if (fd_in == -1 && fd_in++ && flag++)
+		if (fd_in == -1 && flag++)
 		{	
 			perror(av[1]);
-		/* 	pipe(fd);
+			pipe(fd);
 			fd_in = fd[0];
-			write(fd[1], "", 1);
-			close(fd[1]); */
+			// write(fd[1], "", 1);
+			close(fd[1]); 
 		}
 		fd_out = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd_out == -1)
