@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:28 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 20:55:58 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/19 22:01:11 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	del_cmd(void *cmd)
 
 	tmp = (t_cmd *)cmd;
 	i = -1;
+	free(tmp->path);
 	while (*(tmp->args + ++i))
 		free(*(tmp->args + i));
 	free(tmp->args);

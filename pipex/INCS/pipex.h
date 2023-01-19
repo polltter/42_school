@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:14:07 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 20:58:30 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/19 19:47:44 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**split(char *s, char c);
 char	*str_join(char *s1, char *s2, char sep);
 char	*str_dup(char *s);
 void	free_split(char **split);
-
+int		ft_strncmp(char *s1, char *s2, int n);
 //commands
 t_cmd	*create_cmd(char *arg, char **paths);
 void	del_cmd(void *cmd);

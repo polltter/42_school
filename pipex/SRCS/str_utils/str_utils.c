@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 20:57:32 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/15 20:58:56 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/19 22:16:25 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	str_len(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }
@@ -59,4 +59,20 @@ void	free_split(char **split)
 	while (*(++i + split))
 		free((*(i + split)));
 	free(split);
+}
+
+int	ft_strncmp(char *s1, char *s2, int n)
+{
+	int				i;
+	unsigned char	c1;
+	unsigned char	c2;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] == s2[i] && i + 1 < n && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	c1 = s1[i];
+	c2 = s2[i];
+	return (c1 - c2);
 }

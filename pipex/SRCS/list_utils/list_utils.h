@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:03:30 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/12 23:48:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/19 22:18:20 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 
 # include <stdlib.h>
 
-typedef struct s_elems t_elems;
-typedef struct s_array t_array;
+typedef struct s_elems	t_elems;
+typedef struct s_array	t_array;
 
 struct s_elems{
-
 	void	*content;
 	void	(*del)(void *content);
 	t_elems	*next;
@@ -27,7 +26,6 @@ struct s_elems{
 };
 
 struct s_array{
-
 	t_elems	*begin;
 	t_elems	*end;
 	int		size;
@@ -37,7 +35,7 @@ struct s_array{
 	void	(*destroy)(void);
 };
 
-t_array *array(void *lst);
+t_array	*array(void *lst);
 void	*ft_calloc(size_t size);
 void	*creat_array(void);
 

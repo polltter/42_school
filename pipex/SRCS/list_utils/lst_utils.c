@@ -6,15 +6,15 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 21:22:19 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/12 23:49:53 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/19 22:13:34 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_utils.h"
 
-t_array **__this(void);
+t_array	**__this(void);
 
-void	  __del(t_elems *elem)
+void	__del(t_elems *elem)
 {
 	if ((*__this())->begin == elem)
 	{
@@ -83,7 +83,7 @@ void	__destroy(void)
 		if (temp->del)
 			temp->del(temp->content);
 		free(temp);
-		temp =temp2;
+		temp = temp2;
 	}
 	free(*__this());
 	*__this() = NULL;

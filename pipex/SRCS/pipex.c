@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/16 10:50:14 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/19 22:16:19 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,30 @@
 
 int	dup_and_close(int fd_in, int fd_out)
 {
-	if(dup2(fd_out, 1) < 0)
+	if (dup2(fd_out, 1) < 0)
 		return (-1);
 	close(fd_out);
-	if (dup2(fd_in, 0)< 0)
+	if (dup2(fd_in, 0) < 0)
 		return (-1);
 	if (fd_in)
 		close(fd_in);
-	return(1);
+	return (1);
+}
+
+void	error_handle(char *cmd)
+{
+	if (!*cmd)
+		write(2, "Permission denied\n", 18);
+	else
+	{
+		write(2, "command not found: ", 19);
+		while (*cmd)
+		{
+			write(2, cmd, 1);
+			cmd++;
+		}
+		write(2, "\n", 1);
+	}
 }
 
 void	execute(t_elems *elem, int fd_in, char **env)
@@ -43,7 +59,7 @@ void	execute(t_elems *elem, int fd_in, char **env)
 	{	
 		if (dup_and_close(fd_in, fd_out) >= 0)
 			execve(cmd->path, cmd->args, env);
-		perror("");
+		error_handle(cmd->path);
 		exit(127);
 	}
 	close(fd_in);
@@ -58,7 +74,7 @@ int	main(int ac, char **av, char **env)
 	int		flag;
 	int		fd[2];
 
-	if (ac > 4)
+	if (ac == 5)
 	{
 		flag = 2;
 		fd_in = open(av[1], O_RDONLY);
@@ -67,8 +83,7 @@ int	main(int ac, char **av, char **env)
 			perror(av[1]);
 			pipe(fd);
 			fd_in = fd[0];
-			// write(fd[1], "", 1);
-			close(fd[1]); 
+			close(fd[1]);
 		}
 		fd_out = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd_out == -1)
