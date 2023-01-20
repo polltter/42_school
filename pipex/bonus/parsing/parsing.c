@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/19 23:16:49 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/20 00:19:50 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@ char	*find_path_var(char **env)
 	return (NULL);
 }
 
-void	parse_here_doc(int *fd_in, char *av, int *flag)
+void	parse_here_doc(int *fd_in, int *fd_out, char *av, int *flag)
 {
+	int		fd_temp;
+	char	buffer[100];
+	char	*s;
+	
+	buffer[0] = 0;
+	*fd_in = open("temp", O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	while (ft_strncmp(s, av, str_len(av)))
+	{
+		while(str_char(buffer, '\n'))
+		{
+			read(0,buffer, 100);
+			write(*fd_in, buffer, 100);
+		}
+		s = getnextline(fd_temp);
+	}
 	
 }
 

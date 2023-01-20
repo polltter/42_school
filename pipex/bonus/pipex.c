@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/19 23:16:46 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/20 00:07:49 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	main(int ac, char **av, char **env)
 			fd_in = open(av[1], O_RDONLY);
 			if (fd_in == -1 && flag++ && fd_in++)
 				fd_in = treat_infile(av[1]);
+			fd_out = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		}
-		fd_out = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		if (fd_out == -1)
 			exit(ft_printf("Couldn't open %s\n", av[ac - 1]));
 		init_cmds(ac - flag, split(find_path_var(env), ':'), av + flag, fd_out);
