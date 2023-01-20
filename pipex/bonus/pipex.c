@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/20 00:07:49 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:16:52 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ int	main(int ac, char **av, char **env)
 	{
 		flag = 2;
 		if (!ft_strncmp(av[1], "here_doc", 9))
+		{
 			parse_here_doc(&fd_in, *(av + 2), &flag);
+			fd_out = open(av[ac - 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
+		}
 		else
 		{
 			fd_in = open(av[1], O_RDONLY);

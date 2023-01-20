@@ -27,7 +27,8 @@ fclean: clean
 	rm -rf ${NAME}
 
 norm:
-	norminette -R CheckForbiddenSourceHeader CheckDefine SRCS/*
+	norminette -R CheckForbiddenSourceHeader -R CheckDefine SRCS/*
+	norminette -R CheckForbiddenSourceHeader -R CheckDefine bonus/*
 	norminette -R CheckDefine INCS/pipex.h
 
 re: fclean all
