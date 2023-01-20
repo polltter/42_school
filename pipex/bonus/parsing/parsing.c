@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/20 10:19:16 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/20 15:56:00 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	parse_here_doc(int *fd_in, char *lim, int *flag)
 		write(*fd_in, s, str_len(s));
 	}
 	free(s);
+	close(*fd_in);
+	*fd_in = open("temp", O_RDONLY);
 	*flag += 2;
 }
 
