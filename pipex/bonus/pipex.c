@@ -6,7 +6,7 @@
 /*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:43:33 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/20 10:16:52 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/20 17:37:49 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ void	error_handle(char *cmd)
 	}
 }
 
-void	execute(t_elems *elem, int fd_in, char **env)
+void	execute(t_elems *elem, int fd_in, char **env, int ac)
 {
 	t_cmd	*cmd;
 	int		fd_out;
 
 	if (!elem->next)
 	{
-		waitpid(-1, &fd_in, 0);
+		while (ac--)
+			waitpid(-1, &fd_in, 0);
 		return ;
 	}
 	cmd = (t_cmd *)elem->content;
@@ -64,7 +65,7 @@ void	execute(t_elems *elem, int fd_in, char **env)
 	}
 	close(fd_in);
 	close(fd_out);
-	execute(elem->next, cmd->fd[0], env);
+	execute(elem->next, cmd->fd[0], env, ac);
 }
 
 int	treat_infile(char *av)
@@ -101,7 +102,7 @@ int	main(int ac, char **av, char **env)
 		if (fd_out == -1)
 			exit(ft_printf("Couldn't open %s\n", av[ac - 1]));
 		init_cmds(ac - flag, split(find_path_var(env), ':'), av + flag, fd_out);
-		execute(array(*cmds())->begin, fd_in, env);
+		execute(array(*cmds())->begin, fd_in, env, ac - flag);
 		array(*cmds())->destroy();
 	}
 }

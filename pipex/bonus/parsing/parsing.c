@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 10:15:44 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/20 15:56:00 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:31:39 by mvenanci@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,20 @@ void	parse_here_doc(int *fd_in, char *lim, int *flag)
 
 	*fd_in = open("temp", O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	s = ft_calloc(1);
+	lim = str_join(lim, "", '\n');
 	while (ft_strncmp(s, lim, str_len(lim)))
 	{
 		free(s);
 		s = get_next_line(0);
+		if (!ft_strncmp(s, lim, str_len(lim)))
+			break ;
 		write(*fd_in, s, str_len(s));
 	}
 	free(s);
+	free(lim);
 	close(*fd_in);
 	*fd_in = open("temp", O_RDONLY);
-	*flag += 2;
+	*flag += 1;
 }
 
 char	*find_cmds(char **paths, char *av)
