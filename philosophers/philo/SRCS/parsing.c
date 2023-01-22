@@ -45,19 +45,20 @@ void	*create_philosopher(unsigned long id)
 
 t_table	*create_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
 {
-	static t_table	table;
+	t_table	*table;
 
-	table.philos = creat_array();
+	table = ft_calloc(sizeof(t_table));
+	table->philos = creat_array();
 	while (n_philo--)
-		array(table.philos)->add(create_philosopher(n_philo));
-	table.times[EAT] = t_eat;
-	table.times[SLEEP] = t_sleep;
-	table.times[DIE] = t_die;
-	table.msg[EAT] = "is eating";
-	table.msg[SLEEP] = "is sleeping";
-	table.msg[DIE] = "died";
-	table.msg[THINK] = "is thinking";
-	table.msg[FORK] = "has taken a fork";
-	table.times_to_eat = times_to_eat;
-	return (&table);
+		(array(table->philos))->add(create_philosopher(n_philo));
+	table->times[EAT] = t_eat;
+	table->times[SLEEP] = t_sleep;
+	table->times[DIE] = t_die;
+	table->msg[EAT] = "is eating";
+	table->msg[SLEEP] = "is sleeping";
+	table->msg[DIE] = "died";
+	table->msg[THINK] = "is thinking";
+	table->msg[FORK] = "has taken a fork";
+	table->times_to_eat = times_to_eat;
+	return (table);
 }

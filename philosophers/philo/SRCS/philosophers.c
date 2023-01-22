@@ -40,14 +40,14 @@ int	main(int ac, char **av)
 			*table() = create_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
 		elem = array(*table())->begin;
 		printf("%p %p\n", elem, elem->next);
-		exit(0);
-		while (elem)
-		{
-//			pthread_create(&(((t_philo *)(elem->content))->id), NULL, run_threads, elem->content);
-
+		//exit(0);
+//		while (elem)
+//		{
+////			pthread_create(&(((t_philo *)(elem->content))->id), NULL, run_threads, elem->content);
+//
 //			printf("%p", elem->content);
-			elem = elem->next;
-		}
+//			elem = elem->next;
+//		}
 	}
 	return (0);
 }
