@@ -14,6 +14,7 @@
 # define LIST_UTILS_H
 
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_elems	t_elems;
 typedef struct s_array	t_array;

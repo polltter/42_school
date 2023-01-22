@@ -6,7 +6,7 @@ OBJ		= ${SRCS:.c=.o}
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -pthread -g3 -O3 -IINCS #-fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -pthread -g3 -O3 -fsanitize=address
 
 all: $(NAME)
 
@@ -22,5 +22,9 @@ fclean: clean
 norm:
 	norminette -R CheckForbiddenSourceHeader SRCS/*
 	norminette -R CheckDefine INCS/*
+
+p:
+	./philo
+r: all p
 
 re: fclean all
