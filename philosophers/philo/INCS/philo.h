@@ -21,6 +21,7 @@
 
 typedef struct s_table t_table;
 typedef struct s_philo t_philo;
+typedef struct s_args t_args;
 typedef unsigned int t_usec;
 
 enum e_status {
@@ -36,6 +37,7 @@ struct s_philo
 	pthread_t		id;
 	t_usec			last_ate;
 	pthread_mutex_t fork;
+	int 			eaten;
 };
 
 struct s_table
@@ -44,8 +46,15 @@ struct s_table
 	int 	times[5];
 	char 	*msg[5];
 	int 	dead;
+	int 	times_to_eat;
 };
 
+//utils
 int		ft_atoi(char *s);
+void	my_usleep(int mili_sec);
+
+//parsing
+int		check_args(int ac, char **av);
+t_table	*create_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_eaten);
 
 #endif

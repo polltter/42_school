@@ -12,23 +12,6 @@
 
 #include "../INCS/philo.h"
 
-void	my_usleep(int mili_sec)
-{
-	long start;
-	long end;
-	struct timeval tv;
-
-	gettimeofday(&tv, NULL);
-	start = ( tv.tv_sec * 1000 + tv.tv_usec / 1000);
-	end  = start;
-	start += mili_sec;
-	while (end < start)
-	{
-		gettimeofday(&tv, NULL);
-		end = ( tv.tv_sec * 1000 + tv.tv_usec / 1000);
-	}
-}
-
 t_table	**table(void)
 {
 	static t_table	*table;
@@ -36,35 +19,35 @@ t_table	**table(void)
 	return (&table);
 }
 
-void	*create_philosopher(unsigned long id)
+void	*run_threads(void *philo)
 {
-	t_philo	*philo;
+	int i;
 
-	philo = ft_calloc(sizeof(t_philo));
-	philo->id = id;
+	i = 0;
+	printf("%d %ld\n", i++, ((t_philo *)philo)->id);
 	return (philo);
 }
 
-t_table	*create_table(int n_philo, int t_eat, int t_sleep, int t_die)
+int	main(int ac, char **av)
 {
-	static t_table	table;
+	t_elems	*elem;
 
-	table.philos = creat_array();
-	while (n_philo-- > 0)
-		array(table.philos)->add(create_philosopher(n_philo));
-	table.times[EAT] = t_eat;
-	table.times[SLEEP] = t_sleep;
-	table.times[DIE] = t_die;
-	table.msg[EAT] = "is eating";
-	table.msg[SLEEP] = "is sleeping";
-	table.msg[DIE] = "died";
-	table.msg[THINK] = "is thinking";
-	table.msg[FORK] = "has taken a fork";
-	return (&table);
-}
+	if ((ac == 5 || ac == 6) && check_args(ac, av))
+	{
+		if (ac == 5)
+			*table() = create_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), 0);
+		else
+			*table() = create_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
+		elem = array(*table())->begin;
+		printf("%p %p\n", elem, elem->next);
+		exit(0);
+		while (elem)
+		{
+//			pthread_create(&(((t_philo *)(elem->content))->id), NULL, run_threads, elem->content);
 
-int	main(void)
-{
-	*table() = create_table(2, 200, 200, 200);
+//			printf("%p", elem->content);
+			elem = elem->next;
+		}
+	}
 	return (0);
 }
