@@ -24,11 +24,14 @@ void	*run_threads(void *elem)
 	t_philo	*philo;
 
 	philo = (t_philo *)elem;
-	pthread_mutex_lock(philo->rigth);
-	pthread_mutex_lock(&philo->left);
-	printf("%d %ld\n", table()->dead++, ((t_philo *)philo)->id);
-	pthread_mutex_unlock(philo->rigth);
-	pthread_mutex_unlock(&philo->left);
+	if (!(philo->index % 2))
+	{
+		pthread_mutex_lock(&philo->left);
+		pthread_mutex_lock(philo->rigth);
+		printf("%d %ld\n", table()->dead++, ((t_philo *)philo)->id);
+		pthread_mutex_unlock(&philo->left);
+		pthread_mutex_unlock(philo->rigth);
+	}
 	return (philo);
 }
 
@@ -56,7 +59,6 @@ int	main(int ac, char **av)
 		array(table()->philos)->for_each(give_forks, NULL);
 		array(table()->philos)->for_each(init, NULL);
 		array(table()->philos)->for_each(join_for_each, NULL);
-
 	}
 	return (0);
 }

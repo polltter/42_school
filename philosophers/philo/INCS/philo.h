@@ -39,7 +39,7 @@ struct s_philo
 	pthread_mutex_t left;
 	pthread_mutex_t *rigth;
 	int 			eaten;
-//	int				index;
+	int				index;
 };
 
 struct s_table
@@ -61,5 +61,5 @@ void	give_forks(t_elems *elem, void *o);
 //parsing
 int		check_args(int ac, char **av);
 void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat);
-void	*create_philosopher(unsigned long id);
+
 #endif

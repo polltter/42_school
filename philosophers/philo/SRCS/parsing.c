@@ -34,12 +34,13 @@ int	check_args(int ac, char **av)
 	return (1);
 }
 
-void	*create_philosopher(unsigned long id)
+void	*create_philosopher(unsigned long id, int index)
 {
 	t_philo	*philo;
 
 	philo = ft_calloc(sizeof(t_philo));
 	philo->id = id;
+	philo->index = index;
 	return (philo);
 }
 
@@ -54,9 +55,12 @@ void	give_forks(t_elems *elem, void *o)
 
 void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
 {
+	int index;
+
+	index = 0;
 	table()->philos = creat_array();
-	while (n_philo--)
-		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo))->content)->left), NULL);
+	while (n_philo-- && ++index)
+		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);
 	table()->times[EAT] = t_eat;
 	table()->times[SLEEP] = t_sleep;
 	table()->times[DIE] = t_die;
