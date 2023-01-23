@@ -6,7 +6,7 @@ OBJ		= ${SRCS:.c=.o}
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -pthread -g3 -O3 -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -pthread -g3 -O3 -fsanitize=thread
 
 all: $(NAME)
 
@@ -25,6 +25,6 @@ norm:
 
 p:
 	./philo 10 100 100 100
-r: all p
+r: all clean p
 
 re: fclean all

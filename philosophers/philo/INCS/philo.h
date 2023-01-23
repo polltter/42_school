@@ -36,8 +36,10 @@ struct s_philo
 {
 	pthread_t		id;
 	t_usec			last_ate;
-	pthread_mutex_t fork;
+	pthread_mutex_t left;
+	pthread_mutex_t *rigth;
 	int 			eaten;
+//	int				index;
 };
 
 struct s_table
@@ -47,14 +49,17 @@ struct s_table
 	char 	*msg[5];
 	int 	dead;
 	int 	times_to_eat;
+	pthread_mutex_t fork;
 };
 
 //utils
 int		ft_atoi(char *s);
 void	my_usleep(int mili_sec);
+t_table	*table(void);
+void	give_forks(t_elems *elem, void *o);
 
 //parsing
 int		check_args(int ac, char **av);
-t_table	*create_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_eaten);
-
+void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat);
+void	*create_philosopher(unsigned long id);
 #endif

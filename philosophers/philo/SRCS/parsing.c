@@ -43,22 +43,27 @@ void	*create_philosopher(unsigned long id)
 	return (philo);
 }
 
-t_table	*create_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
+void	give_forks(t_elems *elem, void *o)
 {
-	t_table	*table;
+	(void)o;
+	if (!elem->next)
+		((t_philo *)(elem->content))->rigth = &((t_philo *)(array(table())->begin->content))->left;
+	else
+		((t_philo *)(elem->content))->rigth = &((t_philo *)(elem->next))->left;
+}
 
-	table = ft_calloc(sizeof(t_table));
-	table->philos = creat_array();
+void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
+{
+	table()->philos = creat_array();
 	while (n_philo--)
-		(array(table->philos))->add(create_philosopher(n_philo));
-	table->times[EAT] = t_eat;
-	table->times[SLEEP] = t_sleep;
-	table->times[DIE] = t_die;
-	table->msg[EAT] = "is eating";
-	table->msg[SLEEP] = "is sleeping";
-	table->msg[DIE] = "died";
-	table->msg[THINK] = "is thinking";
-	table->msg[FORK] = "has taken a fork";
-	table->times_to_eat = times_to_eat;
-	return (table);
+		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo))->content)->left), NULL);
+	table()->times[EAT] = t_eat;
+	table()->times[SLEEP] = t_sleep;
+	table()->times[DIE] = t_die;
+	table()->msg[EAT] = "is eating";
+	table()->msg[SLEEP] = "is sleeping";
+	table()->msg[DIE] = "died";
+	table()->msg[THINK] = "is thinking";
+	table()->msg[FORK] = "has taken a fork";
+	table()->times_to_eat = times_to_eat;
 }
