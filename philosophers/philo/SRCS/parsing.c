@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:33:27 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/21 13:33:43 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/01/26 13:34:36 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	give_forks(t_elems *elem, void *o)
 {
 	(void)o;
 	if (!elem->next)
-		((t_philo *)(elem->content))->rigth = &((t_philo *)(array(table())->begin->content))->left;
+		((t_philo *)(elem->content))->rigth = &(((t_philo *)(array(table()->philos)->begin->content))->left);
 	else
-		((t_philo *)(elem->content))->rigth = &((t_philo *)(elem->next))->left;
+		((t_philo *)(elem->content))->rigth = &(((t_philo *)(elem->next->content))->left);	
 }
 
 void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
