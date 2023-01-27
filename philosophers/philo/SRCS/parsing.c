@@ -53,7 +53,7 @@ void	give_forks(t_elems *elem, void *o)
 		((t_philo *)(elem->content))->rigth = &(((t_philo *)(elem->next->content))->left);	
 }
 
-void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat)
+void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat)
 {
 	int index;
 

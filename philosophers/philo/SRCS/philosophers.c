@@ -12,34 +12,23 @@
 
 #include "../INCS/philo.h"
 
-t_table	*table(void)
+void	check_if_dead(t_elems *elems, void *o)
 {
-	static t_table	table;
-
-	return (&table);
-}
-
-int	get_time_dif(int last_ate)
-{
-	return (get_time_mili() - last_ate);
-}
-
-int	get_time_mili(void)
-{
-	struct timeval tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-void	check_if_dead(t_philo *philo)
-{
-	if (get_time_dif(philo->last_ate) > table()->times[EAT])
+	(void)o;
+	if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE])
 	{
-		pthread_mutex_lock(&table()->fork);
 		table()->dead = 1;
-		pthread_mutex_unlock(&table()->fork);
+		printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
 	}
+
+}
+
+void	*check_if_dead_each(void *o)
+{
+	(void)o;
+	while (!table()->dead)
+		array(table()->philos)->for_each(check_if_dead, NULL);
+	return (o);
 }
 
 void	*run_threads(void *elem)
@@ -47,37 +36,29 @@ void	*run_threads(void *elem)
 	t_philo	*philo;
 
 	philo = (t_philo *)elem;
+	if (!(philo->index % 2))
+		my_usleep(50);
 	while (!table()->dead)
 	{
+		printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)philo)->index, table()->msg[THINK]);
 		pthread_mutex_lock(philo->rigth);
-		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[FORK]);
-		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[THINK]);
+		printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)philo)->index, table()->msg[FORK]);
 		pthread_mutex_lock(&philo->left);
-		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[EAT]);
+		printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)philo)->index, table()->msg[EAT]);
 		my_usleep(table()->times[EAT]);
+		philo->last_ate = get_time_mili();
 		pthread_mutex_unlock(philo->rigth);
 		pthread_mutex_unlock(&philo->left);
-		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[SLEEP]);
+		printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)philo)->index, table()->msg[SLEEP]);
 		my_usleep(table()->times[SLEEP]);
-		check_if_dead(philo);
+
 	}
 	return (philo);
 }
 
-void	init(t_elems *elem, void *o)
-{
-	(void)o;
-	pthread_create(&(((t_philo *)(elem->content))->id), NULL, run_threads, elem->content);
-}
-
-void	join_for_each(t_elems *elem, void *o)
-{
-	(void)o;
-	pthread_join(((t_philo *)(elem->content))->id, NULL);
-}
-
 int	main(int ac, char **av)
 {
+	pthread_t	dead;
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
 		if (ac == 5)
@@ -85,7 +66,9 @@ int	main(int ac, char **av)
 		else
 			init_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
 		array(table()->philos)->for_each(give_forks, NULL);
+		table()->start_time = get_time_mili();
 		array(table()->philos)->for_each(init, NULL);
+		pthread_create(&dead, NULL, check_if_dead_each, NULL);
 		array(table()->philos)->for_each(join_for_each, NULL);
 	}
 	return (0);

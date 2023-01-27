@@ -48,18 +48,30 @@ struct s_table
 	int 	times[5];
 	char 	*msg[5];
 	int 	dead;
+	int 	start_time;
 	int 	times_to_eat;
 	pthread_mutex_t fork;
 };
 
 //utils
 int		ft_atoi(char *s);
-void	my_usleep(int mili_sec);
 t_table	*table(void);
-void	give_forks(t_elems *elem, void *o);
+
+//for_each_utils
+void	init(t_elems *elem, void *o);
+void	join_for_each(t_elems *elem, void *o);
+
+
+//time_utils
 int		get_time_mili(void);
+void	my_usleep(int mili_sec);
+int		get_time_dif(int last_ate);
+
 //parsing
 int		check_args(int ac, char **av);
 void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat);
+void	give_forks(t_elems *elem, void *o);
 
+//runnig
+void	*run_threads(void *elem);
 #endif
