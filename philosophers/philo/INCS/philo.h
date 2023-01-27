@@ -57,7 +57,7 @@ int		ft_atoi(char *s);
 void	my_usleep(int mili_sec);
 t_table	*table(void);
 void	give_forks(t_elems *elem, void *o);
-
+int		get_time_mili(void);
 //parsing
 int		check_args(int ac, char **av);
 void	init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat);

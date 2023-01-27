@@ -19,6 +19,28 @@ t_table	*table(void)
 	return (&table);
 }
 
+int	get_time_dif(int last_ate)
+{
+	return (get_time_mili() - last_ate);
+}
+
+int	get_time_mili(void)
+{
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	check_if_dead(t_philo *philo)
+{
+	if (get_time_dif(philo->last_ate) > table()->times[EAT])
+	{
+		pthread_mutex_lock(&table()->fork);
+		table()->dead = 1;
+		pthread_mutex_unlock(&table()->fork);
+	}
+}
 
 void	*run_threads(void *elem)
 {
@@ -29,11 +51,15 @@ void	*run_threads(void *elem)
 	{
 		pthread_mutex_lock(philo->rigth);
 		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[FORK]);
+		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[THINK]);
 		pthread_mutex_lock(&philo->left);
 		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[EAT]);
 		my_usleep(table()->times[EAT]);
-		pthread_mutex_unlock(&philo->left);
 		pthread_mutex_unlock(philo->rigth);
+		pthread_mutex_unlock(&philo->left);
+		printf("philosopher %d %s\n", ((t_philo *)philo)->index, table()->msg[SLEEP]);
+		my_usleep(table()->times[SLEEP]);
+		check_if_dead(philo);
 	}
 	return (philo);
 }
