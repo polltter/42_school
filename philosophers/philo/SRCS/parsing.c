@@ -73,4 +73,6 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	table()->msg[THINK] = "is thinking";
 	table()->msg[FORK] = "has taken a fork";
 	table()->times_to_eat = times_to_eat;
+	pthread_mutex_init(&table()->mutex, NULL);
+	pthread_mutex_init(&table()->print, NULL);
 }

@@ -50,7 +50,8 @@ struct s_table
 	int 	dead;
 	int 	start_time;
 	int 	times_to_eat;
-	pthread_mutex_t fork;
+	pthread_mutex_t mutex;
+	pthread_mutex_t print;
 };
 
 //utils
