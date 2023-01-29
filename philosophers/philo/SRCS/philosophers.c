@@ -51,6 +51,18 @@ void	print_philo(t_philo *philo, int status)
 	pthread_mutex_unlock(&table()->print);
 }
 
+int break_while(void)
+{
+	pthread_mutex_lock(&table()->print);
+	if (table()->dead)
+	{
+		pthread_mutex_unlock(&table()->print);
+		return (1);
+	}
+	pthread_mutex_unlock(&table()->print);
+	return (0);
+}
+
 void	*run_threads(void *elem)
 {
 	t_philo	*philo;
@@ -71,6 +83,8 @@ void	*run_threads(void *elem)
 		print_philo(philo, SLEEP);
 		my_usleep(table()->times[SLEEP]);
 		print_philo(philo, THINK);
+		if (break_while())
+			break ;
 	}
 	return (philo);
 }
