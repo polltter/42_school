@@ -43,12 +43,12 @@ void	*check_if_dead_each(void *begin)
 
 void	print_philo(t_philo *philo, int status)
 {
-	pthread_mutex_lock(&table()->print);
+//	pthread_mutex_lock(&table()->print);
 	pthread_mutex_lock(&table()->mutex);
 	if (!table()->dead)
 		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
 	pthread_mutex_unlock(&table()->mutex);
-	pthread_mutex_unlock(&table()->print);
+//	pthread_mutex_unlock(&table()->print);
 }
 
 int break_while(void)
