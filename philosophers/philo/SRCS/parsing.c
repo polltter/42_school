@@ -41,6 +41,7 @@ void	*create_philosopher(unsigned long id, int index)
 	philo = ft_calloc(sizeof(t_philo));
 	philo->id = id;
 	philo->index = index;
+	philo->n_forks = 0;
 	return (philo);
 }
 
@@ -59,6 +60,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 
 	index = 0;
 	table()->philos = creat_array();
+	table()->n_philo = n_philo;
 	while (n_philo-- && ++index)
 	{
 		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);

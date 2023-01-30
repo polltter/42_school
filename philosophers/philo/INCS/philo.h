@@ -40,6 +40,7 @@ struct s_philo
 	pthread_mutex_t *rigth;
 	int 			eaten;
 	int				index;
+	int 			n_forks;
 };
 
 struct s_table
@@ -51,6 +52,7 @@ struct s_table
 	int 	dead;
 	int 	start_time;
 	int 	times_to_eat;
+	int		n_philo;
 	pthread_mutex_t mutex;
 	pthread_mutex_t print;
 };
@@ -58,6 +60,8 @@ struct s_table
 //utils
 int		ft_atoi(char *s);
 t_table	*table(void);
+int 	break_while(void);
+void	*check_if_dead_each(void *begin);
 
 //for_each_utils
 void	init(t_elems *elem, void *o);
@@ -68,6 +72,7 @@ void	join_for_each(t_elems *elem, void *o);
 int		get_time_mili(void);
 void	my_usleep(int mili_sec);
 int		get_time_dif(int last_ate);
+void	set_philo_time(t_philo *philo);
 
 //parsing
 int		check_args(int ac, char **av);

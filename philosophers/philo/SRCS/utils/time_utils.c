@@ -33,3 +33,10 @@ void	my_usleep(int mili_sec)
 		end = ( tv.tv_sec * 1000 + tv.tv_usec / 1000);
 	}
 }
+
+void	set_philo_time(t_philo *philo)
+{
+	pthread_mutex_lock(&table()->mutex);
+	philo->last_ate = get_time_mili();
+	pthread_mutex_unlock(&table()->mutex);
+}
