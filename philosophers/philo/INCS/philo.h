@@ -47,6 +47,7 @@ struct s_table
 	void	*philos;
 	int 	times[5];
 	char 	*msg[5];
+	int		fork[9999];
 	int 	dead;
 	int 	start_time;
 	int 	times_to_eat;

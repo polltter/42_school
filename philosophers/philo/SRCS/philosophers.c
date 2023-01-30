@@ -83,8 +83,8 @@ void	*run_threads(void *elem)
 			pthread_mutex_lock(&philo->left);
 		}
 		print_philo(philo, FORK);
-		print_philo(philo, EAT);
 		set_philo_time(philo);
+		print_philo(philo, EAT);
 		my_usleep(table()->times[EAT]);
 		if (!(philo->index % 2))
 		{
