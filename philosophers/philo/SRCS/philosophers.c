@@ -69,11 +69,19 @@ void	*run_threads(void *elem)
 
 	philo = (t_philo *)elem;
 	if (!(philo->index % 2))
-		my_usleep(150);
+		my_usleep(50);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->left);
-		pthread_mutex_lock(philo->rigth);
+		if (!(philo->index % 2))
+		{
+			pthread_mutex_lock(&philo->left);
+			pthread_mutex_lock(philo->rigth);
+		}
+		else
+		{
+			pthread_mutex_lock(philo->rigth);
+			pthread_mutex_lock(&philo->left);
+		}
 		print_philo(philo, FORK);
 		print_philo(philo, EAT);
 		set_philo_time(philo);
