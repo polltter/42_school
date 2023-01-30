@@ -21,6 +21,8 @@ void	check_if_dead(t_elems *elems)
 		{
 			table()->dead = 1;
 			printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
+			pthread_mutex_unlock(&table()->mutex);
+			return ;
 		}
 		pthread_mutex_unlock(&table()->mutex);
 		elems = elems->next;
@@ -43,23 +45,21 @@ void	*check_if_dead_each(void *begin)
 
 void	print_philo(t_philo *philo, int status)
 {
-	pthread_mutex_lock(&table()->print);
 	pthread_mutex_lock(&table()->mutex);
 	if (!table()->dead)
 		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
 	pthread_mutex_unlock(&table()->mutex);
-	pthread_mutex_unlock(&table()->print);
 }
 
 int break_while(void)
 {
-	pthread_mutex_lock(&table()->print);
+	pthread_mutex_lock(&table()->mutex);
 	if (table()->dead)
 	{
-		pthread_mutex_unlock(&table()->print);
+		pthread_mutex_unlock(&table()->mutex);
 		return (1);
 	}
-	pthread_mutex_unlock(&table()->print);
+	pthread_mutex_unlock(&table()->mutex);
 	return (0);
 }
 
@@ -69,7 +69,7 @@ void	*run_threads(void *elem)
 
 	philo = (t_philo *)elem;
 	if (!(philo->index % 2))
-		my_usleep(50);
+		my_usleep(150);
 	while (1)
 	{
 		if (!(philo->index % 2))
@@ -86,8 +86,16 @@ void	*run_threads(void *elem)
 		print_philo(philo, EAT);
 		set_philo_time(philo);
 		my_usleep(table()->times[EAT]);
-		pthread_mutex_unlock(&philo->left);
-		pthread_mutex_unlock(philo->rigth);
+		if (!(philo->index % 2))
+		{
+			pthread_mutex_unlock(&philo->left);
+			pthread_mutex_unlock(philo->rigth);
+		}
+		else
+		{
+			pthread_mutex_unlock(philo->rigth);
+			pthread_mutex_unlock(&philo->left);
+		}
 		print_philo(philo, SLEEP);
 		my_usleep(table()->times[SLEEP]);
 		print_philo(philo, THINK);
@@ -112,6 +120,7 @@ int	main(int ac, char **av)
 		array(table()->philos)->for_each(init, NULL);
 		pthread_create(&dead, NULL, check_if_dead_each, array(table()->philos)->begin);
 		array(table()->philos)->for_each(join_for_each, NULL);
+		pthread_join(dead, NULL);
 	}
 	return (0);
 }
