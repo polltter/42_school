@@ -32,6 +32,7 @@ int dead(void)
 
 void	get_fork(t_philo *philo)
 {
+	philo->n_forks = 0;
 	while (philo->n_forks != 2 && !dead())
 	{
 		pthread_mutex_lock(&philo->left);
@@ -47,7 +48,9 @@ void	get_fork(t_philo *philo)
 			else
 			{
 				philo->n_forks--;
+				pthread_mutex_lock(&philo->left);
 				table()->fork[philo->index - 1] = 1;
+				pthread_mutex_unlock(&philo->left);
 			}
 			pthread_mutex_unlock(philo->rigth);
 		}
@@ -55,7 +58,6 @@ void	get_fork(t_philo *philo)
 			pthread_mutex_unlock(&philo->left);
 	}
 	print_philo(philo, FORK);
-	philo->n_forks = 0;
 }
 
 void	*run_threads(void *elem)

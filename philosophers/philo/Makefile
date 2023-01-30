@@ -6,7 +6,7 @@ OBJ		= ${SRCS:.c=.o}
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -pthread -g -O3 #-fsanitize=thread
+CFLAGS	= -Wall -Werror -Wextra -pthread -g -O3 -fsanitize=thread
 
 all: $(NAME)
 
