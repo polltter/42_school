@@ -65,7 +65,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	{
 		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);
 		((t_philo *)(((t_array *)(table()->philos))->end->content))->last_ate = get_time_mili();
-		table()->fork[index - 1] = 1;
+		table()->fork[index] = 1;
 	}
 	table()->times[EAT] = t_eat;
 	table()->times[SLEEP] = t_sleep;

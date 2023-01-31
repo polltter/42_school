@@ -12,14 +12,6 @@
 
 #include "../INCS/philo.h"
 
-void	print_philo(t_philo *philo, int status)
-{
-	pthread_mutex_lock(&table()->mutex);
-	if (!table()->dead)
-		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
-	pthread_mutex_unlock(&table()->mutex);
-}
-
 int dead(void)
 {
 	int status;
@@ -30,26 +22,32 @@ int dead(void)
 	return (status);
 }
 
+void	print_philo(t_philo *philo, int status)
+{
+	if (!dead())
+		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+}
+
 void	get_fork(t_philo *philo)
 {
 	philo->n_forks = 0;
 	while (philo->n_forks != 2 && !dead())
 	{
 		pthread_mutex_lock(&philo->left);
-		if (table()->fork[philo->index - 1] && ++philo->n_forks)
+		if (table()->fork[philo->index] && ++philo->n_forks)
 		{
-			table()->fork[philo->index - 1] = 0;
+			table()->fork[philo->index] = 0;
 			pthread_mutex_unlock(&philo->left);
 			pthread_mutex_lock(philo->rigth);
-			if (philo->index == table()->n_philo && table()->fork[0] && philo->n_forks++)
-				table()->fork[0] = 0;
-			else if (table()->fork[philo->index] && philo->n_forks++)
-				table()->fork[philo->index] = 0;
+			if (philo->index == table()->n_philo && table()->fork[1] && ++philo->n_forks)
+				table()->fork[1] = 0;
+			else if (table()->fork[philo->index + 1] && ++philo->n_forks)
+				table()->fork[philo->index + 1] = 0;
 			else
 			{
 				philo->n_forks--;
 				pthread_mutex_lock(&philo->left);
-				table()->fork[philo->index - 1] = 1;
+				table()->fork[philo->index] = 1;
 				pthread_mutex_unlock(&philo->left);
 			}
 			pthread_mutex_unlock(philo->rigth);
@@ -72,13 +70,13 @@ void	*run_threads(void *elem)
 		print_philo(philo, EAT);
 		my_usleep(table()->times[EAT]);
 		pthread_mutex_lock(&philo->left);
-		table()->fork[philo->index - 1] = 1;
+		table()->fork[philo->index] = 1;
 		pthread_mutex_unlock(&philo->left);
 		pthread_mutex_lock(philo->rigth);
 		if (philo->index == table()->n_philo)
-			table()->fork[0] = 1;
-		else if (table()->fork[philo->index])
-			table()->fork[philo->index] = 1;
+			table()->fork[1] = 1;
+		else
+			table()->fork[philo->index + 1] = 1;
 		pthread_mutex_unlock(philo->rigth);
 		print_philo(philo, SLEEP);
 		my_usleep(table()->times[SLEEP]);
