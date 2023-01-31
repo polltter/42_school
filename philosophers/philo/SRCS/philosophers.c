@@ -12,26 +12,15 @@
 
 #include "../INCS/philo.h"
 
-int dead(void)
-{
-	int status;
-
-	pthread_mutex_lock(&table()->mutex);
-	status = table()->dead;
-	pthread_mutex_unlock(&table()->mutex);
-	return (status);
-}
-
 void	print_philo(t_philo *philo, int status)
 {
-	if (!dead())
 		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
 }
 
 void	get_fork(t_philo *philo)
 {
 	philo->n_forks = 0;
-	while (philo->n_forks != 2 && !dead())
+	while (philo->n_forks != 2)
 	{
 		pthread_mutex_lock(&philo->left);
 		if (table()->fork[philo->index] && ++philo->n_forks)
@@ -63,7 +52,7 @@ void	*run_threads(void *elem)
 	t_philo	*philo;
 
 	philo = (t_philo *)elem;
-	while (!dead())
+	while (1)
 	{
 		get_fork(philo);
 		set_philo_time(philo);
@@ -87,8 +76,9 @@ void	*run_threads(void *elem)
 
 int	main(int ac, char **av)
 {
-	pthread_t	dead;
+//	pthread_t	thread_dead;
 
+	//*get_thread_dead() = thread_dead;
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
 		if (ac == 5)
@@ -98,9 +88,9 @@ int	main(int ac, char **av)
 		array(table()->philos)->for_each(give_forks, NULL);
 		table()->start_time = get_time_mili();
 		array(table()->philos)->for_each(init, NULL);
-		pthread_create(&dead, NULL, check_if_dead_each, array(table()->philos)->begin);
-		array(table()->philos)->for_each(join_for_each, NULL);
-		pthread_join(dead, NULL);
+		//pthread_create(&thread_dead, NULL, check_if_dead_each, array(table()->philos)->begin);
+//		pthread_join(thread_dead, NULL);
+		while (1);
 	}
 	return (0);
 }

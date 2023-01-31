@@ -36,7 +36,7 @@ void	my_usleep(int mili_sec)
 
 void	set_philo_time(t_philo *philo)
 {
-	pthread_mutex_lock(&table()->mutex);
+	pthread_mutex_lock(&philo->ate);
 	philo->last_ate = get_time_mili();
-	pthread_mutex_unlock(&table()->mutex);
+	pthread_mutex_unlock(&philo->ate);
 }
