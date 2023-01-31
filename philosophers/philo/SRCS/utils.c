@@ -49,7 +49,7 @@ pthread_t	*get_thread_dead(void)
 	return (&thread_dead);
 }
 
-void	check_if_dead(t_elems *elems)
+int	check_if_dead(t_elems *elems)
 {
 	while (elems)
 	{
@@ -58,17 +58,17 @@ void	check_if_dead(t_elems *elems)
 		{
 			printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
 			array(table()->philos)->for_each(detach_each, NULL);
-			pthread_detach(*get_thread_dead());
-
+			return (0);
 		}
 		pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
 		elems = elems->next;
 	}
+	return (1);
 }
 
 void	*check_if_dead_each(void *begin)
 {
-	while (1)
-		check_if_dead(begin);
+	while (check_if_dead(begin))
+		;
 	return (begin);
 }

@@ -14,7 +14,15 @@
 
 void	print_philo(t_philo *philo, int status)
 {
-		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+	printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+	my_usleep(table()->times[status]);
+}
+
+void	unlock_fork(pthread_mutex_t *lock, int pos)
+{
+	pthread_mutex_lock(lock);
+	table()->fork[pos] = 1;
+	pthread_mutex_unlock(lock);
 }
 
 void	get_fork(t_philo *philo)
@@ -32,13 +40,8 @@ void	get_fork(t_philo *philo)
 				table()->fork[1] = 0;
 			else if (table()->fork[philo->index + 1] && ++philo->n_forks)
 				table()->fork[philo->index + 1] = 0;
-			else
-			{
-				philo->n_forks--;
-				pthread_mutex_lock(&philo->left);
-				table()->fork[philo->index] = 1;
-				pthread_mutex_unlock(&philo->left);
-			}
+			else if (philo->n_forks--)
+				unlock_fork(&philo->left, philo->index);
 			pthread_mutex_unlock(philo->rigth);
 		}
 		else
@@ -57,18 +60,12 @@ void	*run_threads(void *elem)
 		get_fork(philo);
 		set_philo_time(philo);
 		print_philo(philo, EAT);
-		my_usleep(table()->times[EAT]);
-		pthread_mutex_lock(&philo->left);
-		table()->fork[philo->index] = 1;
-		pthread_mutex_unlock(&philo->left);
-		pthread_mutex_lock(philo->rigth);
+		unlock_fork(&philo->left, philo->index);
 		if (philo->index == table()->n_philo)
-			table()->fork[1] = 1;
+			unlock_fork(philo->rigth, 1);
 		else
-			table()->fork[philo->index + 1] = 1;
-		pthread_mutex_unlock(philo->rigth);
+			unlock_fork(philo->rigth, philo->index + 1);
 		print_philo(philo, SLEEP);
-		my_usleep(table()->times[SLEEP]);
 		print_philo(philo, THINK);
 	}
 	return (philo);
@@ -76,9 +73,9 @@ void	*run_threads(void *elem)
 
 int	main(int ac, char **av)
 {
-//	pthread_t	thread_dead;
+	pthread_t	thread_dead;
 
-	//*get_thread_dead() = thread_dead;
+	*get_thread_dead() = thread_dead;
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
 		if (ac == 5)
@@ -88,9 +85,8 @@ int	main(int ac, char **av)
 		array(table()->philos)->for_each(give_forks, NULL);
 		table()->start_time = get_time_mili();
 		array(table()->philos)->for_each(init, NULL);
-		//pthread_create(&thread_dead, NULL, check_if_dead_each, array(table()->philos)->begin);
-//		pthread_join(thread_dead, NULL);
-		while (1);
+		pthread_create(&thread_dead, NULL, check_if_dead_each, array(table()->philos)->begin);
+		pthread_join(thread_dead, NULL);
 	}
 	return (0);
 }
