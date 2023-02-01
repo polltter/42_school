@@ -1,6 +1,14 @@
-//
-// Created by mvenanci on 1/27/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   for_each_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/01 21:30:00 by mvenanci          #+#    #+#             */
+/*   Updated: 2023/02/01 21:30:03 by mvenanci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../INCS/philo.h"
 
@@ -14,4 +22,10 @@ void	join_for_each(t_elems *elem, void *o)
 {
 	(void)o;
 	pthread_join(((t_philo *)(elem->content))->id, NULL);
+}
+
+void	detach_each(t_elems *elem, void *o)
+{
+	(void)o;
+	pthread_detach(((t_philo *)(elem->content))->id);
 }

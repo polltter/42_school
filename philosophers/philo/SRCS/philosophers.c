@@ -3,59 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:40:55 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/26 14:54:43 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:51:54 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/philo.h"
 
-int dead(void)
-{
-	int status;
-
-	pthread_mutex_lock(&table()->mutex);
-	status = table()->dead;
-	pthread_mutex_unlock(&table()->mutex);
-	return (status);
-}
-
 void	print_philo(t_philo *philo, int status)
 {
-	if (!dead())
-		printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+	printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+	if (table()->times[status])
+		my_usleep(table()->times[status]);
 }
 
-void	get_fork(t_philo *philo)
+void	unlock_fork(pthread_mutex_t *lock, int pos)
 {
-	philo->n_forks = 0;
-	while (philo->n_forks != 2 && !dead())
+	pthread_mutex_lock(lock);
+	table()->fork[pos] = 1;
+	pthread_mutex_unlock(lock);
+}
+
+int	get_fork(t_philo *philo)
+{
+	philo->n_forks = 2;
+
+	pthread_mutex_lock(&philo->left);
+	if (table()->fork[philo->index] && ++philo->n_forks)
 	{
-		pthread_mutex_lock(&philo->left);
-		if (table()->fork[philo->index] && ++philo->n_forks)
-		{
-			table()->fork[philo->index] = 0;
-			pthread_mutex_unlock(&philo->left);
-			pthread_mutex_lock(philo->rigth);
-			if (philo->index == table()->n_philo && table()->fork[1] && ++philo->n_forks)
-				table()->fork[1] = 0;
-			else if (table()->fork[philo->index + 1] && ++philo->n_forks)
-				table()->fork[philo->index + 1] = 0;
-			else
-			{
-				philo->n_forks--;
-				pthread_mutex_lock(&philo->left);
-				table()->fork[philo->index] = 1;
-				pthread_mutex_unlock(&philo->left);
-			}
-			pthread_mutex_unlock(philo->rigth);
-		}
-		else
-			pthread_mutex_unlock(&philo->left);
+		table()->fork[philo->index] = 0;
+		pthread_mutex_unlock(&philo->left);
+		pthread_mutex_lock(philo->rigth);
+		if (philo->index == table()->n_philo && table()->fork[1] && ++philo->n_forks)
+			table()->fork[1] = 0;
+		else if (table()->fork[philo->index + 1] && ++philo->n_forks)
+			table()->fork[philo->index + 1] = 0;
+		else if (philo->n_forks--)
+			unlock_fork(&philo->left, philo->index);
+		pthread_mutex_unlock(philo->rigth);
 	}
-	print_philo(philo, FORK);
+	else
+		pthread_mutex_unlock(&philo->left);
+	if (philo->n_forks)
+	{
+		print_philo(philo, FORK);
+		set_philo_time(philo);
+		print_philo(philo, EAT);
+	}
+	return (philo->n_forks);
 }
 
 void	*run_threads(void *elem)
@@ -63,32 +60,27 @@ void	*run_threads(void *elem)
 	t_philo	*philo;
 
 	philo = (t_philo *)elem;
-	while (!dead())
+	while (1)
 	{
-		get_fork(philo);
-		set_philo_time(philo);
-		print_philo(philo, EAT);
-		my_usleep(table()->times[EAT]);
-		pthread_mutex_lock(&philo->left);
-		table()->fork[philo->index] = 1;
-		pthread_mutex_unlock(&philo->left);
-		pthread_mutex_lock(philo->rigth);
-		if (philo->index == table()->n_philo)
-			table()->fork[1] = 1;
-		else
-			table()->fork[philo->index + 1] = 1;
-		pthread_mutex_unlock(philo->rigth);
-		print_philo(philo, SLEEP);
-		my_usleep(table()->times[SLEEP]);
-		print_philo(philo, THINK);
+		if (get_fork(philo))
+		{
+			// unlock_fork(&philo->left, philo->index);
+			// if (philo->index == table()->n_philo)
+			// 	unlock_fork(philo->rigth, 1);
+			// else
+			// 	unlock_fork(philo->rigth, philo->index + 1);
+			// print_philo(philo, SLEEP);
+			// print_philo(philo, THINK);
+		}
 	}
 	return (philo);
 }
 
 int	main(int ac, char **av)
 {
-	pthread_t	dead;
+	// pthread_t	thread_dead;
 
+	// *get_thread_dead() = thread_dead;
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
 		if (ac == 5)
@@ -98,9 +90,9 @@ int	main(int ac, char **av)
 		array(table()->philos)->for_each(give_forks, NULL);
 		table()->start_time = get_time_mili();
 		array(table()->philos)->for_each(init, NULL);
-		pthread_create(&dead, NULL, check_if_dead_each, array(table()->philos)->begin);
-		array(table()->philos)->for_each(join_for_each, NULL);
-		pthread_join(dead, NULL);
+		// pthread_create(&thread_dead, NULL, check_if_dead_each, array(table()->philos)->begin);
+		// pthread_join(thread_dead, NULL);
+		while (1);
 	}
 	return (0);
 }

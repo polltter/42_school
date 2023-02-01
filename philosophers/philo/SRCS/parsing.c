@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:33:27 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/26 13:34:36 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:33:06 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	give_forks(t_elems *elem, void *o)
 
 void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	table()->philos = creat_array();
@@ -64,6 +64,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	while (n_philo-- && ++index)
 	{
 		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);
+		pthread_mutex_init(&((t_philo *)(((t_array *)(table()->philos))->end->content))->ate, NULL);
 		((t_philo *)(((t_array *)(table()->philos))->end->content))->last_ate = get_time_mili();
 		table()->fork[index] = 1;
 	}
@@ -76,6 +77,4 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	table()->msg[THINK] = "is thinking";
 	table()->msg[FORK] = "has taken a fork";
 	table()->times_to_eat = times_to_eat;
-	pthread_mutex_init(&table()->mutex, NULL);
-	pthread_mutex_init(&table()->print, NULL);
 }

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:25:22 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/22 11:09:07 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/02/01 21:39:35 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
+# include "pthread.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
@@ -38,6 +38,7 @@ struct s_philo
 	t_usec			last_ate;
 	pthread_mutex_t left;
 	pthread_mutex_t *rigth;
+	pthread_mutex_t ate;
 	int 			eaten;
 	int				index;
 	int 			n_forks;
@@ -48,13 +49,11 @@ struct s_table
 	void	*philos;
 	int 	times[5];
 	char 	*msg[5];
-	int		fork[9999];
+	int		fork[200];
 	int 	dead;
 	int 	start_time;
 	int 	times_to_eat;
 	int		n_philo;
-	pthread_mutex_t mutex;
-	pthread_mutex_t print;
 };
 
 //utils
@@ -62,11 +61,12 @@ int		ft_atoi(char *s);
 t_table	*table(void);
 int 	break_while(void);
 void	*check_if_dead_each(void *begin);
+pthread_t	*get_thread_dead(void);
 
 //for_each_utils
 void	init(t_elems *elem, void *o);
 void	join_for_each(t_elems *elem, void *o);
-
+void	detach_each(t_elems *elem, void *o);
 
 //time_utils
 int		get_time_mili(void);
