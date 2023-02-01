@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci <mvenanci@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:33:27 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/26 13:34:36 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:33:06 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	give_forks(t_elems *elem, void *o)
 
 void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	table()->philos = creat_array();

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvenanci@student.42lisboa.com <mvenanci    +#+  +:+       +#+        */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:25:22 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/01/22 11:09:07 by mvenanci@st      ###   ########.fr       */
+/*   Updated: 2023/02/01 21:39:35 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
+# include "pthread.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/time.h>
@@ -49,7 +49,7 @@ struct s_table
 	void	*philos;
 	int 	times[5];
 	char 	*msg[5];
-	int		fork[9999];
+	int		fork[200];
 	int 	dead;
 	int 	start_time;
 	int 	times_to_eat;
