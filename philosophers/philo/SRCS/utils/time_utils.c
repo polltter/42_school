@@ -35,7 +35,7 @@ void	my_usleep(int mili_sec)
 	while (tv.tv_sec * 1000 + tv.tv_usec / 1000 < end)
 	{
 		gettimeofday(&tv, NULL);
-		usleep(10);
+		usleep(50);
 	}
 }
 

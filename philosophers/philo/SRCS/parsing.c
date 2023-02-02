@@ -42,6 +42,7 @@ void	*create_philosopher(unsigned long id, int index)
 	philo->id = id;
 	philo->index = index;
 	philo->n_forks = 0;
+	philo->times_eaten = 0;
 	return (philo);
 }
 
@@ -61,6 +62,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	index = 0;
 	table()->philos = creat_array();
 	table()->n_philo = n_philo;
+	table()->times_to_eat = times_to_eat * n_philo;
 	while (n_philo-- && ++index)
 	{
 		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);
@@ -76,5 +78,6 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	table()->msg[DIE] = "died";
 	table()->msg[THINK] = "is thinking";
 	table()->msg[FORK] = "has taken a fork";
-	table()->times_to_eat = times_to_eat;
+	table()->times_to_eat_each = times_to_eat;
+	pthread_mutex_init(&table()->total_times_to_eat, NULL);
 }
