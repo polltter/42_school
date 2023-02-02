@@ -39,7 +39,7 @@ struct s_philo
 	pthread_mutex_t left;
 	pthread_mutex_t *rigth;
 	pthread_mutex_t ate;
-	int 			eaten;
+	int 			times_eaten;
 	int				index;
 	int 			n_forks;
 };
@@ -50,10 +50,11 @@ struct s_table
 	int 	times[5];
 	char 	*msg[5];
 	int		fork[200];
-	int 	dead;
 	int 	start_time;
+	int 	times_to_eat_each;
 	int 	times_to_eat;
 	int		n_philo;
+	pthread_mutex_t	total_times_to_eat;
 };
 
 //utils
@@ -62,6 +63,8 @@ t_table	*table(void);
 int 	break_while(void);
 void	*check_if_dead_each(void *begin);
 pthread_t	*get_thread_dead(void);
+void	increase_times_eaten(void);
+int	check_times_eaten(void);
 
 //for_each_utils
 void	init(t_elems *elem, void *o);
