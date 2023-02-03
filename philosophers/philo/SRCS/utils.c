@@ -54,22 +54,16 @@ int	check_if_dead(t_elems *elems)
 	while (elems)
 	{
 		pthread_mutex_lock(&((t_philo *)(elems->content))->ate);
-		if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE] || !check_times_eaten())
+		if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE])
 		{
-			if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE])
-				printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
-			array(table()->philos)->for_each(detach_each, NULL);
+			printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
+			pthread_mutex_lock(&table()->dead);
+			table()->any_dead = 1;
+			pthread_mutex_unlock(&table()->dead);
 			return (0);
 		}
 		pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
 		elems = elems->next;
 	}
 	return (1);
-}
-
-void	*check_if_dead_each(void *begin)
-{
-	while (check_if_dead(begin))
-		;
-	return (begin);
 }

@@ -62,7 +62,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	index = 0;
 	table()->philos = creat_array();
 	table()->n_philo = n_philo;
-	table()->times_to_eat = times_to_eat * n_philo;
+	table()->times_to_eat = times_to_eat;
 	table()->eat = times_to_eat;
 	while (n_philo-- && ++index)
 	{
@@ -78,6 +78,5 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	table()->msg[DIE] = "died";
 	table()->msg[THINK] = "is thinking";
 	table()->msg[FORK] = "has taken a fork";
-	table()->times_to_eat_each = times_to_eat;
 	pthread_mutex_init(&table()->total_times_to_eat, NULL);
 }
