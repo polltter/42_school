@@ -6,7 +6,7 @@ OBJ		= ${SRCS:.c=.o}
 
 CC		= gcc
 
-CFLAGS	= -Wall -Werror -Wextra -pthread -g #-fsanitize=thread
+CFLAGS	= -Wall -Werror -Wextra -pthread -g #-fsanitize=address
 
 all: $(NAME)
 
@@ -24,7 +24,7 @@ norm:
 	norminette -R CheckDefine INCS/*
 
 p:
-	./philo 50 800 200 200
+	./philo 15 800 200 200
 
 r: all clean p
 

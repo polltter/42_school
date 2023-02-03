@@ -71,6 +71,5 @@ void	*check_if_dead_each(void *begin)
 {
 	while (check_if_dead(begin))
 		;
-//	array(table()->philos)->destroy();
 	return (begin);
 }

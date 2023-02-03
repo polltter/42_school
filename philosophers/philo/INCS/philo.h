@@ -49,7 +49,6 @@ struct s_table
 	void	*philos;
 	int 	times[5];
 	char 	*msg[5];
-	int		fork[200];
 	int 	start_time;
 	int 	times_to_eat_each;
 	int 	times_to_eat;
@@ -66,12 +65,13 @@ void	*check_if_dead_each(void *begin);
 pthread_t	*get_thread_dead(void);
 void	increase_times_eaten(void);
 int	check_times_eaten(void);
+int	check_if_dead(t_elems *elems);
 
 //for_each_utils
 void	init(t_elems *elem, void *o);
 void	join_for_each(t_elems *elem, void *o);
 void	detach_each(t_elems *elem, void *o);
-
+void	mutex_destroy_each(t_elems *elem, void *o);
 //time_utils
 int		get_time_mili(void);
 void	my_usleep(int mili_sec);

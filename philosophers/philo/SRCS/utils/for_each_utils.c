@@ -29,3 +29,9 @@ void	detach_each(t_elems *elem, void *o)
 	(void)o;
 	pthread_detach(((t_philo *)(elem->content))->id);
 }
+
+void	mutex_destroy_each(t_elems *elem, void *o)
+{
+	(void)o;
+	pthread_mutex_destroy(&((t_philo *)(elem->content))->left);
+}
