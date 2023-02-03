@@ -28,7 +28,7 @@ void	unlock_fork(pthread_mutex_t *lock, int pos)
 
 int	get_fork(t_philo *philo)
 {
-	philo->n_forks = 0;
+	philo->n_forks = 2;
 
 	pthread_mutex_lock(&philo->left);
 	if (table()->fork[philo->index] && ++philo->n_forks)
@@ -47,7 +47,15 @@ int	get_fork(t_philo *philo)
 	else
 		pthread_mutex_unlock(&philo->left);
 	return (philo->n_forks);
+}
 
+void	release_fork(t_philo *philo)
+{
+	unlock_fork(&philo->left, philo->index);
+	if (philo->index == table()->n_philo)
+		unlock_fork(philo->rigth, 1);
+	else
+		unlock_fork(philo->rigth, philo->index + 1);
 }
 
 void	increase_times_eaten(void)
@@ -77,19 +85,16 @@ void	*run_threads(void *elem)
 		{
 			print_philo(philo, FORK);
 			set_philo_time(philo);
-			if (table()->times_to_eat && philo->times_eaten < table()->times_to_eat_each)
+			if (table()->eat && philo->times_eaten < table()->times_to_eat_each)
 			{
 				philo->times_eaten++;
 				increase_times_eaten();
 			}
 			print_philo(philo, EAT);
-			unlock_fork(&philo->left, philo->index);
-			if (philo->index == table()->n_philo)
-				unlock_fork(philo->rigth, 1);
-			else
-				unlock_fork(philo->rigth, philo->index + 1);
+			release_fork(philo);
 			print_philo(philo, SLEEP);
 			print_philo(philo, THINK);
+			usleep(10);
 		}
 	}
 	return (philo);

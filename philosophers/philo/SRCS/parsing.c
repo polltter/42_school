@@ -63,6 +63,7 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat
 	table()->philos = creat_array();
 	table()->n_philo = n_philo;
 	table()->times_to_eat = times_to_eat * n_philo;
+	table()->eat = times_to_eat;
 	while (n_philo-- && ++index)
 	{
 		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);

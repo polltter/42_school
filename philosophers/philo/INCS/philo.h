@@ -53,6 +53,7 @@ struct s_table
 	int 	start_time;
 	int 	times_to_eat_each;
 	int 	times_to_eat;
+	int 	eat;
 	int		n_philo;
 	pthread_mutex_t	total_times_to_eat;
 };
