@@ -27,6 +27,11 @@ int	action(t_philo *philo, int status)
 	return (1);
 }
 
+void	increase_times_to_eat(t_philo *philo)
+{
+
+}
+
 void	*run_threads(void *elem)
 {
 	t_philo	*philo;
@@ -42,11 +47,9 @@ void	*run_threads(void *elem)
 		if (!action(philo, FORK))
 			return (philo);
 		set_philo_time(philo);
-//		if (table()->eat && philo->times_eaten < table()->times_to_eat_each)
-//		{
-//			philo->times_eaten++;
-//			increase_times_eaten();
-//		}
+		philo->times_eaten++;
+		if (philo->times_eaten == table()->times_to_eat)
+			in
 		if (!action(philo, EAT))
 			return (philo);
 		release_fork(philo);
