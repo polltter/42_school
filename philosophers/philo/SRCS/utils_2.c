@@ -6,6 +6,7 @@
 
 void	get_fork(t_philo *philo)
 {
+	(void)philo;
 	if (philo->index % 2)
 	{
 		pthread_mutex_lock(&philo->left);
@@ -20,14 +21,15 @@ void	get_fork(t_philo *philo)
 
 void	release_fork(t_philo *philo)
 {
-	if (philo->index % 2)
-	{
-		pthread_mutex_unlock(&philo->left);
-		pthread_mutex_unlock(philo->rigth);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->rigth);
-		pthread_mutex_unlock(&philo->left);
-	}
+	(void)philo;
+//	if (philo->index % 2)
+//	{
+//		pthread_mutex_unlock(&philo->left);
+//		pthread_mutex_unlock(philo->rigth);
+//	}
+//	else
+//	{
+//		pthread_mutex_unlock(philo->rigth);
+//		pthread_mutex_unlock(&philo->left);
+//	}
 }

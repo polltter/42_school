@@ -56,6 +56,7 @@ int	check_if_dead(t_elems *elems)
 		pthread_mutex_lock(&((t_philo *)(elems->content))->ate);
 		if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE])
 		{
+			pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
 			printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *)(elems->content))->index, table()->msg[DIE]);
 			pthread_mutex_lock(&table()->dead);
 			table()->any_dead = 1;
