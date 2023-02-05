@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:25:22 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/02/01 21:39:35 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:37:56 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <sys/time.h>
 # include "../SRCS/list_utils/list_utils.h"
 
-typedef struct s_table t_table;
-typedef struct s_philo t_philo;
-typedef struct s_args t_args;
-typedef unsigned int t_usec;
+typedef struct s_table	t_table;
+typedef struct s_philo	t_philo;
+typedef struct s_args	t_args;
+typedef unsigned int	t_usec;
 
 enum e_status {
 	EAT,
@@ -36,24 +36,24 @@ struct s_philo
 {
 	pthread_t		id;
 	t_usec			last_ate;
-	pthread_mutex_t left;
-	pthread_mutex_t *rigth;
-	pthread_mutex_t ate;
-	int 			times_eaten;
+	pthread_mutex_t	left;
+	pthread_mutex_t	*rigth;
+	pthread_mutex_t	ate;
+	int				times_eaten;
 	int				index;
-	int 			n_forks;
+	int				n_forks;
 };
 
 struct s_table
 {
 	void			*philos;
-	int 			times[5];
-	int 			availabe_fork[100];
-	char 			*msg[5];
-	int 			start_time;
-	int 			times_to_eat;
-	int 			any_dead;
-	int 			eat;
+	int				times[5];
+	int				availabe_fork[100];
+	char			*msg[5];
+	int				start_time;
+	int				times_to_eat;
+	int				any_dead;
+	int				eat;
 	int				n_philo;
 	pthread_mutex_t	total_times_to_eat;
 	pthread_mutex_t	dead;
@@ -65,13 +65,12 @@ t_table		*table(void);
 int			check_if_dead(t_elems *elems);
 int			get_fork(t_philo *philo);
 void		release_fork(t_philo *philo);
-int 		dead(void);
+int			dead(void);
 int			full(void);
 
 //for_each_utils
 void		init(t_elems *elem, void *o);
 void		join_for_each(t_elems *elem, void *o);
-
 
 //time_utils
 int			get_time_mili(void);
@@ -81,9 +80,9 @@ void		set_philo_time(t_philo *philo);
 
 //parsing
 int			check_args(int ac, char **av);
-void		init_table(int n_philo, int t_eat, int t_sleep, int t_die, int times_to_eat);
+void		init_table(int n_philo, int t_eat, int t_sleep, int t_die);
 void		give_forks(t_elems *elem, void *o);
 
 //runnig
-void	*run_threads(void *elem);
+void		*run_threads(void *elem);
 #endif

@@ -1,6 +1,14 @@
-//
-// Created by mvenanci on 2/2/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/05 16:01:43 by mvenanci          #+#    #+#             */
+/*   Updated: 2023/02/05 16:19:00 by mvenanci         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../INCS/philo.h"
 
@@ -13,7 +21,8 @@ int	get_fork(t_philo *philo)
 		table()->availabe_fork[philo->index] = 0;
 		pthread_mutex_unlock(&philo->left);
 		pthread_mutex_lock(philo->rigth);
-		if (philo->index == table()->n_philo && table()->availabe_fork[1] && ++philo->n_forks)
+		if (philo->index == table()->n_philo && \
+		table()->availabe_fork[1] && ++philo->n_forks)
 			table()->availabe_fork[1] = 0;
 		else if (table()->availabe_fork[philo->index + 1] && ++philo->n_forks)
 			table()->availabe_fork[philo->index + 1] = 0;
@@ -44,7 +53,7 @@ void	release_fork(t_philo *philo)
 	pthread_mutex_unlock(philo->rigth);
 }
 
-int dead(void)
+int	dead(void)
 {
 	pthread_mutex_lock(&table()->dead);
 	if (table()->any_dead)
@@ -56,10 +65,9 @@ int dead(void)
 	return (1);
 }
 
-int full(void)
+int	full(void)
 {
 	pthread_mutex_lock(&table()->total_times_to_eat);
-//	printf("numero de philo: %d, numero de vezes comidas: %d\n", table()->n_philo, table()->eat);
 	if (table()->eat == table()->n_philo)
 	{
 		pthread_mutex_unlock(&table()->total_times_to_eat);

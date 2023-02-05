@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 13:33:27 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/02/01 21:33:06 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:33:37 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,29 @@ void	give_forks(t_elems *elem, void *o)
 {
 	(void)o;
 	if (!elem->next)
-		((t_philo *)(elem->content))->rigth = &(((t_philo *)(array(table()->philos)->begin->content))->left);
+		((t_philo *)(elem->content))->rigth = \
+		&(((t_philo *)(array(table()->philos)->begin->content))->left);
 	else
-		((t_philo *)(elem->content))->rigth = &(((t_philo *)(elem->next->content))->left);	
+		((t_philo *)(elem->content))->rigth = \
+		&(((t_philo *)(elem->next->content))->left);
 }
 
-void	init_table(int n_philo, int t_die, int t_eat, int t_sleep, int times_to_eat)
+void	init_table(int n_philo, int t_die, int t_eat, int t_sleep)
 {
 	int	index;
 
 	index = 0;
 	table()->philos = creat_array();
 	table()->n_philo = n_philo;
-	table()->times_to_eat = times_to_eat;
 	table()->eat = 0;
 	while (n_philo-- && ++index)
 	{
-		pthread_mutex_init(&(((t_philo *)array(table()->philos)->add(create_philosopher(n_philo, index))->content)->left), NULL);
-		pthread_mutex_init(&((t_philo *)(((t_array *)(table()->philos))->end->content))->ate, NULL);
-		((t_philo *)(((t_array *)(table()->philos))->end->content))->last_ate = get_time_mili();
+		pthread_mutex_init(&(((t_philo *)array(table()->philos) \
+		->add(create_philosopher(n_philo, index))->content)->left), NULL);
+		pthread_mutex_init(&((t_philo *)(((t_array *)(table()->philos)) \
+		->end->content))->ate, NULL);
+		((t_philo *)(((t_array *)(table()->philos))->end->content))\
+		->last_ate = get_time_mili();
 		table()->availabe_fork[index] = 1;
 	}
 	table()->times[EAT] = t_eat;

@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 16:22:21 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/02/01 21:28:24 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:01:22 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ int	check_if_dead(t_elems *elems)
 	while (elems)
 	{
 		pthread_mutex_lock(&((t_philo *)(elems->content))->ate);
-		if (get_time_dif(((t_philo *)(elems->content))->last_ate) > table()->times[DIE])
+		if (get_time_dif(((t_philo *)(elems->content))->last_ate) \
+		> table()->times[DIE])
 		{
 			pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
 			if (full())
 			{
-				printf("%d %d %s\n", get_time_dif(table()->start_time), ((t_philo *) (elems->content))->index,
-					   table()->msg[DIE]);
+				printf("%d %d %s\n", get_time_dif(table()->start_time), \
+				((t_philo *)(elems->content))->index,
+					table()->msg[DIE]);
 				pthread_mutex_lock(&table()->dead);
 				table()->any_dead = 1;
 				pthread_mutex_unlock(&table()->dead);

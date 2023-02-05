@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 21:30:00 by mvenanci          #+#    #+#             */
-/*   Updated: 2023/02/01 21:30:03 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:36:57 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	init(t_elems *elem, void *o)
 {
 	(void)o;
-	pthread_create(&(((t_philo *)(elem->content))->id), NULL, run_threads, elem->content);
+	pthread_create(&(((t_philo *)(elem->content))->id), \
+	NULL, run_threads, elem->content);
 }
 
 void	join_for_each(t_elems *elem, void *o)

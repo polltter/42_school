@@ -6,7 +6,7 @@
 /*   By: mvenanci <mvenanci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 11:40:55 by mvenanci@st       #+#    #+#             */
-/*   Updated: 2023/02/01 21:51:54 by mvenanci         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:36:30 by mvenanci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	action(t_philo *philo, int status)
 {
 	if (!dead() || !full())
 		return (0);
-	printf("%d %d %s\n", get_time_dif(table()->start_time), philo->index, table()->msg[status]);
+	printf("%d %d %s\n", get_time_dif(table()->start_time), \
+	philo->index, table()->msg[status]);
 	if (table()->times[status])
 		my_usleep(table()->times[status]);
 	return (1);
@@ -41,18 +42,17 @@ void	*run_threads(void *elem)
 		if (get_fork(philo) == 2)
 		{
 			if (!action(philo, FORK))
-				break;
+				break ;
 			set_philo_time(philo);
-			if (!action(philo, EAT))
-				break;
+			if (++philo->times_eaten && !action(philo, EAT))
+				break ;
 			release_fork(philo);
-			philo->times_eaten++;
 			if (philo->times_eaten == table()->times_to_eat)
 				increase_times_to_eat();
 			if (!action(philo, SLEEP))
-				break;
+				break ;
 			if (!action(philo, THINK))
-				break;
+				break ;
 			usleep(50);
 		}
 	}
@@ -63,17 +63,19 @@ int	main(int ac, char **av)
 {
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
+		init_table(ft_atoi(av[1]), ft_atoi(av[2]), \
+			ft_atoi(av[3]), ft_atoi(av[4]));
 		if (ac == 5)
-			init_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), -1);
+			table()->times_to_eat = -1;
 		else
-			init_table(ft_atoi(av[1]), ft_atoi(av[2]), ft_atoi(av[3]), ft_atoi(av[4]), ft_atoi(av[5]));
-		array(table()->philos)->for_each(give_forks, NULL);
+			table()->times_to_eat = ft_atoi(av[5]);
+		(array(table()->philos))->for_each(give_forks, NULL);
 		table()->start_time = get_time_mili();
-		array(table()->philos)->for_each(init, NULL);
+		(array(table()->philos))->for_each(init, NULL);
 		while (check_if_dead(array(table()->philos)->begin))
 			;
-		array(table()->philos)->for_each(join_for_each, NULL);
-		array(table()->philos)->destroy();
+		(array(table()->philos))->for_each(join_for_each, NULL);
+		(array(table()->philos))->destroy();
 	}
 	return (0);
 }
