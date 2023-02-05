@@ -4,32 +4,67 @@
 
 #include "../INCS/philo.h"
 
-void	get_fork(t_philo *philo)
+int	get_fork(t_philo *philo)
 {
-	(void)philo;
-	if (philo->index % 2)
+	philo->n_forks = 0;
+	pthread_mutex_lock(&philo->left);
+	if (table()->availabe_fork[philo->index] && ++philo->n_forks)
 	{
-		pthread_mutex_lock(&philo->left);
+		table()->availabe_fork[philo->index] = 0;
+		pthread_mutex_unlock(&philo->left);
 		pthread_mutex_lock(philo->rigth);
+		if (philo->index == table()->n_philo && table()->availabe_fork[1] && ++philo->n_forks)
+			table()->availabe_fork[1] = 0;
+		else if (table()->availabe_fork[philo->index + 1] && ++philo->n_forks)
+			table()->availabe_fork[philo->index + 1] = 0;
+		else
+		{
+			philo->n_forks--;
+			pthread_mutex_lock(&philo->left);
+			table()->availabe_fork[philo->index] = 1;
+			pthread_mutex_unlock(&philo->left);
+		}
+		pthread_mutex_unlock(philo->rigth);
 	}
 	else
-	{
-		pthread_mutex_lock(philo->rigth);
-		pthread_mutex_lock(&philo->left);
-	}
+		pthread_mutex_unlock(&philo->left);
+	return (philo->n_forks);
 }
 
 void	release_fork(t_philo *philo)
 {
-	(void)philo;
-//	if (philo->index % 2)
-//	{
-//		pthread_mutex_unlock(&philo->left);
-//		pthread_mutex_unlock(philo->rigth);
-//	}
-//	else
-//	{
-//		pthread_mutex_unlock(philo->rigth);
-//		pthread_mutex_unlock(&philo->left);
-//	}
+	pthread_mutex_unlock(&philo->left);
+	table()->availabe_fork[philo->index] = 1;
+	pthread_mutex_unlock(&philo->left);
+	pthread_mutex_lock(philo->rigth);
+	if (philo->index == table()->n_philo)
+		table()->availabe_fork[1] = 1;
+	else
+		table()->availabe_fork[philo->index + 1] = 1;
+	pthread_mutex_unlock(philo->rigth);
+}
+
+int dead(void)
+{
+	pthread_mutex_lock(&table()->dead);
+	if (table()->any_dead)
+	{
+		pthread_mutex_unlock(&table()->dead);
+		return (0);
+	}
+	pthread_mutex_unlock(&table()->dead);
+	return (1);
+}
+
+int full(void)
+{
+	pthread_mutex_lock(&table()->total_times_to_eat);
+//	printf("numero de philo: %d, numero de vezes comidas: %d\n", table()->n_philo, table()->eat);
+	if (table()->eat == table()->n_philo)
+	{
+		pthread_mutex_unlock(&table()->total_times_to_eat);
+		return (0);
+	}
+	pthread_mutex_unlock(&table()->total_times_to_eat);
+	return (1);
 }

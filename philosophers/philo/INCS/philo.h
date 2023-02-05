@@ -48,6 +48,7 @@ struct s_table
 {
 	void			*philos;
 	int 			times[5];
+	int 			availabe_fork[100];
 	char 			*msg[5];
 	int 			start_time;
 	int 			times_to_eat;
@@ -62,8 +63,10 @@ struct s_table
 int			ft_atoi(char *s);
 t_table		*table(void);
 int			check_if_dead(t_elems *elems);
-void		get_fork(t_philo *philo);
+int			get_fork(t_philo *philo);
 void		release_fork(t_philo *philo);
+int 		dead(void);
+int			full(void);
 
 //for_each_utils
 void		init(t_elems *elem, void *o);
