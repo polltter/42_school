@@ -37,16 +37,17 @@ void	*run_threads(void *elem)
 	philo = (t_philo *)elem;
 	if (table()->n_philo <= 1)
 		return (philo);
-	if (philo->index % 2)
-		usleep(150);
 	while (dead() && full())
 	{
+		if (get_time_dif(philo->last_ate) <= 2 * table()->times[EAT])
+			usleep(50);
 		if (get_fork(philo) == 2)
 		{
 			if (!action(philo, FORK))
 				break ;
+			philo->times_eaten++;
 			set_philo_time(philo);
-			if (++philo->times_eaten && !action(philo, EAT))
+			if (!action(philo, EAT))
 				break ;
 			release_fork(philo);
 			if (philo->times_eaten == table()->times_to_eat)
