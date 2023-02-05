@@ -35,8 +35,10 @@ void	*run_threads(void *elem)
 	t_philo	*philo;
 
 	philo = (t_philo *)elem;
-	if (table()->n_philo == 1)
+	if (table()->n_philo <= 1)
 		return (philo);
+	if (philo->index % 2)
+		usleep(150);
 	while (dead() && full())
 	{
 		if (get_fork(philo) == 2)
@@ -49,11 +51,8 @@ void	*run_threads(void *elem)
 			release_fork(philo);
 			if (philo->times_eaten == table()->times_to_eat)
 				increase_times_to_eat();
-			if (!action(philo, SLEEP))
+			if (!action(philo, SLEEP) || !action(philo, THINK))
 				break ;
-			if (!action(philo, THINK))
-				break ;
-			usleep(50);
 		}
 	}
 	return (philo);
@@ -63,6 +62,8 @@ int	main(int ac, char **av)
 {
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
+		if (!ft_atoi(av[1]) || (ac == 6 && !ft_atoi(av[5])))
+			return (0);
 		init_table(ft_atoi(av[1]), ft_atoi(av[2]), \
 			ft_atoi(av[3]), ft_atoi(av[4]));
 		if (ac == 5)
