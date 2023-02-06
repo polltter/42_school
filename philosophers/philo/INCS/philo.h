@@ -24,6 +24,13 @@ typedef struct s_philo	t_philo;
 typedef struct s_args	t_args;
 typedef unsigned int	t_usec;
 
+# define EATING "is eating"
+# define SLEEPING "is sleeping"
+# define THINKING "is thinking"
+# define FORKING "has taken a fork"
+# define DYING "died"
+
+
 enum e_status {
 	EAT,
 	SLEEP,
@@ -57,6 +64,7 @@ struct s_table
 	int				n_philo;
 	pthread_mutex_t	total_times_to_eat;
 	pthread_mutex_t	dead;
+	pthread_mutex_t	print;
 };
 
 //utils

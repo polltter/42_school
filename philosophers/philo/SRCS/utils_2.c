@@ -42,7 +42,7 @@ int	get_fork(t_philo *philo)
 
 void	release_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->left);
+	pthread_mutex_lock(&philo->left);
 	table()->availabe_fork[philo->index] = 1;
 	pthread_mutex_unlock(&philo->left);
 	pthread_mutex_lock(philo->rigth);

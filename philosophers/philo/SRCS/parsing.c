@@ -78,10 +78,6 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep)
 	table()->times[EAT] = t_eat;
 	table()->times[SLEEP] = t_sleep;
 	table()->times[DIE] = t_die;
-	table()->msg[EAT] = "is eating";
-	table()->msg[SLEEP] = "is sleeping";
-	table()->msg[DIE] = "died";
-	table()->msg[THINK] = "is thinking";
-	table()->msg[FORK] = "has taken a fork";
 	pthread_mutex_init(&table()->total_times_to_eat, NULL);
+	pthread_mutex_init(&table()->print, NULL);
 }

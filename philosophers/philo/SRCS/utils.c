@@ -62,7 +62,7 @@ int	check_if_dead(t_elems *elems)
 			{
 				printf("%d %d %s\n", get_time_dif(table()->start_time), \
 				((t_philo *)(elems->content))->index,
-					table()->msg[DIE]);
+					DYING);
 				pthread_mutex_lock(&table()->dead);
 				table()->any_dead = 1;
 				pthread_mutex_unlock(&table()->dead);

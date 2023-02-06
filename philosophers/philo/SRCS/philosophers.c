@@ -12,12 +12,12 @@
 
 #include "../INCS/philo.h"
 
-int	action(t_philo *philo, int status)
+int	action(t_philo *philo, int status, char *s)
 {
 	if (!dead() || !full())
 		return (0);
 	printf("%d %d %s\n", get_time_dif(table()->start_time), \
-	philo->index, table()->msg[status]);
+	philo->index, s);
 	if (table()->times[status])
 		my_usleep(table()->times[status]);
 	return (1);
@@ -43,16 +43,16 @@ void	*run_threads(void *elem)
 			usleep(50);
 		if (get_fork(philo) == 2)
 		{
-			if (!action(philo, FORK))
+			if (!action(philo, FORK, FORKING))
 				break ;
 			philo->times_eaten++;
 			set_philo_time(philo);
-			if (!action(philo, EAT))
+			if (!action(philo, EAT, EATING))
 				break ;
 			release_fork(philo);
 			if (philo->times_eaten == table()->times_to_eat)
 				increase_times_to_eat();
-			if (!action(philo, SLEEP) || !action(philo, THINK))
+			if (!action(philo, SLEEP, SLEEPING) || !action(philo, THINK, THINKING))
 				break ;
 		}
 	}
