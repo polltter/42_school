@@ -52,7 +52,7 @@ void	*run_threads(void *elem)
 			release_fork(philo);
 			if (philo->times_eaten == table()->times_to_eat)
 				increase_times_to_eat();
-			if (!action(philo, SLEEP, SLEEPING) || !action(philo, THINK, THINKING))
+			if (!action(philo, SLEEP, SLEEPING) || !action(philo, THINK, T))
 				break ;
 		}
 	}

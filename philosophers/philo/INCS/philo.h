@@ -26,10 +26,9 @@ typedef unsigned int	t_usec;
 
 # define EATING "is eating"
 # define SLEEPING "is sleeping"
-# define THINKING "is thinking"
+# define T "is thinking"
 # define FORKING "has taken a fork"
 # define DYING "died"
-
 
 enum e_status {
 	EAT,
