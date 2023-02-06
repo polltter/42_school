@@ -41,30 +41,21 @@ enum e_status {
 
 struct s_philo
 {
-	pthread_t		id;
 	t_usec			last_ate;
-	pthread_mutex_t	left;
-	pthread_mutex_t	*rigth;
-	pthread_mutex_t	ate;
 	int				times_eaten;
 	int				index;
-	int				n_forks;
 };
 
 struct s_table
 {
 	void			*philos;
 	int				times[5];
-	int				availabe_fork[100];
 	char			*msg[5];
 	int				start_time;
 	int				times_to_eat;
 	int				any_dead;
 	int				eat;
 	int				n_philo;
-	pthread_mutex_t	total_times_to_eat;
-	pthread_mutex_t	dead;
-	pthread_mutex_t	print;
 };
 
 //utils
