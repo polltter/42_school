@@ -16,8 +16,10 @@
 # include "pthread.h"
 # include <unistd.h>
 # include <stdio.h>
-#include <semaphore.h>
+# include <fcntl.h>
+# include <semaphore.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include "../SRCS/list_utils/list_utils.h"
 
 typedef struct s_table	t_table;
@@ -50,9 +52,10 @@ struct s_table
 {
 	void			*philos;
 	int				times[5];
-	char			*msg[5];
 	int				start_time;
 	int				times_to_eat;
+	sem_t 			*forks;
+	pid_t 			pid[300];
 	int				any_dead;
 	int				eat;
 	int				n_philo;
@@ -62,14 +65,10 @@ struct s_table
 int			ft_atoi(char *s);
 t_table		*table(void);
 int			check_if_dead(t_elems *elems);
-int			get_fork(t_philo *philo);
-void		release_fork(t_philo *philo);
 int			dead(void);
 int			full(void);
 
 //for_each_utils
-void		init(t_elems *elem, void *o);
-void		join_for_each(t_elems *elem, void *o);
 
 //time_utils
 int			get_time_mili(void);
@@ -80,8 +79,7 @@ void		set_philo_time(t_philo *philo);
 //parsing
 int			check_args(int ac, char **av);
 void		init_table(int n_philo, int t_eat, int t_sleep, int t_die);
-void		give_forks(t_elems *elem, void *o);
 
 //runnig
-void		*run_threads(void *elem);
+
 #endif

@@ -34,27 +34,14 @@ int	check_args(int ac, char **av)
 	return (1);
 }
 
-void	*create_philosopher(unsigned long id, int index)
+void	*create_philosopher(int index)
 {
 	t_philo	*philo;
 
 	philo = ft_calloc(sizeof(t_philo));
-	philo->id = id;
 	philo->index = index;
-	philo->n_forks = 0;
 	philo->times_eaten = 0;
 	return (philo);
-}
-
-void	give_forks(t_elems *elem, void *o)
-{
-	(void)o;
-	if (!elem->next)
-		((t_philo *)(elem->content))->rigth = \
-		&(((t_philo *)(array(table()->philos)->begin->content))->left);
-	else
-		((t_philo *)(elem->content))->rigth = \
-		&(((t_philo *)(elem->next->content))->left);
 }
 
 void	init_table(int n_philo, int t_die, int t_eat, int t_sleep)
@@ -65,19 +52,14 @@ void	init_table(int n_philo, int t_die, int t_eat, int t_sleep)
 	table()->philos = creat_array();
 	table()->n_philo = n_philo;
 	table()->eat = 0;
+	sem_unlink("/forks");
+	table()->forks = sem_open("/forks", O_CREAT, 0666, n_philo);
 	while (n_philo-- && ++index)
 	{
-		pthread_mutex_init(&(((t_philo *)array(table()->philos) \
-		->add(create_philosopher(n_philo, index))->content)->left), NULL);
-		pthread_mutex_init(&((t_philo *)(((t_array *)(table()->philos)) \
-		->end->content))->ate, NULL);
-		((t_philo *)(((t_array *)(table()->philos))->end->content))\
-		->last_ate = get_time_mili();
-		table()->availabe_fork[index] = 1;
+		((t_philo *)array(table()->philos) \
+		->add(create_philosopher(index))->content)->last_ate = get_time_mili();
 	}
 	table()->times[EAT] = t_eat;
 	table()->times[SLEEP] = t_sleep;
 	table()->times[DIE] = t_die;
-	pthread_mutex_init(&table()->total_times_to_eat, NULL);
-	pthread_mutex_init(&table()->print, NULL);
 }

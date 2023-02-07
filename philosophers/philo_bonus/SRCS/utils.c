@@ -42,35 +42,3 @@ t_table	*table(void)
 	return (&table);
 }
 
-pthread_t	*get_thread_dead(void)
-{
-	static pthread_t	thread_dead;
-
-	return (&thread_dead);
-}
-
-int	check_if_dead(t_elems *elems)
-{
-	while (elems)
-	{
-		pthread_mutex_lock(&((t_philo *)(elems->content))->ate);
-		if (get_time_dif(((t_philo *)(elems->content))->last_ate) \
-		> table()->times[DIE])
-		{
-			pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
-			if (full())
-			{
-				printf("%d %d %s\n", get_time_dif(table()->start_time), \
-				((t_philo *)(elems->content))->index,
-					DYING);
-				pthread_mutex_lock(&table()->dead);
-				table()->any_dead = 1;
-				pthread_mutex_unlock(&table()->dead);
-			}
-			return (0);
-		}
-		pthread_mutex_unlock(&((t_philo *)(elems->content))->ate);
-		elems = elems->next;
-	}
-	return (1);
-}

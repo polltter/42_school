@@ -14,8 +14,6 @@
 
 int	action(t_philo *philo, int status, char *s)
 {
-	if (!dead() || !full())
-		return (0);
 	printf("%d %d %s\n", get_time_dif(table()->start_time), \
 	philo->index, s);
 	if (table()->times[status])
@@ -23,44 +21,40 @@ int	action(t_philo *philo, int status, char *s)
 	return (1);
 }
 
-void	increase_times_to_eat(void)
-{
-	pthread_mutex_lock(&table()->total_times_to_eat);
-	table()->eat++;
-	pthread_mutex_unlock(&table()->total_times_to_eat);
-}
-
-void	*run_threads(void *elem)
+int start_processes(t_elems *elems)
 {
 	t_philo	*philo;
 
-	philo = (t_philo *)elem;
-	if (table()->n_philo <= 1)
-		return (philo);
-	while (dead() && full())
+	while (elems)
 	{
-		if (get_time_dif(philo->last_ate) <= 2 * table()->times[EAT])
-			usleep(50);
-		if (get_fork(philo) == 2)
+		philo = (t_philo *)elems->content;
+		table()->pid[philo->index] = fork();
+		if (table()->pid[philo->index] == -1)
+			return (0);
+		else if  (!table()->pid[philo->index])
 		{
-			if (!action(philo, FORK, FORKING))
-				break ;
-			philo->times_eaten++;
-			set_philo_time(philo);
-			if (!action(philo, EAT, EATING))
-				break ;
-			release_fork(philo);
-			if (philo->times_eaten == table()->times_to_eat)
-				increase_times_to_eat();
-			if (!action(philo, SLEEP, SLEEPING) || !action(philo, THINK, T))
-				break ;
+			while (get_time_dif(philo->last_ate) <= table()->times[DIE])
+			{
+				sem_wait(table()->forks);
+				sem_wait(table()->forks);
+				action(philo, FORK, FORKING);
+				action(philo, EAT, EATING);
+				sem_post(table()->forks);
+				sem_post(table()->forks);
+				action(philo, SLEEP, SLEEPING);
+				action(philo, THINK, T);
+			}
 		}
+		else
+			elems = elems->next;
 	}
-	return (philo);
+	return (1);
 }
 
 int	main(int ac, char **av)
 {
+	int status;
+
 	if ((ac == 5 || ac == 6) && check_args(ac, av))
 	{
 		if (!ft_atoi(av[1]) || (ac == 6 && !ft_atoi(av[5])))
@@ -71,12 +65,9 @@ int	main(int ac, char **av)
 			table()->times_to_eat = -1;
 		else
 			table()->times_to_eat = ft_atoi(av[5]);
-		(array(table()->philos))->for_each(give_forks, NULL);
 		table()->start_time = get_time_mili();
-		(array(table()->philos))->for_each(init, NULL);
-		while (check_if_dead(array(table()->philos)->begin))
-			;
-		(array(table()->philos))->for_each(join_for_each, NULL);
+		start_processes(array(table()->philos)->begin);
+		waitpid(-1, &status, 0);
 		(array(table()->philos))->destroy();
 	}
 	return (0);
