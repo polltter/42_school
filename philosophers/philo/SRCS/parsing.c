@@ -29,8 +29,12 @@ int	check_args(int ac, char **av)
 
 	i = 0;
 	while (++i < ac)
+	{
 		if (!is_digit(av[i]))
 			return (printf("Invalid argument\n") == 0);
+		if (i == 1 && ft_atoi(av[1]) > 200)
+			return (printf("Invalid number of philosophers\n") == 0);
+	}
 	return (1);
 }
 

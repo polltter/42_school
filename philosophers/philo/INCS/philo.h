@@ -54,7 +54,7 @@ struct s_table
 {
 	void			*philos;
 	int				times[5];
-	int				availabe_fork[100];
+	int				availabe_fork[300];
 	char			*msg[5];
 	int				start_time;
 	int				times_to_eat;

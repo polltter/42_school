@@ -25,12 +25,6 @@ void	join_for_each(t_elems *elem, void *o)
 	pthread_join(((t_philo *)(elem->content))->id, NULL);
 }
 
-void	detach_each(t_elems *elem, void *o)
-{
-	(void)o;
-	pthread_detach(((t_philo *)(elem->content))->id);
-}
-
 void	mutex_destroy_each(t_elems *elem, void *o)
 {
 	(void)o;

@@ -74,3 +74,15 @@ int	check_if_dead(t_elems *elems)
 	}
 	return (1);
 }
+
+int	full(void)
+{
+	pthread_mutex_lock(&table()->total_times_to_eat);
+	if (table()->eat == table()->n_philo)
+	{
+		pthread_mutex_unlock(&table()->total_times_to_eat);
+		return (0);
+	}
+	pthread_mutex_unlock(&table()->total_times_to_eat);
+	return (1);
+}
