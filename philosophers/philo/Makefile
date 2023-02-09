@@ -24,7 +24,7 @@ norm:
 	norminette -R CheckDefine INCS/*
 
 p:
-	./philo 16 1000 200 100
+	./philo 5 800 200 100
 
 r: all clean p
 

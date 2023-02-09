@@ -40,7 +40,7 @@ void	*run_threads(void *elem)
 	while (dead() && full())
 	{
 		if (get_time_dif(philo->last_ate) <= 2 * table()->times[EAT])
-			usleep(50);
+			usleep(200);
 		if (get_fork(philo) == 2)
 		{
 			if (!action(philo, FORK, FORKING))
