@@ -1,0 +1,3 @@
+/home/miguel/Documents/42_school/CPP00/cmake-build-debug/CMakeFiles/CPP00.dir
+/home/miguel/Documents/42_school/CPP00/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/miguel/Documents/42_school/CPP00/cmake-build-debug/CMakeFiles/rebuild_cache.dir
