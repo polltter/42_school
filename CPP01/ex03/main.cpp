@@ -2,8 +2,8 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "HumanA.h++"
-#include "HumanB.h++"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 int main(void) {
     {

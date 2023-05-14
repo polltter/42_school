@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "Weapon.h++"
+#include "Weapon.hpp"
 
 Weapon::Weapon(void) {
     std::cout << "Weapon created\n";

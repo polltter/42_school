@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "Harl.h++"
+#include "Harl.hpp"
 
 Harl::Harl() {
     levels[0] = "DEBUG";

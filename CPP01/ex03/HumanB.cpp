@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "HumanB.h++"
+#include "HumanB.hpp"
 
 HumanB::HumanB(std::string name) {
     this->myName = name;

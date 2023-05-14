@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "HumanA.h++"
+#include "HumanA.hpp"
 
 HumanA::HumanA(std::string name, Weapon &weapon): myWeapon(weapon) {
     this->myName = name;

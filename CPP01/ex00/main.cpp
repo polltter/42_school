@@ -1,12 +1,12 @@
-#include "Zombie.h++"
+#include "Zombie.hpp"
 
 void randomChump( std::string name );
 
 Zombie* newZombie( std::string name );
 
 int main() {
-    randomChump("gay");
-    Zombie *b = newZombie("homo");
+    randomChump("Miguel");
+    Zombie *b = newZombie("Edu");
     b->announce();
     delete b;
     return 0;

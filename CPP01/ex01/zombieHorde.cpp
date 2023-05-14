@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "Zombie.h++"
+#include "Zombie.hpp"
 
 Zombie* zombieHorde( int N, std::string name ) {
     Zombie *horde = new Zombie[N];

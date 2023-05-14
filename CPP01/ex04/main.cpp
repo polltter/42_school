@@ -1,4 +1,4 @@
-#include "string_utils.h++"
+#include "string_utils.hpp"
 
 int open_files(std::ifstream *in, std::ofstream *out, const char *av) {
     std::string     out_name(av);

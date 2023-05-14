@@ -2,7 +2,7 @@
 #ifndef CPP01_HUMANA_H
 #define CPP01_HUMANA_H
 
-#include "Weapon.h++"
+#include "Weapon.hpp"
 
 class HumanA {
 private:

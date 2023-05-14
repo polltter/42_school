@@ -2,7 +2,7 @@
 // Created by miguel on 29-04-2023.
 //
 
-#include "string_utils.h++"
+#include "string_utils.hpp"
 
 std::string getTextFile(std::ifstream &in) {
     std::string str;
