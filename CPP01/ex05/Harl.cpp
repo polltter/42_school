@@ -36,7 +36,7 @@ void Harl::error() {
     std::cout << "This is unacceptable! I want to speak to the manager now.\n";
 }
 
-void Harl::comlain(std::string level) {
+void Harl::complain(std::string level) {
     for (int i = 0; i < 4; i++) {
         if (this->levels[i] == level)
             (this->*f[i])();

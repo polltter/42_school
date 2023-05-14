@@ -26,7 +26,7 @@ std::string searchReplace(std::string og, const char *s, const char *r) {
     while (pos + 1) {
         og.erase(pos, search.length());
         og.insert(pos, replace);
-        pos = og.find(search);
+        pos = og.find(search, pos + replace.length());
     }
     return og;
 }

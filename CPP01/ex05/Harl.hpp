@@ -14,7 +14,7 @@ private:
     void (Harl::*f[4])(void);
     std::string levels[4];
 public:
-    void comlain(std::string level);
+    void complain(std::string level);
     Harl();
     ~Harl();
 };
