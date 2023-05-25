@@ -19,7 +19,7 @@ public:
     ClapTrap &operator=(ClapTrap const &src);
     virtual ~ClapTrap();
 
-    virtual void attack(const std::string & target);
+    void attack(const std::string & target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);
 
@@ -29,7 +29,7 @@ public:
     void setEnergyPoints(int energyPoints);
     int getHitPoints() const;
     void setHitPoints(int hitPoints);
-    virtual const std::string &getName() const;
+    const std::string &getName() const;
 
     void setName(const std::string &name);
 

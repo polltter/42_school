@@ -4,16 +4,14 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {
-    std::cout << "ClapTrap created" << std::endl;
-}
+ClapTrap::ClapTrap() {}
 
 ClapTrap::ClapTrap(const std::string& n): name(n), hitPoints(10), energyPoints(10), attackDamage(0){
-    std::cout << "ClapTrap default constructor called" << std::endl;
+    std::cout << name << " has entered the game" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap &src) {
-    std::cout << "ClapTrap copy constructor called" << std::endl;
+    std::cout << "Copy constructor called" << std::endl;
     *this = src;
 }
 
@@ -26,7 +24,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &src) {
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "ClapTrap destroyed" << std::endl;
+    std::cout << name << " has left the game" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
@@ -40,9 +38,9 @@ void ClapTrap::takeDamage(unsigned int amount) {
 
 void ClapTrap::attack(const std::string &target) {
     std::cout << "Claptrap " << this->name
-              << " attacks " << target
-              << ", causing " << this->attackDamage
-              << " points of damage!" << std::endl;
+    << " attacks " << target
+    << ", causing " << this->attackDamage
+    << " points of damage!" << std::endl;
     this->energyPoints--;
 }
 
