@@ -1,5 +1,5 @@
 
-NAME = clap
+NAME = scav
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp

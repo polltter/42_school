@@ -4,7 +4,7 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {}
+ClapTrap::ClapTrap(): hitPoints(10), energyPoints(10), attackDamage(0) {}
 
 ClapTrap::ClapTrap(const std::string& n): name(n), hitPoints(10), energyPoints(10), attackDamage(0){
     std::cout << name << " has entered the game" << std::endl;

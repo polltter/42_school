@@ -4,7 +4,7 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {
+ClapTrap::ClapTrap(): hitPoints(10), energyPoints(10), attackDamage(0){
     std::cout << "ClapTrap created" << std::endl;
 }
 

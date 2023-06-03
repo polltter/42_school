@@ -4,8 +4,11 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() {
+ScavTrap::ScavTrap():ClapTrap(){
     std::cout << "ScavTrap created" << std::endl;
+	this->energyPoints = 50;
+	this->hitPoints = 100;
+	this->attackDamage = 20 ;
 }
 
 ScavTrap::ScavTrap(const std::string &name): ClapTrap(name) {

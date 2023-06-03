@@ -1,5 +1,5 @@
 
-NAME = clap
+NAME = frag
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp ClapTrap.cpp FragTrap.cpp

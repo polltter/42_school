@@ -7,7 +7,7 @@ int main( void ) {
     Point b(5, 0);
     Point c(2.5, 5);
 
-    Point point(1, 100);
+    Point point(0, 0);
     std::cout << bsp(a, b, c, point) << std::endl;
     return 0;
 }

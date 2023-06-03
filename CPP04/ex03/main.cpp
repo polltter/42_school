@@ -2,10 +2,12 @@
 // Created by miguel on 29-05-2023.
 //
 
+#include "lists.hpp"
 #include "Character.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
+
 
 int main()
 {
@@ -18,9 +20,12 @@ int main()
     me->equip(tmp);
     tmp = src->createMateria("cure");
     me->equip(tmp);
+	me->unequip(1);
+	tmp = src->createMateria("cure");
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
     me->use(1, *bob);
+	delete_list();
     delete bob;
     delete me;
     delete src;

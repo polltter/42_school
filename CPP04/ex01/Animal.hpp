@@ -2,22 +2,22 @@
 // Created by miguel on 29-05-2023.
 //
 
-#ifndef CPP04_AANIMAL_HPP
+#ifndef CPP04_ANIMAL_HPP
 #define CPP04_ANIMAL_HPP
 
 #include "iostream"
 #include "string"
 #include "Brain.hpp"
 
-class AAnimal {
+class Animal {
 protected:
     std::string type;
     Brain       *brain;
 public:
-    AAnimal();
-    AAnimal(const AAnimal& src);
-    AAnimal &operator=(const AAnimal& src);
-    virtual ~AAnimal();
+    Animal();
+    Animal(const Animal& src);
+    Animal &operator=(const Animal& src);
+    virtual ~Animal();
 
     const std::string &getType() const;
     void setType(const std::string &type);

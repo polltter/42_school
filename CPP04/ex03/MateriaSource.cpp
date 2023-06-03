@@ -3,6 +3,7 @@
 //
 
 #include "MateriaSource.hpp"
+#include "lists.hpp"
 
 MateriaSource::MateriaSource(): IMateriaSource(){
     for (int i = 0; i < 4; i++) {
@@ -41,7 +42,7 @@ void MateriaSource::learnMateria(AMateria *src) {
 AMateria *MateriaSource::createMateria(std::string const & type){
     for (int i = 0; i < 4; i++) {
         if (sources[i]->getType() == type)
-            return sources[i]->clone();
+            return add_list(sources[i]->clone())->cont;
     }
     return 0;
 }

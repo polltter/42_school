@@ -4,15 +4,16 @@
 
 #include "AMateria.hpp"
 
-AMateria::AMateria() {
+AMateria::AMateria(): equiped(0) {
     std::cout << "Default AMateria created" << std::endl;
 }
 
 
-AMateria::AMateria(const std::string &type): type(type) {}
+AMateria::AMateria(const std::string &type): type(type), equiped(0) {}
 
 AMateria &AMateria::operator=(const AMateria &src) {
     type = src.getType();
+	equiped = src.equiped;
     return *this;
 }
 

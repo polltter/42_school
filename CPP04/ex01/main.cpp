@@ -9,7 +9,7 @@
 int	main()
 {
     {
-        const	AAnimal*	bunch[6];
+        const	Animal*	bunch[6];
         for (int i = 0; i < 6; i++)
         {
             if (i % 2)
@@ -28,8 +28,8 @@ int	main()
     {
         std::cout << std::endl << "Checking the copy constructors: " << std::endl;
         const 	Dog*	dog = new Dog;
-        const	AAnimal* other = new Dog(*dog);
-//        dog->makeSound();
+        const	Animal* other = new Dog(*dog);
+        dog->makeSound();
         other->makeSound();
         delete dog;
         delete other;

@@ -3,7 +3,7 @@
 //
 
 #include "Character.hpp"
-
+#include "lists.hpp"
 
 Character::Character(): name("Default name") {
     for (int i = 0; i < 4; i++)
@@ -43,13 +43,15 @@ void Character::equip(AMateria *m) {
         if (!inventory[i])
         {
             inventory[i] = m;
+			m->equiped = 1;
             break;
         }
     }
 }
 
 void Character::unequip(int idx) {
-    inventory[idx] = 0;
+    inventory[idx]->equiped = 0;
+	inventory[idx] = 0;
 }
 
 void Character::use(int idx, ICharacter &target) {

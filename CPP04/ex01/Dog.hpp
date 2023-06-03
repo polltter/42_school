@@ -7,7 +7,7 @@
 
 #include "Animal.hpp"
 
-class Dog: public AAnimal{
+class Dog: public Animal{
 public:
     Dog();
     Dog(const Dog& src);

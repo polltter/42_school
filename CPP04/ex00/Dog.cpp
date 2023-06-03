@@ -4,12 +4,12 @@
 
 #include "Dog.hpp"
 
-Dog::Dog(): AAnimal() {
+Dog::Dog(): Animal() {
     std::cout << "New dog creted" << std::endl;
     setType("dog");
 }
 
-Dog::Dog(const Dog& src): AAnimal(src) {
+Dog::Dog(const Dog& src): Animal(src) {
     *this = src;
 }
 

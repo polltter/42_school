@@ -4,12 +4,12 @@
 
 #include "Cat.hpp"
 
-Cat::Cat(): AAnimal() {
+Cat::Cat(): Animal() {
     std::cout << "Cat created" << std::endl;
     setType("Cat");
 }
 
-Cat::Cat(const Cat &src): AAnimal(src) {
+Cat::Cat(const Cat &src): Animal(src) {
     *this = src;
 }
 
