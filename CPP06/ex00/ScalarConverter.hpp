@@ -35,14 +35,13 @@ private:
     static void toFloat(const std::string&);
     static void toDouble(const std::string&);
     static void display(const std::string& s);
+    static int typeOfNumber(const std::string&);
 public:
     ScalarConverter();
     ScalarConverter(const ScalarConverter &scalarConverter);
-
     ~ScalarConverter();
     ScalarConverter &operator=(const ScalarConverter &scalarConverter);
     static void converter(const std::string& s);
-    static int typeOfNumber(const std::string&);
 };
 
 
