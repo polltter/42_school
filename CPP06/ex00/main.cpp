@@ -1,12 +1,15 @@
 //
 // Created by miguel on 02-07-2023.
 //
+
 #include "ScalarConverter.hpp"
-#include <iostream>
+
+
 int main(int ac, char **av) {
-
-    ScalarConverter a;
-    a.convert("42.1");
-
-    return 0;
+    if (ac != 2)
+        std::cout << "Invalid number of inputs." << std::endl;
+    else {
+        ScalarConverter a = ScalarConverter();
+        a.converter(av[ac - 1]);
+    }
 }

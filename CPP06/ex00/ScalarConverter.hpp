@@ -10,21 +10,39 @@
 #include "cstdlib"
 #include <sstream>
 #include <cmath>
-#include "limits"
+#include "climits"
+#include <cfloat>
+
+enum tipos {
+    CHAR,
+    INT,
+    FLOAT,
+    DOUBLE,
+    INVALID
+};
 
 class ScalarConverter {
 private:
-    void convert_int(std::string scalar);
-    void convert_float(std::string scalar);
-    double convert_double(std::string scalar);
-    void convert_char(std::string scalar);
+    static char c;
+    static int  i;
+    static float f;
+    static double d;
+    static bool checkInt(const std::string&);
+    static bool checkDouble(const std::string&);
+    static bool checkFloat(const std::string&);
+    static void toChar(const std::string&);
+    static void toInt(const std::string&);
+    static void toFloat(const std::string&);
+    static void toDouble(const std::string&);
+    static void display(const std::string& s);
 public:
     ScalarConverter();
-    ScalarConverter(ScalarConverter const &src);
-    ScalarConverter &operator=(ScalarConverter const &src);
-    ~ScalarConverter();
+    ScalarConverter(const ScalarConverter &scalarConverter);
 
-    void convert(std::string);
+    ~ScalarConverter();
+    ScalarConverter &operator=(const ScalarConverter &scalarConverter);
+    static void converter(const std::string& s);
+    static int typeOfNumber(const std::string&);
 };
 
 
