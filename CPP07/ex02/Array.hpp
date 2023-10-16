@@ -40,6 +40,7 @@ public:
         }
         return values[index];
     }
+    ~Array() { delete [] values;}
     int size() {return len;}
 };
 
