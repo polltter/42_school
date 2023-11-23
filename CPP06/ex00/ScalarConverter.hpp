@@ -11,20 +11,21 @@
 #include <sstream>
 #include <cmath>
 #include "limits"
+#include "iomanip"
 
 class ScalarConverter {
 private:
-    void convert_int(std::string scalar);
-    void convert_float(std::string scalar);
-    double convert_double(std::string scalar);
-    void convert_char(std::string scalar);
-public:
+    static void convert_int(std::string scalar);
+    static void convert_float(std::string scalar);
+    static void convert_double(const std::string& scalar);
+    static void convert_char(std::string scalar);
     ScalarConverter();
     ScalarConverter(ScalarConverter const &src);
     ScalarConverter &operator=(ScalarConverter const &src);
+public:
     ~ScalarConverter();
 
-    void convert(std::string);
+    static void convert(std::string);
 };
 
 

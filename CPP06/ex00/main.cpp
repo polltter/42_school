@@ -5,8 +5,10 @@
 #include <iostream>
 int main(int ac, char **av) {
 
-    ScalarConverter a;
-    a.convert("42.1");
-
+    if (ac != 2) {
+        std::cout << "Usage: ./convert <string>" << std::endl;
+        return 1;
+    }
+    ScalarConverter::convert(av[1]);
     return 0;
 }
