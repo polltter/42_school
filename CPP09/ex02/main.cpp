@@ -26,19 +26,21 @@ bool is_sorted (ForwardIterator first, ForwardIterator last)
 template <typename T>
 void displayArr(T first, T last, const std::string msg) {
     std::string s;
-    std::stringstream ss;
-    ss << msg;
-    while (first != last) {
+	std::stringstream ss;
+	ss << msg;
+//	COUT(ss.str());
+//	COUT(*first);
+	while (first != last) {
         ss << *first;
         ss << ' ';
-        s = ss.str();
-        if (s.size() > 25) {
-            s += "[...]";
+//        s = ss.str();
+        if (ss.str().size() > 25) {
+            ss << "[...]";
             break;
         }
         first++;
     }
-    COUT(s);
+    COUT(ss.str());
 }
 
 int main(int ac, char **av)
@@ -61,14 +63,16 @@ int main(int ac, char **av)
             numbersV.push_back(atoi(word.c_str()));
             numbersL.push_back(atoi(word.c_str()));
         }
-        displayArr(numbersV.begin(), numbersV.end(), "Before: ");
+        displayArr(numbersV.begin(), numbersV.end(), "Before Vector: ");
+        displayArr(numbersL.begin(), numbersL.end(), "Before list: ");
         PmergeMe p;
         clock_t t11 = clock();
         numbersV = p.mySortV(numbersV);
         clock_t t12 = clock();
         numbersL = p.mySortL(numbersL);
         clock_t t13 = clock();
-        displayArr(numbersV.begin(), numbersV.end(), "After: ");
+        displayArr(numbersV.begin(), numbersV.end(), "After Vector: ");
+        displayArr(numbersL.begin(), numbersL.end(), "After List: ");
         std::cout << "Time to process a range of " << numbersV.size() << " elements with std::vector: " << (double )(t12 - t11) * 1000 / CLOCKS_PER_SEC << " us" << std::endl;
         std::cout << "Time to process a range of " << numbersV.size() << " elements with std::vector: " << (double)(t13 - t12) * 1000 / CLOCKS_PER_SEC << " us" << std::endl;
     }

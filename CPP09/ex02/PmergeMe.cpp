@@ -4,6 +4,9 @@
 
 #include "PmergeMe.hpp"
 
+template <typename T>
+void displayArr(T first, T last, const std::string msg);
+
 std::vector<int> PmergeMe::mySortV(std::vector<int> arr) {
     std::vector<int> arr1(arr.begin(), arr.begin() + arr.size() / 2);
     std::vector<int> arr2(arr.begin() + arr.size() / 2, arr.end());
@@ -44,18 +47,18 @@ std::list<int> PmergeMe::mySortL(std::list<int> arr) {
 
     std::list<int> arr1;
     std::list<int> arr2;
-    int sizeHalf = arr.size();
-    for (int i = 0; i < sizeHalf; i++) {
-        arr1.push_back(arr.front());
-        arr.pop_front();
-    }
-    for (int i = sizeHalf; i < (int)arr.size(); i++) {
-        arr2.push_back(arr.front());
-        arr.pop_front();
-    }
-    if (arr.size() > 2) {
-        arr1 = mySortL(arr1);
-        arr2 = mySortL(arr2);
+    int size = arr.size();
+	if (arr.size() > 2) {
+		for (int i = 0; i < size / 2; i++) {
+			arr1.push_back(arr.front());
+			arr.pop_front();
+		}
+		for (int i = size / 2; i < size; i++) {
+			arr2.push_back(arr.front());
+			arr.pop_front();
+		}
+		arr1 = mySortL(arr1);
+		arr2 = mySortL(arr2);
     }
     else {
         if (arr.size() == 2 && arr.front() > arr.back()){
@@ -66,7 +69,7 @@ std::list<int> PmergeMe::mySortL(std::list<int> arr) {
         return arr;
     }
     std::list<int> newArray;
-    for (; !arr2.empty() || arr1.empty();) {
+    for (; !arr2.empty() || !arr1.empty();) {
         if (arr1.empty()) {
             newArray.push_back(arr2.front());
             arr2.pop_front();
