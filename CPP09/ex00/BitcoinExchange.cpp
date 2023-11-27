@@ -75,8 +75,7 @@ void BitcoinExchange::evaluateInput(char *io) {
             std::getline(fs, line);
         }
         catch (badLineInputException &e) {
-            std::string a("Error: Bad input => " + line);
-            COUT(e.what(a));
+            COUT(e.what() + line);
             std::getline(fs, line);
             continue;
         }

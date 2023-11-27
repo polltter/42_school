@@ -36,8 +36,8 @@ public:
 
     class badLineInputException: public std::exception {
     public:
-        virtual const char *what(std::string &input) const throw() {
-            return (input).c_str();
+        virtual const char *what() const throw() {
+            return "Error: Bad input => ";
         }
     };
 
