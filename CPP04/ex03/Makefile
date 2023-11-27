@@ -1,7 +1,8 @@
 NAME = animal
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
-SRC = AMateria.cpp Character.cpp ICharacter.cpp Ice.cpp Cure.cpp main.cpp IMateriaSource.cpp MateriaSource.cpp
+SRC = AMateria.cpp Character.cpp ICharacter.cpp Ice.cpp Cure.cpp main.cpp \
+		IMateriaSource.cpp MateriaSource.cpp lists.cpp
 
 $(NAME):
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(NAME)

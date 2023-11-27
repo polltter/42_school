@@ -10,6 +10,12 @@ template<class T>
 class MutantStack: public  std::stack<T> {
 public:
     MutantStack() {}
+	MutantStack(const MutantStack &src) {*this = src;}
+	MutantStack &operator=(const MutantStack &src) {
+		this->c = src.c;
+		return *this;
+	}
+	~MutantStack() {}
     typedef typename std::stack<T>::container_type::iterator iterator;
     typedef typename std::stack<T>::container_type::const_iterator const_iterator;
     typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;

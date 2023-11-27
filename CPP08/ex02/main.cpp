@@ -24,7 +24,6 @@ int main()
             std::cout << *it << std::endl;
             ++it;
         }
-        std::stack<int> s(mstack);
     }
     std::cout << std::endl << "-----------" << std::endl << std::endl;
     {

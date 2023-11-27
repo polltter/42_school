@@ -1,4 +1,3 @@
-
 NAME = form
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98

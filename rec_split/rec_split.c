@@ -48,17 +48,35 @@ char	**split(const char *s, char c)
 	return (rec_split(0, 0, c, s));
 }
 
+int freepp(char **s)
+{
+	char **head = s;
+	while(*s)
+	{
+		free(*s);
+		s++;
+	}
+	free(head);
+	return (1);
+}
+
+int	coninhas(void)
+{
+	return (1);
+}
+
+int	coninhas2(void *test)
+{
+	(void)test;
+	return (1);
+}
+
 int	main(void)
 {
 	int i = -1;
 	char *s = "  sdfklg sdfkgls sd a     ";
 	char **splitted = split(s, ' ');
-	char **head = splitted;
-	while(*splitted)
-	{
-		printf("%s\n", *splitted);
-		free (*splitted);
-		splitted++;
-	}
-	free(head);
+	int	a;
+
+	(a = coninhas()) == 0 || (freepp(splitted) && coninhas2((void *)exit(0)));
 }

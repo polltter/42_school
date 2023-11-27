@@ -26,9 +26,9 @@ int main( void )
     std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
     std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 
-    Data	*e = new Data;
-    Data	*f = new Data;
-    e->content = 5;
+	Data	*e = new Data;
+	Data	*f = new Data;
+	e->content = 5;
     f->content = 10;
 
     ::swap(e, f);

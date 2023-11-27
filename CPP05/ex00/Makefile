@@ -1,5 +1,5 @@
 
-NAME = animal
+NAME = bureau
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = main.cpp Bureaucrat.cpp
