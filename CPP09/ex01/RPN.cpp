@@ -3,6 +3,15 @@
 //
 
 #include "RPN.hpp"
+
+RPN::RPN() {}
+RPN &RPN::operator=(const RPN &src) {(void)src; return *this;}
+RPN::RPN(const RPN &src) {*this = src;}
+RPN::~RPN() {}
+
+void RPN::displayResult() { if(!s.empty())COUT(s.top());}
+
+
 void RPN::calculate(std::string calc) {
     if (calc.find_first_not_of(" *+-/0123456789") != std::string::npos) {
         COUT("Error.");

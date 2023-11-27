@@ -15,13 +15,13 @@
 class RPN {
 std::stack<float> s;
 public:
-    RPN() {}
-    RPN &operator=(const RPN &src) {s = src.s; return *this;}
-    RPN(const RPN &src) {*this = src;}
-    ~RPN() {}
+    RPN();
+    RPN &operator=(const RPN &src);
+    RPN(const RPN &src);
+    ~RPN();
 
     void calculate(std::string calc);
-    void displyResult() { if(!s.empty())COUT(s.top());}
+    void displayResult();
 };
 
 

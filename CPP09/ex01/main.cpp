@@ -10,7 +10,7 @@ int main(int ac, char **av)
         RPN r;
         std::string calc(av[1]);
         r.calculate(calc);
-        r.displyResult();
+        r.displayResult();
     }
     else
         COUT("Wrong number of arguments");

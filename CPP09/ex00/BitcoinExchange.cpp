@@ -85,7 +85,6 @@ void BitcoinExchange::evaluateInput(char *io) {
             std::getline(fs, line);
             continue;
         }
-
     }
     fs.close();
 }
