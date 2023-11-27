@@ -59,13 +59,20 @@ void BitcoinExchange::evaluateInput(char *io) {
         return;
     }
     std::pair<time_t, float> p;
-    while (!fs.eof()) {
-        if (line == "date | value") {
-            std::getline(fs, line);
-            continue;
-        }
+    bool stopper = false;
+    if (fs.eof())
+        stopper = true;
+    std::getline(fs, line);
+    while (!stopper) {
+        if (fs.eof())
+            stopper = true;
         try {
             p = parseInput(line);
+            std::map<time_t, float>::iterator clo = closest(p.first);
+            line.insert(line.find('|'), "=>");
+            line.erase(line.find('|'), 1);
+            std::cout << line + " = " << p.second * clo->second << std::endl;
+            std::getline(fs, line);
         }
         catch (badLineInputException &e) {
             std::string a("Error: Bad input => " + line);
@@ -78,11 +85,7 @@ void BitcoinExchange::evaluateInput(char *io) {
             std::getline(fs, line);
             continue;
         }
-        std::map<time_t, float>::iterator clo = closest(p.first);
-        line.insert(line.find('|'), "=>");
-        line.erase(line.find('|'), 1);
-        std::cout << line + " = " << p.second * clo->second << std::endl;
-        std::getline(fs, line);
+
     }
     fs.close();
 }

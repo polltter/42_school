@@ -12,5 +12,4 @@ void iter(T *begin, unsigned int len, void(*func)(T *t)) {
         func(begin);
     }
 }
-
 #endif //CPP07_ITER_HPP
