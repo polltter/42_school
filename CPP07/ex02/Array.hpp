@@ -9,7 +9,6 @@ template<class T>
 class Array {
     long len;
     T *values;
-    int a[3];
 public:
     Array() {
         values = new T[0];

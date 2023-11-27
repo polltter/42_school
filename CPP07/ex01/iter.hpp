@@ -12,10 +12,5 @@ void iter(T *begin, unsigned int len, void(*func)(T *t)) {
         func(begin);
     }
 }
-template <typename T>
-void iter(T *begin, unsigned int len, void(*func)(const T *t)) {
-    for (unsigned int i = 0; i < len; i++, begin++) {
-        func(begin);
-    }
-}
+
 #endif //CPP07_ITER_HPP
