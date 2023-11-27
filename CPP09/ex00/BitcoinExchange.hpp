@@ -16,12 +16,7 @@
 
 class BitcoinExchange {
     std::map<time_t, float> exchange;
-    std::map<time_t, float>::iterator closest(time_t target) {
-        std::map<time_t, float>::iterator clo = exchange.lower_bound(target);
-        if (clo->first != target)
-            clo--;
-        return clo;
-    }
+    std::map<time_t, float>::iterator closest(time_t target);
 public:
     BitcoinExchange();
     BitcoinExchange &operator=(const BitcoinExchange &src);
@@ -74,6 +69,12 @@ public:
         }
     };
 
+	class dateToEarlyException: public std::exception {
+	public:
+		virtual const char *what() const throw() {
+			return "Error: date is not in the database date range.";
+		}
+	};
 };
 
 

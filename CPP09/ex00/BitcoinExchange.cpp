@@ -88,3 +88,14 @@ void BitcoinExchange::evaluateInput(char *io) {
     }
     fs.close();
 }
+
+std::map<time_t, float>::iterator BitcoinExchange::closest(time_t target) {
+	std::map<time_t, float>::iterator clo = exchange.lower_bound(target);
+	if (clo->first == target)
+		return clo;
+	else if (clo != exchange.begin()) {
+		return --clo;
+	}
+	else
+		throw dateToEarlyException();
+}
