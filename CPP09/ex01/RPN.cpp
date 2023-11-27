@@ -9,7 +9,7 @@ RPN &RPN::operator=(const RPN &src) {(void)src; return *this;}
 RPN::RPN(const RPN &src) {*this = src;}
 RPN::~RPN() {}
 
-void RPN::displayResult() { if(!s.empty())COUT(s.top());}
+void RPN::displayResult() { if(s.size() == 1)COUT(s.top());}
 
 
 void RPN::calculate(std::string calc) {
@@ -51,4 +51,7 @@ void RPN::calculate(std::string calc) {
             }
         }
     }
+	if (s.size() != 1) {
+		COUT("Invalid number of operations or numbers.");
+	}
 }
